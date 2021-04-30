@@ -16,6 +16,7 @@ router.route('/').post((req,res) =>{
     const city = req.body.city ;
     const requirements = req.body.requirements;
     const isCompleted = req.body.isCompleted;
+    const comments = req.body.comments;
     const date = Date.parse(req.body.date);
 
     const newSeeker = new Seeker({
@@ -26,6 +27,7 @@ router.route('/').post((req,res) =>{
         city,
         requirements,
         isCompleted,
+        comments,
         date,
     });
 

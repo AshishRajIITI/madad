@@ -42,7 +42,12 @@ const seekerSchema = new Schema({
     isCompleted:{
         type:Boolean,
         required:false,        
+    },
+    comments:{
+        type: String,
+        trim:true,
     }
+
 },{
     timestamps:true,
 });

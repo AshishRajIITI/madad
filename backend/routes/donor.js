@@ -14,6 +14,7 @@ router.route('/').post((req,res) =>{
     const email = req.body.email;
     const workingRegion = req.body.workingRegion;
     const availableFacilities = req.body.workingRegion ;
+    const comments = req.body.comments;
     const date = Date.parse(req.body.date);
 
     const newDonor = new Donor({
@@ -22,6 +23,7 @@ router.route('/').post((req,res) =>{
         email: email,
         workingRegion: workingRegion,
         availableFacilities: availableFacilities,
+        comments:comments,
         date:date,
     });
 

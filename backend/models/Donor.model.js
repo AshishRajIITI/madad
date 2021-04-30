@@ -32,6 +32,10 @@ const donorSchema = new Schema({
         required:true,
         unique:false,
         trim:true,
+    },
+    comments:{
+        type:String,
+        trim:true,
     }
 },{
     timestamps:true,
