@@ -31,8 +31,8 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 })
 
-// app.use('/donors',donorRouter);
-// app.use('/seekers', seekerRouter);
+ app.use('/donors',donorRouter);
+ app.use('/seekers', seekerRouter);
 
 app.listen(port, ()=>{    
 
