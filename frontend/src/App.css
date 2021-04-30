@@ -1,11 +1,22 @@
+
+.App{
+    background-color: #152033;
+}
 .home-div{
-    background-color: aqua;
     text-align: center;   
 }
 .h-700{
     height: 500px;
 }
-.home-seeker
-{
-    background-color: blue;
+
+.footer{
+    background-color: white;
+    color: black;
+}
+.header-clr{
+    background-color: white;
+}
+.m-card{
+    margin: 30px 50px;
+    height: 400px;
 }

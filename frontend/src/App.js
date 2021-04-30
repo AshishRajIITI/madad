@@ -12,7 +12,9 @@ function App() {
     <div>
       <Provider store={store}>
       <BrowserRouter>
+      <div>
           <Main />
+          </div>
       </BrowserRouter> 
       </Provider>
     </div>

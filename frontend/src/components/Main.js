@@ -1,19 +1,22 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./Header";
-import Footer from "./Footer/Footer";
+import Footer from "./Footer";
 import Home from "./Home";
+import Donors from './Donors'
+import Seekers from "./Seekers";
 
 
 const Main = () => {
 
     return (
-        <div>
+        <div className="App">
             <Header />
             <Switch>
-                <Route path="/">
-                    <Home />
-                </Route>
+                <Route path="/home" component={Home} />
+                <Route exact path="/donors" component={Donors} />
+                <Route exact path="/seekers" component={Seekers} />
+                <Redirect to="/home" />
             </Switch>
             <Footer />
         </div>
