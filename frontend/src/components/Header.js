@@ -1,51 +1,52 @@
 import React, { useState } from 'react';
-import {NavItem, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav} from 'reactstrap';
-import {NavLink} from 'react-router-dom';
+import { NavItem, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
-function Header(props) {
+
+function Header() {
     const [isNavOpen, setNav] = useState(false);
-    const toggleNav=()=>{
+    const toggleNav = () => {
         setNav(!isNavOpen);
     }
     return (
         <div>
             <Navbar className="header-clr" light expand="md">
-                    <div className="container">
-                        <NavbarBrand className="mr-auto" href="/">
-                            MADAD
+                <div className="container">
+                    <NavbarBrand className="mr-auto" href="/">
+                        MADAD
                         </NavbarBrand>
-                        <NavbarToggler className='ml-auto' onClick={toggleNav} />
-                        <Collapse isOpen={isNavOpen} navbar>
-                            <Nav className='ml-auto' navbar>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/">
-                                         Home
+                    <NavbarToggler className='ml-auto' onClick={toggleNav} />
+                    <Collapse isOpen={isNavOpen} navbar>
+                        <Nav className='ml-auto' navbar>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/">
+                                    Home
                                     </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/donors">
-                                         Donors
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/donors">
+                                    Donors
                                     </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/seekers">
-                                         Seekers
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/seekers">
+                                    Seekers
                                     </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/awareness">
-                                         Awareness
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/awareness">
+                                    Awareness
                                     </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/contactus">
-                                         Contact Us
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/contactus">
+                                    Contact Us
                                     </NavLink>
-                                </NavItem>
-                            </Nav>
-                        </Collapse>
-                    </div>
-                </Navbar>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </div>
+            </Navbar>
         </div>
     );
 }
