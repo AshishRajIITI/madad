@@ -12,25 +12,25 @@ const donorSchema = new Schema({
     mobileNumber:{
         type:String,
         required:true,
-        unique:true,
+        unique:false,
         trim:true,
     },
     email:{
         type:String,
-        required:true,
-        unique:true,
+        required:false,
+        unique:false,
         trim:true,
     },
     workingRegion:{
         type:String,
         required:true,
-        unique:true,
+        unique:false,
         trim:true,
     },
     availableFacilities:{
         type:Array,
         required:true,
-        unique:true,
+        unique:false,
         trim:true,
     }
 },{

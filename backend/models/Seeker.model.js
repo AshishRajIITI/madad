@@ -11,39 +11,37 @@ const seekerSchema = new Schema({
     },
     mobileNumber:{
         type:String,
-        required:true,
+        required:false,
         unique:true,
         trim:true,
     },
     email:{
         type:String,
-        required:true,
+        required:false,
         unique:false,
         trim:true,
     },
     address:{
         type:String,
-        required:true,
+        required:false,
         unique:false,
         trim:true,
     },
     city:{
         type:String,
-        required:true,
+        required:false,
         unique:false,
         trim:true,
     },
     requirements:{
         type:Array,
-        required:true,
+        required:false,
         unique:false,
         trim:true,
     },
     isCompleted:{
         type:Boolean,
-        required:true,
-        unique:false,
-        trim:true,
+        required:false,        
     }
 },{
     timestamps:true,
