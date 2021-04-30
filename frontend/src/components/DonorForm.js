@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import suggestion from "../resources/city";
+import Chips from "react-chips";
 
 const DonorForm = (props) => {
+  const [city, setCity] = useState([]);
+
+  const appendCity = (city) => {
+    setCity({city});
+  }
   return (
     <Form>
       <FormGroup>
@@ -18,13 +25,15 @@ const DonorForm = (props) => {
       </FormGroup>
       <FormGroup>
         <Label for="workingRegion">Working Area</Label>
-        <Input type="select" name="workingRegion" id="workingRegion">
-          <option>delhi</option>
-          <option>mumbai</option>
-          <option>bangaluru</option>
-          <option>kolkata</option>
-          <option>lucknow</option>
-        </Input>
+        <Chips
+          
+
+          alwaysRenderSuggestions
+          value={city}
+          onChange={appendCity}
+          suggestions={suggestion}
+ 
+        />
       </FormGroup>
       <FormGroup>
         <Label for="availableFacilities">Facilities you could Provide( You can select multiples )</Label>
@@ -36,6 +45,7 @@ const DonorForm = (props) => {
           <option>Others</option>
         </Input>
       </FormGroup>
+      
       <FormGroup>
         <Label for="comments">Any comment</Label>
         <Input type="textarea" name="comments" id="comments" />
