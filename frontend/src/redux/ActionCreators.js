@@ -1,5 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import axios from 'axios';
+const baseURL = 'http://localhost:5000';
 
 const fetchDonorRequest = () => ({
     type: ActionTypes.DONOR_LOADING
@@ -16,7 +17,7 @@ const donorFailed = (err) => ({
 export const fetchDonor = () => {
     return function (dispatch) {
         dispatch(fetchDonorRequest());
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        axios.get(baseURL + '/donors')
             .then(response => {
                 const donors = response.data;
                 dispatch(donorSuccess(donors))
@@ -43,7 +44,7 @@ const seekerFailed = (err) => ({
 export const fetchSeeker = () => {
     return function (dispatch) {
         dispatch(fetchSeekerRequest());
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        axios.get(baseURL+'/seekers')
             .then(response => {
                 const seekers = response.data;
                 dispatch(seekerSuccess(seekers))

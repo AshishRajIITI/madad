@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSeeker} from "../redux/ActionCreators";
+import Loading from "./Loading";
+import SeekerCard from './SeekerCard';
 
 function Seekers() {
     const seekerReducer = useSelector(state => state.seekerReducer);
@@ -12,7 +14,7 @@ function Seekers() {
 
     if (seekerReducer.isLoading) {
         return (
-            <h1>Loading</h1>
+            <Loading />
         )
     }
     else if (seekerReducer.err) {
@@ -23,7 +25,7 @@ function Seekers() {
     else if (seekerReducer.seekers != null) {
         const seeker = seekerReducer.seekers.map((seeker) => {
             return (
-                <h1>{seeker.title}</h1>
+                <SeekerCard seeker={seeker} />
             )
         })
         return (

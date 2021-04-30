@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDonor} from "../redux/ActionCreators";
+import { fetchDonor } from "../redux/ActionCreators";
+import DonorCard from "./DonorCard";
+import Loading from "./Loading";
 
 function Donors() {
     const donorReducer = useSelector(state => state.donorReducer);
@@ -12,7 +14,7 @@ function Donors() {
 
     if (donorReducer.isLoading) {
         return (
-            <h1>Loading</h1>
+            <Loading />
         )
     }
     else if (donorReducer.err) {
@@ -23,7 +25,7 @@ function Donors() {
     else if (donorReducer.donors != null) {
         const donor = donorReducer.donors.map((donor) => {
             return (
-                <h1>{donor.title}</h1>
+                <DonorCard donor={donor} />
             )
         })
         return (

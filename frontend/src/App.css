@@ -1,4 +1,8 @@
-
+.loading{
+    height: 80vh;
+    text-align: center;
+    margin-top: 40vh;
+}
 .App{
     background-color: #152033;
 }
