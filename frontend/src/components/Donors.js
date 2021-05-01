@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Container } from "reactstrap";
+import {Row, Col} from "reactstrap";
 import { fetchDonor } from "../redux/ActionCreators";
 import DonorCard from "./DonorCard";
 import Loading from "./Loading";
@@ -24,14 +26,18 @@ function Donors() {
     }
     else if (donorReducer.donors != null) {
         const donor = donorReducer.donors.map((donor) => {
-            return (
-                <DonorCard donor={donor} />
+            return ( 
+                <Col className="mt-2 mb-2" md={4} >
+                  <DonorCard donor={donor} />
+                </Col>
             )
         })
         return (
-            <div>
-                {donor}
-            </div>
+            <Container className= "container-fluid  justify-center mt-2 mb-2" >
+                    <Row>                        
+                           {donor}                        
+                    </Row>
+                </Container>
         )
     }
     else {

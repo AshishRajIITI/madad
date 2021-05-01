@@ -10,7 +10,7 @@ function Header() {
     }
     return (
         <div>
-            <Navbar className="header-clr" light expand="md">
+            <Navbar dark className="header-clr"  expand="md">
                 <div className="container">
                     <NavbarBrand className="mr-auto" href="/">
                         MADAD
