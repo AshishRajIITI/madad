@@ -7,7 +7,7 @@ const DonorForm = (props) => {
   const [city, setCity] = useState([]);
 
   const appendCity = (city) => {
-    setCity({city});
+    setCity(city);
   }
   return (
     <Form>

@@ -6,6 +6,7 @@ import Home from "./Home";
 import Donors from './Donors'
 import Seekers from "./Seekers";
 import Awareness from "./Awareness";
+//import ContactUs from "./";
 
 function Main() {
     return (
@@ -16,6 +17,7 @@ function Main() {
                 <Route exact path="/donors" component={() => <Donors />} />
                 <Route exact path="/seekers" component={Seekers} />
                 <Route exact path="/awareness" component={Awareness} />
+                {/* <Route exact path="/contactUs" component={ContactUs} /> */}
                 <Redirect to="/home" />
             </Switch>
             <Footer />
