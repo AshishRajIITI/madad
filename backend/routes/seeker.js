@@ -36,4 +36,38 @@ router.route('/').post((req,res) =>{
     .catch(err => res.status(400).json('Error' + err));
 });
 
+router.route('/:id').get((req,res) => {
+    Seeker.findById(req.params.id)
+    .then(seeker => res.json(seeker))
+    .catch((err) => res.status(400).json('Error :' + err));
+});
+
+router.route('/:id').delete((req,res) => {
+    Seeker.findByIdAndDelete(req.params.id)
+    .then(seeker => res.json('Donor deleted'))
+    .catch((err) => res.status(400).json('Error :' + err));
+});
+
+router.route('/update/:id').post((req,res) => {
+    Donor.findById(req.params.id)
+    .then(seeker => {
+        seeker.name =  req.body.name;
+        seeker.mobileNumber = req.body.mobileNumber;
+        seeker.email = req.body.email;
+        seeker.address = req.body.address;
+        seeker.city = req.body.city ;
+        seeker.requirements = req.body.requirements;
+        seeker.isCompleted = req.body.isCompleted;
+        seeker.comments = req.body.comments;
+        seeker.date = Date.parse(req.body.date);
+
+        seeker.save()
+         .then(() => res.json('Seeker updated succesfully !'))
+         .catch((err) => res.status(400).json('Error :' + err));
+    })
+    .catch((err) => res.status(400).json('Error :' + err));
+});
+
+
+
 module.exports =  router;
