@@ -6,7 +6,7 @@ function DonorCard ({donor}){
     return(
         <div>
            
-                    <Card className="donor-card">
+                    <Card className="donor-card" color="warning">
                         <CardBody className="my-card" >
                             <CardText tag="h5">Facilities You Can Provide {donor.availableFacilities}</CardText>
                             <CardText tag="h6">{donor.workingRegion}</CardText>

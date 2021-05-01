@@ -5,7 +5,7 @@ const Schema= mongoose.Schema;
 const donorSchema = new Schema({
     name:{
         type:String,
-        required:true,
+        required:false,
         unique:false,
         trim:true,
     },
