@@ -13,9 +13,8 @@ router.route('/').post((req,res) =>{
     const mobileNumber = req.body.mobileNumber;
     const email = req.body.email;
     const workingRegion = req.body.workingRegion;
-    const availableFacilities = req.body.availableFacilities ;
+    const availableFacilities = req.body.availableFacilities;
     const comments = req.body.comments;
-    const date = Date.parse(req.body.date);
 
     const newDonor = new Donor({
         name: name,
@@ -24,7 +23,6 @@ router.route('/').post((req,res) =>{
         workingRegion: workingRegion,
         availableFacilities: availableFacilities,
         comments:comments,
-        date:date,
     });
 
     newDonor.save()
