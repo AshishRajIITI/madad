@@ -60,7 +60,7 @@ export const postDonor = (body)=>{
     return function (dispatch){
 axios.post(baseURL+'/donors', body)
 .then((response)=>{
-    if(response.ok){
+    if(response){
         console.log("posted");
     }      
     else
@@ -68,6 +68,25 @@ axios.post(baseURL+'/donors', body)
     error.response = response;
     throw error;}
 
+})
+.catch(error=>{
+    console.log(error.message)
+})
+}
+}
+
+
+export const postSeeker = (body)=>{
+    return function (dispatch){
+axios.post(baseURL+'/seekers', body)
+.then((response)=>{
+    if(response){
+        console.log("posted");
+    }      
+    else
+    {var error = new Error('Error ' + response.status + ': ' + response.statusText);
+    error.response = response;
+    throw error;}
 })
 .catch(error=>{
     console.log(error.message)
