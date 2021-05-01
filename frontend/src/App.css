@@ -25,19 +25,6 @@
 .m-card{
     margin: 30px 50px;
     height: 400px;
-<<<<<<< HEAD
-}
-.search{
-    z-index: 9;
-    position: absolute;
-    background-color: white;
-    list-style-type: none;
-    margin-top: 0;
-}
-.search-li :hover{
-background-color: blue;
-}
-=======
         
 }
 .donor-card{
@@ -76,4 +63,3 @@ background-color: blue;
   .seeker-card-body:hover{
     box-shadow: 4px 8px 12px 4px rgba(0,0,0,0.2);
   }
->>>>>>> def1c5a0f819ce586b2c899a68c0684f5c49d5ca
