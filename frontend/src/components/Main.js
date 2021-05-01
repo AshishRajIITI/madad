@@ -1,10 +1,11 @@
 import React from "react";
-import { Redirect, Route, Switch} from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
 import Donors from './Donors'
 import Seekers from "./Seekers";
+import Awareness from "./Awareness";
 
 function Main() {
     return (
@@ -14,6 +15,7 @@ function Main() {
                 <Route path="/home" component={Home} />
                 <Route exact path="/donors" component={() => <Donors />} />
                 <Route exact path="/seekers" component={Seekers} />
+                <Route exact path="/awareness" component={Awareness} />
                 <Redirect to="/home" />
             </Switch>
             <Footer />
