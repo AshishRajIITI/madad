@@ -11,7 +11,7 @@ const seekerSchema = new Schema({
     },
     mobileNumber:{
         type:String,
-        required:false,
+        required:true,
         unique:true,
         trim:true,
     },
@@ -29,13 +29,13 @@ const seekerSchema = new Schema({
     },
     city:{
         type:String,
-        required:false,
+        required:true,
         unique:false,
         trim:true,
     },
     requirements:{
         type:Array,
-        required:false,
+        required:true,
         unique:false,
         trim:true,
     },
