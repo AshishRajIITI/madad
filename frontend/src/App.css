@@ -1,26 +1,46 @@
-.loading{
-    height: 80vh;
-    text-align: center;
-    margin-top: 40vh;
+.loading {
+  height: 80vh;
+  text-align: center;
+  margin-top: 40vh;
 }
-.App{
-    background-color: #152033;
+.App {
+  background-color: #152033;
 }
-.home-div{
-    text-align: center;   
+.home-div {
+  text-align: center;
 }
-.h-700{
-    height: 500px;
+.h-700 {
+  height: 500px;
 }
 
-.footer{
-    background-color: white;
-    color: black;
+.footer {
+  background-color: white;
+  color: black;
 }
-.header-clr{
-    background-color: white;
+.header-clr {
+  background-color: white;
 }
-.m-card{
-    margin: 30px 50px;
-    height: 400px;
+.m-card {
+  margin: 30px 50px;
+  height: 400px;
+}
+.awareness-div {
+  color: #fff;
+}
+.blog {
+  color: #000;
+}
+.desc {
+  text-align: left;
+}
+@media screen and (max-width: 992px) {
+  .blog {
+    text-align: center;
+  }
+  .desc {
+    text-align: center;
+  }
+  .blog-row {
+    flex-direction: column-reverse;
+  }
 }
