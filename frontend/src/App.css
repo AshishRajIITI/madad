@@ -1,3 +1,4 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
 .loading{
     height: 80vh;
     text-align: center;
@@ -23,4 +24,14 @@
 .m-card{
     margin: 30px 50px;
     height: 400px;
+}
+.search{
+    z-index: 9;
+    position: absolute;
+    background-color: white;
+    list-style-type: none;
+    margin-top: 0;
+}
+.search-li :hover{
+background-color: blue;
 }
