@@ -1,3 +1,4 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
 .loading{
     height: 80vh;
     text-align: center;

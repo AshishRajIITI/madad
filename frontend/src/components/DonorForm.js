@@ -6,7 +6,7 @@ import Chips from 'react-chips';
 import {useDispatch} from 'react-redux';
 import { postDonor } from '../redux/ActionCreators';
 
-const DonorForm = (props) => {
+const DonorForm = ({toggleModal}) => {
   const dispatch = useDispatch();
 
   const [city, setCity] = useState([]);
@@ -32,6 +32,7 @@ const DonorForm = (props) => {
     }
     console.log(donor);
     dispatch(postDonor(donor));
+    toggleModal();
   }
   const appendCity = (ci) => {
     setCity(ci);
