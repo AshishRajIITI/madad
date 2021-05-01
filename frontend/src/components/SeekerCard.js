@@ -1,19 +1,21 @@
 import React from 'react';
-import { Card, Button, CardTitle, CardText } from 'reactstrap';
+import { Card, Button, CardTitle, CardText, CardBody } from 'reactstrap';
 
 function SeekerCard ({seeker}){
 
     return(
         <div>
-            <Card body inverse color="primary">
-                <CardTitle tag="h5">Requirements</CardTitle>
-                <CardTitle tag="h4">city</CardTitle>
+            <Card className="seeker-card" color="primary">
+                <CardBody className="seeker-card-body">
+                <CardText tag="h5">Requirements</CardText>
+                <CardText tag="h6">city</CardText>
                 <CardText>Address: kdnvf,sdbkv</CardText>
                 <CardText>Mobile:= {seeker.mobileNumber}</CardText>
                 <CardText>Name:=  {seeker.name}</CardText>                
                 <CardText>{seeker.email}</CardText>
                 <CardText>Any comments</CardText>
-                <Button color="secondary"> Request Completed/Non-Completed</Button>
+                <Button className="justify-center" color="success"> Status</Button>
+                </CardBody>
             </Card>
         </div>
     );
