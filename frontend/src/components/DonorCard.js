@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, CardTitle, CardText, CardBody } from 'reactstrap';
+import { Card, Button, CardText, CardBody } from 'reactstrap';
 
 function DonorCard ({donor}){
 

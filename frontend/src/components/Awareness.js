@@ -87,7 +87,7 @@ const Awareness = () => {
           <a
             className="btn btn-danger"
             href="https://neurowellnessspa.com/mental-health-blogs-2020/"
-            target="_blank"
+
           >
             Read More
           </a>
