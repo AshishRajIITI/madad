@@ -1,7 +1,46 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import citySuggestion from "../resources/city";
+import facilitySuggestion from '../resources/facilty';
+import Chips from 'react-chips';
+import {useDispatch} from 'react-redux';
+//import { postSeeker } from '../redux/ActionCreators';
+
 
 const SeekerForm = (props) => {
+  const dispatch = useDispatch();
+
+  const [city, setCity] = useState([]);
+  const [name, setName]= useState('');
+  const [mob, setMob] = useState('');
+  const [email, setEmail] = useState('');
+  const [facility, setFacility] = useState([]);
+  const [comment, setComment] = useState('');
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log("form submit");
+    console.log(city);
+    const workingRegion = city.join(' / ');
+    const availableFacilities = facility.join(' / ');
+    const donor = {
+      "name": name,
+      "mobileNumber": mob,
+      "email": email,
+      "workingRegion": workingRegion,
+      "availableFacilities" : availableFacilities,
+      "comments": comment
+    }
+    console.log(donor);
+    //dispatch(postDonor(donor));
+  }
+  const appendCity = (ci) => {
+    setCity(ci);
+  }
+  const appendFacility=(fac)=>{
+    setFacility(fac);
+  }
+
   return (
     <Form>
         <FormGroup>
@@ -23,11 +62,11 @@ const SeekerForm = (props) => {
       <FormGroup>
         <Label for="city">City</Label>
         <Input type="select" name="city" id="city">
-          <option>delhi</option>
-          <option>mumbai</option>
-          <option>bangaluru</option>
-          <option>kolkata</option>
-          <option>lucknow</option>
+          {citySuggestion.map((c)=>{
+            return(
+              <option>{c}</option>
+            )
+          })}
         </Input>
       </FormGroup>
       <FormGroup>

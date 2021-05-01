@@ -13,7 +13,7 @@ router.route('/').post((req,res) =>{
     const mobileNumber = req.body.mobileNumber;
     const email = req.body.email;
     const workingRegion = req.body.workingRegion;
-    const availableFacilities = req.body.workingRegion ;
+    const availableFacilities = req.body.availableFacilities ;
     const comments = req.body.comments;
     const date = Date.parse(req.body.date);
 

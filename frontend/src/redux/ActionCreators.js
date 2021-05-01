@@ -54,3 +54,23 @@ export const fetchSeeker = () => {
             })
     }
 }
+
+
+export const postDonor = (body)=>{
+    return function (dispatch){
+axios.post(baseURL+'/donors', body)
+.then((response)=>{
+    if(response.ok){
+        console.log("posted");
+    }      
+    else
+    {var error = new Error('Error ' + response.status + ': ' + response.statusText);
+    error.response = response;
+    throw error;}
+
+})
+.catch(error=>{
+    console.log(error.message)
+})
+}
+}

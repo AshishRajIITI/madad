@@ -1,57 +1,87 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import suggestion from "../resources/city";
-import Chips from "react-chips";
+import citySuggestion from "../resources/city";
+import facilitySuggestion from '../resources/facilty';
+import Chips from 'react-chips';
+import {useDispatch} from 'react-redux';
+import { postDonor } from '../redux/ActionCreators';
 
 const DonorForm = (props) => {
-  const [city, setCity] = useState([]);
+  const dispatch = useDispatch();
 
-  const appendCity = (city) => {
-    setCity({city});
+  const [city, setCity] = useState([]);
+  const [name, setName]= useState('');
+  const [mob, setMob] = useState('');
+  const [email, setEmail] = useState('');
+  const [facility, setFacility] = useState([]);
+  const [comment, setComment] = useState('');
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log("form submit");
+    console.log(city);
+    const workingRegion = city.join(' / ');
+    const availableFacilities = facility.join(' / ');
+    const donor = {
+      "name": name,
+      "mobileNumber": mob,
+      "email": email,
+      "workingRegion": workingRegion,
+      "availableFacilities" : availableFacilities,
+      "comments": comment
+    }
+    console.log(donor);
+    dispatch(postDonor(donor));
   }
+  const appendCity = (ci) => {
+    setCity(ci);
+  }
+  const appendFacility=(fac)=>{
+    setFacility(fac);
+  }
+
+  
+
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <FormGroup>
         <Label for="name">Name</Label>
-        <Input type="text" name="email" id="name" placeholder="Enter your name" />
+        <Input type="text" name="email" id="name" onChange={e=>setName(e.target.value)} placeholder="Enter your name" />
       </FormGroup>
       <FormGroup>
         <Label for="mobileNo">Mobile No.</Label>
-        <Input type="text" name="mobileNo" id="mobileNo" placeholder="Enter your Mobile Number" />
+        <Input type="text" name="mobileNo" id="mobileNo" onChange={e=>setMob(e.target.value)} placeholder="Enter your Mobile Number" />
       </FormGroup>
       <FormGroup>
         <Label for="email">Email-ID</Label>
-        <Input type="text" name="email" id="email" placeholder="Enter your Email-ID" />
+        <Input type="text" name="email" id="email" onChange={e=>setEmail(e.target.value)} placeholder="Enter your Email-ID" />
       </FormGroup>
       <FormGroup>
         <Label for="workingRegion">Working Area</Label>
         <Chips
-          
-
           alwaysRenderSuggestions
           value={city}
           onChange={appendCity}
-          suggestions={suggestion}
- 
+          suggestions={citySuggestion}
         />
       </FormGroup>
       <FormGroup>
         <Label for="availableFacilities">Facilities you could Provide( You can select multiples )</Label>
-        <Input type="select" name="availableFacilities" id="availableFacilities" multiple>
-          <option>O2-cylinder</option>
-          <option>Hospital Beds</option>
-          <option>Medicines</option>
-          <option>Plasma</option>
-          <option>Others</option>
-        </Input>
+        <Chips
+          alwaysRenderSuggestions
+          value={facility}
+          onChange={appendFacility}
+          suggestions={facilitySuggestion}
+        />
       </FormGroup>
       
       <FormGroup>
         <Label for="comments">Any comment</Label>
-        <Input type="textarea" name="comments" id="comments" />
+        <Input type="textarea" name="comments" onChange={e=>setComment(e.target.value)} id="comments" />
       </FormGroup>      
      
-      <Button>Submit</Button>
+      <Button type="submit">Submit</Button>
     </Form>
   );
 }

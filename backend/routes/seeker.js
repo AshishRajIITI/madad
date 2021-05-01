@@ -32,7 +32,8 @@ router.route('/').post((req,res) =>{
     });
 
     newSeeker.save()
-    .then(() => res.json(newSeeker))
+    .then(() => {console.log("posted");
+        res.json(newSeeker)})
     .catch(err => res.status(400).json('Error' + err));
 });
 
