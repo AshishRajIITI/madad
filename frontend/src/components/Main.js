@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Home from "./Home";
 import Donors from './Donors'
 import Seekers from "./Seekers";
+import Contactus from "./Contactus";
 
 function Main() {
     return (
@@ -14,6 +15,7 @@ function Main() {
                 <Route path="/home" component={Home} />
                 <Route exact path="/donors" component={() => <Donors />} />
                 <Route exact path="/seekers" component={Seekers} />
+                <Route exact path="/contactus" component={Contactus} />
                 <Redirect to="/home" />
             </Switch>
             <Footer />
