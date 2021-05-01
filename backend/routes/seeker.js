@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 let Seeker = require('../models/Seeker.model');
 
-const config = require('../twitter/config');
+const config = require('../config');
 const twitter = require('twitter-lite');
 const client = new twitter(config);
 
