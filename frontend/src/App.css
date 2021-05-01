@@ -24,14 +24,20 @@
   margin: 30px 50px;
   height: 400px;
 }
-.awareness-div {
-  color: #fff;
-}
+
 .blog {
   color: #000;
 }
 .desc {
   text-align: left;
+  font-size: 1.3rem;
+}
+.myth-lists {
+  font-size: 1.3rem;
+}
+.myth-heading {
+  font-size: 1.7rem;
+  font-weight: 700;
 }
 @media screen and (max-width: 992px) {
   .blog {
