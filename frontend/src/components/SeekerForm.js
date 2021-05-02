@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col, Row  } from 'reactstrap';
 import citySuggestion from "../resources/city";
 import facilitySuggestion from '../resources/facilty';
 import Chips from 'react-chips';
 import {useDispatch} from 'react-redux';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 //import { postSeeker } from '../redux/ActionCreators';
 
 
 const SeekerForm = (props) => {
   const dispatch = useDispatch();
-
+  const [isFormInValid, makeValid] = useState(true);
   const [city, setCity] = useState([]);
   const [name, setName]= useState('');
   const [mob, setMob] = useState('');
@@ -41,20 +42,79 @@ const SeekerForm = (props) => {
     setFacility(fac);
   }
 
+  const isName = (val) => /^[a-zA-Z]+ [a-zA-Z]+$/.test(val);
+  const isNumber = (val) => /^\d{10}$/.test(val);
+  const validEmail = val => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val);
+  
+  function handleUpdate(form) {
+    makeValid(!form['$form'].valid );
+  }
+
   return (
-    <Form>
-        <FormGroup>
-        <Label for="name">Name</Label>
-        <Input type="text" name="name" id="name" placeholder="Enter your name" />
-      </FormGroup>
-      <FormGroup>
-        <Label for="mobileNumber">Mobile No.</Label>
-        <Input type="text" name="mobileNumber" id="mobileNumber" placeholder="Enter your Mobile Number" />
-      </FormGroup>
-      <FormGroup>
-        <Label for="email">Email</Label>
-        <Input type="text" name="email" id="email" placeholder="Enter your Email-ID" />
-      </FormGroup>
+    <LocalForm onUpdate={(form) => handleUpdate(form)}>
+      <Row className="form-group">
+        <Label htmlFor="name">Name</Label>
+        <Col>
+          <Control.text model=".name" name="name"
+            id="name"
+            className="form-control"
+            validators={{
+              isName
+            }}
+            placeholder="Enter your name" />
+          <Errors
+            className="text-danger"
+            model=".name"
+            show="touched"
+            messages={{
+              isName: "Pleasse Enter Your Full Name"
+            }}
+          />
+        </Col>
+      </Row>
+      <Row className="form-group">
+        <Label htmlFor="mobileNo">Mobile No.</Label>
+        <Col>
+          <Control.text model=".mobileNo" name="mobileNo"
+            id="mobileNo"
+            validators={{
+              isNumber
+            }}
+            placeholder="Enter your Mobile Number"
+            className="form-control"
+          />
+          <Errors
+            className="text-danger"
+            model=".mobileNo"
+            show="touched"
+            messages={{
+              isNumber: 'Must be a valid number'
+            }}
+          />
+        </Col>
+      </Row>
+      <Row className="form-group">
+        <Label htmlFor="email">Email-ID</Label>
+        <Col>
+          <Control.text model=".email" name="email"
+            id="email"
+            placeholder="Enter your Email-ID"
+            className="form-control"
+            validators={{
+              validEmail
+            }}
+          />
+          <Errors
+            className="text-danger"
+            model=".email"
+            show="touched"
+            messages={{
+              validEmail: 'Must be a valid email'
+            }}
+          />
+        </Col>
+
+      </Row>
       <FormGroup>
         <Label for="address">Address</Label>
         <Input type="text" name="address" id="address" placeholder="Enter your Address" />
@@ -92,8 +152,8 @@ const SeekerForm = (props) => {
         </FormText>
       </FormGroup> */}
       
-      <Button>Submit</Button>
-    </Form>
+      <Button disabled={isFormInValid}>Submit</Button>
+    </LocalForm>
   );
 }
 
