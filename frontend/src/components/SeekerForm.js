@@ -73,10 +73,10 @@ const SeekerForm = (props) => {
         </Col>
       </Row>
       <Row className="form-group">
-        <Label htmlFor="mobileNo">Mobile No.</Label>
+        <Label htmlFor="mobileNumber">Mobile No.</Label>
         <Col>
-          <Control.text model=".mobileNo" name="mobileNo"
-            id="mobileNo"
+          <Control.text model=".mobileNumber" name="mobileNumber"
+            id="mobileNumber"
             validators={{
               isNumber
             }}
@@ -85,7 +85,7 @@ const SeekerForm = (props) => {
           />
           <Errors
             className="text-danger"
-            model=".mobileNo"
+            model=".mobileNumber"
             show="touched"
             messages={{
               isNumber: 'Must be a valid number'
