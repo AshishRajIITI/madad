@@ -48,7 +48,7 @@ setSearch(temp2);
             </div>
             </div>
             <div className="row">
-               <Button onClick={handleSearch} color="primary" >Search</Button>
+               <Button onClick={handleSearch} color="primary" block >Search</Button>
             </div>
         </div>
         <div className="mt-3">
