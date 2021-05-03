@@ -3,23 +3,10 @@ const mongoose =require('mongoose');
 const Schema= mongoose.Schema;
 
 const donorSchema = new Schema({
-    name:{
-        type:String,
-        required:false,
-        unique:false,
-        trim:true,
-    },
-    mobileNumber:{
-        type:String,
-        required:true,
-        unique:false,
-        trim:true,
-    },
-    email:{
-        type:String,
-        required:false,
-        unique:false,
-        trim:true,
+    user: {
+        type:Schema.Types.ObjectId,
+        ref: 'User',
+        required:true
     },
     workingRegion:{
         type:String,
