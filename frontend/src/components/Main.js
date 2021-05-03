@@ -7,7 +7,7 @@ import Donors from './Donors'
 import Seekers from "./Seekers";
 import Contactus from "./Contactus";
 import Awareness from "./Awareness";
-import SearchEngine from "./searchEngine";
+// import SearchEngine from "./searchEngine";
 import MyCarousel from "./MyCarousel";
 
 function Main() {
@@ -20,7 +20,6 @@ function Main() {
                 <Route exact path="/seekers" component={Seekers} />
                 <Route exact path="/contactus" component={Contactus} />
                 <Route exact path="/awareness" component={Awareness} />
-                <Route exact path="/search" component={SearchEngine} />
                 <Route exact path="/donate" component={MyCarousel} />
                 <Redirect to="/home" />
             </Switch>

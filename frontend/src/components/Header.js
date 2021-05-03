@@ -49,11 +49,7 @@ function Header() {
                                     Awareness
                                     </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink className="nav-link" to="/search">
-                                    Search
-                                </NavLink>
-                            </NavItem>
+                            
                             <NavItem>
                                 <NavLink className="nav-link" to="/donate">
                                     Donate

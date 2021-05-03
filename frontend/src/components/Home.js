@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Button, Card, CardBody, CardHeader, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import DonorForm from "./DonorForm";
 import SeekerForm from "./SeekerForm";
-import donor from './images/donor.gif';
-import seeker from './images/seeker.gif';
+// import donor from './images/donor.gif';
+// import seeker from './images/seeker.gif';
 import network from './images/network.jpg';
 //import Carousal from "./Carousal";
 

@@ -1,51 +1,80 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Container } from "reactstrap";
-import {Row, Col} from "reactstrap";
-import { fetchDonor } from "../redux/ActionCreators";
-import DonorCard from "./DonorCard";
-import Loading from "./Loading";
+import React, { useState, useEffect } from 'react';
+import AutoSuggest from './AutoSuggest';
+import city from '../resources/city';
+import facility from '../resources/facilty';
+import { Button } from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import DonorCard from './DonorCard';
+import { fetchDonor } from '../redux/ActionCreators';
+import { FaSearch } from 'react-icons/fa';
+import Loading from './Loading';
 
-function Donors() {
-    const donorReducer = useSelector(state => state.donorReducer);
+function SearchEngine() {
+
+    const donor = useSelector((state) => state.donorReducer.donors);
+    const isLoading = useSelector((state) => state.donorReducer.isLoading);
+
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(fetchDonor());
     }, [dispatch]);
+    const [searched, setSearch] = useState([]);
+    const [cityS, setCityS] = useState('');
+    const [facilityS, setFacilityS] = useState('');
+    const [touch, setTouch] = useState(0);
 
-    if (donorReducer.isLoading) {
-        return (
-            <Loading />
-        )
+
+
+
+
+    function handleSearch() {
+        var temp = [];
+        temp = donor.filter(v => v.workingRegion.toString().search(cityS) !== -1);
+        var temp2 = [];
+        temp2 = temp.filter(v => v.availableFacilities.toString().search(facilityS) !== -1);
+        setSearch(temp2);
+        setTouch(touch + 1);
     }
-    else if (donorReducer.err) {
+
+    const item = searched.map(d => {
         return (
-            <h1>{donorReducer.err}</h1>
+            <div key={d._id} className="col-md-4 mt-2 mb-2" >
+                <DonorCard donor={d} />
+            </div>
         )
-    }
-    else if (donorReducer.donors != null) {
-        const donor = donorReducer.donors.map((donor) => {
-            return ( 
-                <Col className="mt-2 mb-2" md={4} >
-                  <DonorCard donor={donor} />
-                </Col>
-            )
-        })
+    }).reverse();
+
+    const initialDonor = donor.map(d => {
+
         return (
-            <Container className= "container-fluid  justify-center mt-2 mb-2" >
-                    <Row>                        
-                           {donor}                        
-                    </Row>
-                </Container>
+            <div key={d._id} className="col-md-4 mt-2 mb-2" >
+                <DonorCard donor={d} />
+            </div>
         )
-    }
-    else {
-        return (
-            <h1>.</h1>
-        )
-    }
+    }).reverse();
+
+
+
+    return (
+        <div className="container">
+            <div className="m-sticky">
+                <div className="row mt-1 b-bottom">
+                    <div className="col-6 col-sm-5">
+                        <AutoSuggest text={cityS} setText={setCityS} sug={city} placeHolder="Search City" />
+                    </div>
+                    <div className="col-6 col-sm-5">
+                        <AutoSuggest text={facilityS} setText={setFacilityS} sug={facility} placeHolder="Search Facility" />
+                    </div>
+                    <div className="col-12 col-sm-2">
+                        <Button className="" onClick={handleSearch} color="primary" block ><FaSearch /> Search</Button>
+                    </div>
+                </div>
+            </div>
+            <div className="row mt-3 justify-content-center">
+                {touch === 0 ? (isLoading ? <Loading /> : initialDonor) : (searched.length > 0 ? item : <h1>No Result</h1>)}
+            </div>
+        </div>
+    );
 }
 
-
-export default Donors;
+export default SearchEngine;

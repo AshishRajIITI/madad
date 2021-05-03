@@ -13,7 +13,7 @@ function Footer(props) {
           <div className="col-4 offset-1 col-sm-2">
             <h5>Links</h5>
             <ul className="list-unstyled">
-              <li><Link to="/">Home</Link></li>
+              <li><Link to="/home">Home</Link></li>
               <li><Link to="/donors">Donors</Link></li>
               <li><Link to="/seekers">Seekers</Link></li>
               <li><Link to="/contactus">Contact Us</Link></li>
