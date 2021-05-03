@@ -7,7 +7,6 @@ import seeker from './images/seeker.gif';
 import network from './images/network.jpg';
 //import Carousal from "./Carousal";
 
-
 const Home = () => {
 
     const [modal1, setmodal1] = useState(false);
