@@ -5,7 +5,6 @@ import SeekerForm from "./SeekerForm";
 import donor from './images/donor.gif';
 import seeker from './images/seeker.gif';
 
-
 const Home = () => {
     
     const [modal1, setmodal1] = useState(false);
@@ -37,7 +36,7 @@ const Home = () => {
                     <Card className='m-card'>
                         <CardBody>
                             <img src={seeker} alt='' height="80%" width="80%" />
-                            <Button block onClick={toggleModal2} className="btn-lg text-center py-2" color="success" >Want Help</Button>
+                            <Button block onClick={toggleModal2} className="btn-lg text-center py-2" color="success" >Need Help</Button>
 
                         </CardBody>
                     </Card>
@@ -48,6 +47,7 @@ const Home = () => {
                     <ModalBody><SeekerForm toggleModal={toggleModal2} /></ModalBody>
                 </Modal>
             </div>
+            
         </div>
     );
 }

@@ -43,7 +43,12 @@ function Header() {
                             <NavItem>
                                 <NavLink className="nav-link" to="/search">
                                     Search
-                                    </NavLink>
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/donate">
+                                    Donate
+                                </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink className="nav-link" to="/contactus">
