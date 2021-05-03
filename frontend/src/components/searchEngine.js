@@ -37,8 +37,8 @@ setSearch(temp2);
 
 
     return (
-        <div className="container-fluid">
         <div className="container">
+        <div>
             <div className="row mt-1">
             <div className="col-12 col-sm-6">
                 <AutoSuggest text={cityS} setText={setCityS} sug={city} placeHolder="Search City" />
@@ -47,11 +47,11 @@ setSearch(temp2);
                 <AutoSuggest text={facilityS} setText={setFacilityS} sug={facility} placeHolder="Search Facility" />
             </div>
             </div>
-            <div className="row">
-               <Button onClick={handleSearch} color="primary" block >Search</Button>
+            <div className="row ml-1 mr-1">
+               <Button className="" onClick={handleSearch} color="primary" block >Search</Button>
             </div>
         </div>
-        <div className="mt-3">
+        <div className="row mt-3">
             {item}
         </div>
         </div>

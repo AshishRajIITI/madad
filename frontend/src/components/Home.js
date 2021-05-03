@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Button, Card, CardBody, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import DonorForm from "./DonorForm";
 import SeekerForm from "./SeekerForm";
 import donor from './images/donor.gif';
 import seeker from './images/seeker.gif';
+import network from './images/network.jpg';
+//import Carousal from "./Carousal";
 
 
 const Home = () => {
-    
+
     const [modal1, setmodal1] = useState(false);
     const [modal2, setmodal2] = useState(false);
     const toggleModal1 = () => {
@@ -18,15 +20,19 @@ const Home = () => {
     }
 
     return (
-        <div className="container-fluid ">
-            <div className="row home-div">
+        <div className="container ">
+            <div className="row align-items-center">
+                <div className="col-12 col-md-5 text-wrap align-middle">
+                    <div className="line2 fs-6">An IIT Indore Initiative to connect covid affected people to verified relief sources</div>
+                </div>
+                <div className="col-12 col-md-7 ">
+                    <img src={network} width="100%" height="auto" alt="" />
+                </div>
+            </div>
+            <div className="row mt-5 home-div align-item-center justify-content-center">
                 <div className="col-12 col-md-6 h-700">
-                    <Card className="m-card">
-                        <CardBody>
-                            <img src={donor} alt='' height="80%" width="80%" />
-                            <Button block className="btn-lg text-center py-2" color="warning" onClick={toggleModal1} >Provide Help</Button>
-
-                        </CardBody>
+                    <Card onClick={toggleModal1} className="m-card">
+                        <CardHeader>Want to Help</CardHeader>
                     </Card>
                 </div>
                 <Modal isOpen={modal1} toggle={toggleModal1} >
@@ -34,12 +40,8 @@ const Home = () => {
                     <ModalBody><DonorForm toggleModal={toggleModal1} /></ModalBody>
                 </Modal>
                 <div className="col-12 col-md-6 h-700 home-seeker">
-                    <Card className='m-card'>
-                        <CardBody>
-                            <img src={seeker} alt='' height="80%" width="80%" />
-                            <Button block onClick={toggleModal2} className="btn-lg text-center py-2" color="success" >Want Help</Button>
-
-                        </CardBody>
+                    <Card className='m-card' onClick={toggleModal2}>
+                        <CardHeader>Need Help</CardHeader>
                     </Card>
 
                 </div>
@@ -48,6 +50,33 @@ const Home = () => {
                     <ModalBody><SeekerForm toggleModal={toggleModal2} /></ModalBody>
                 </Modal>
             </div>
+            <h1 className="text-center mt-5" >Donate to</h1>
+            <div className="row mt-2 justify-content-center">
+
+                <div className="col-12 col-md-3 ">
+                    <Card className="m-card">
+                        <CardBody>PM fund</CardBody>
+                    </Card>
+                </div>
+                <div className="col-12 col-md-3 ">
+                    <Card className="m-card">
+                        <CardBody>CM fund</CardBody>
+                    </Card>
+                </div>
+                <div className="col-12 col-md-3 ">
+                    <Card className="m-card">
+                        <CardBody>RobinHood</CardBody>
+                    </Card>
+                </div>
+                <div className="col-12 col-md-3 ">
+                    <Card className="m-card">
+                        <CardBody>PM fund</CardBody>
+                    </Card>
+                </div>
+            </div>
+            {/* <div>
+                <Carousal />
+            </div> */}
         </div>
     );
 }

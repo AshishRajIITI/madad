@@ -49,11 +49,11 @@ const DonorForm = ({ toggleModal }) => {
       </FormGroup>
       <FormGroup>
         <Label for="mobileNo">Mobile No.</Label>
-        <Input type="text" name="mobileNo" id="mobileNo" onChange={e => setMob(e.target.value)} placeholder="Enter your Mobile Number" />
+        <Input type="tel" required name="mobileNo" id="mobileNo" onChange={e => setMob(e.target.value)} placeholder="Enter your Mobile Number" />
       </FormGroup>
       <FormGroup>
         <Label for="email">Email-ID</Label>
-        <Input type="text" name="email" id="email" onChange={e => setEmail(e.target.value)} placeholder="Enter your Email-ID" />
+        <Input type="email" name="email" id="email" onChange={e => setEmail(e.target.value)} placeholder="Enter your Email-ID" />
       </FormGroup>
       <FormGroup>
         <Label for="workingRegion">Working Cities</Label>
