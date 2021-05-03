@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSeeker} from "../redux/ActionCreators";
 import Loading from "./Loading";
 import SeekerCard from './SeekerCard';
+import { Container } from "reactstrap";
+import {Row, Col} from "reactstrap";
 
 function Seekers() {
     const seekerReducer = useSelector(state => state.seekerReducer);
@@ -25,12 +27,20 @@ function Seekers() {
     else if (seekerReducer.seekers != null) {
         const seeker = seekerReducer.seekers.map((seeker) => {
             return (
-                <SeekerCard seeker={seeker} />
+                <Col className="mt-2 mb-2" md="4">
+                   <SeekerCard seeker={seeker} />
+                </Col>
+                
             )
         })
         return (
             <div>
-                {seeker}
+                <Container className="container-fluid  justify-center mt-2 mb-2">
+                    <Row>
+                      {seeker}
+                    </Row>
+                </Container>
+                
             </div>
         )
     }

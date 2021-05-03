@@ -7,39 +7,44 @@ import {useDispatch} from 'react-redux';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 //import { postSeeker } from '../redux/ActionCreators';
 
+import { useDispatch } from 'react-redux';
+import { postSeeker } from '../redux/ActionCreators';
+import AutoSuggest from './AutoSuggest';
 
-const SeekerForm = (props) => {
+
+
+
+
+const SeekerForm = ({ toggleModal }) => {
   const dispatch = useDispatch();
   const [isFormInValid, makeValid] = useState(true);
   const [city, setCity] = useState([]);
   const [name, setName]= useState('');
   const [mob, setMob] = useState('');
   const [email, setEmail] = useState('');
-  const [facility, setFacility] = useState([]);
+  const [address, setAddress] = useState('');
   const [comment, setComment] = useState('');
+  const [requirement, setRequirement] = useState('');
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log("form submit");
-    console.log(city);
-    const workingRegion = city.join(' / ');
-    const availableFacilities = facility.join(' / ');
-    const donor = {
+    const seeker = {
       "name": name,
       "mobileNumber": mob,
       "email": email,
-      "workingRegion": workingRegion,
-      "availableFacilities" : availableFacilities,
+      "address": address,
+      "city": city,
+      "requirements": requirement,
       "comments": comment
     }
-    console.log(donor);
-    //dispatch(postDonor(donor));
+    dispatch(postSeeker(seeker));
+    toggleModal();
   }
   const appendCity = (ci) => {
     setCity(ci);
   }
-  const appendFacility=(fac)=>{
-    setFacility(fac);
+  const appendFacility = (fac) => {
+    setRequirement(fac);
   }
 
   const isName = (val) => /^[a-zA-Z]+ [a-zA-Z]+$/.test(val);
@@ -116,28 +121,16 @@ const SeekerForm = (props) => {
 
       </Row>
       <FormGroup>
-        <Label for="address">Address</Label>
-        <Input type="text" name="address" id="address" placeholder="Enter your Address" />
+        <Label for="requirements">Requirements </Label>
+        <AutoSuggest text={requirement} setText={appendFacility} sug={facilitySuggestion} placeHolder="Select your facility" />
       </FormGroup>
       <FormGroup>
-        <Label for="city">City</Label>
-        <Input type="select" name="city" id="city">
-          {citySuggestion.map((c)=>{
-            return(
-              <option>{c}</option>
-            )
-          })}
-        </Input>
+        <Label for="mobileNumber">Mobile No.</Label>
+        <Input type="text" name="mobileNumber" id="mobileNumber" onChange={(e) => { setMob(e.target.value) }} placeholder="Enter your Mobile Number" />
       </FormGroup>
       <FormGroup>
-        <Label for="requirements">Requirements ( You can select multiples )</Label>
-        <Input type="select" name="requirements" id="requirements" multiple>
-          <option>O2-cylinder</option>
-          <option>Hospital Beds</option>
-          <option>Medicines</option>
-          <option>Plasma</option>
-          <option>Others</option>
-        </Input>
+        <Label for="email">Email</Label>
+        <Input type="text" name="email" id="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter your Email-ID" />
       </FormGroup>
       <FormGroup>
         <Label for="comments">Any comment</Label>

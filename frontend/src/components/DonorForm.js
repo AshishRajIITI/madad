@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import citySuggestion from "../resources/city";
 import facilitySuggestion from '../resources/facilty';
 import Chips from 'react-chips';
@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux';
 import { postDonor } from '../redux/ActionCreators';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
-const DonorForm = (props) => {
+const DonorForm = ({ toggleModal }) => {
+  const dispatch = useDispatch();
 
   const dispatch = useDispatch();
   const [isFormInValid, makeValid] = useState(true);
@@ -20,8 +21,6 @@ const DonorForm = (props) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log("form submit");
-    console.log(city);
     const workingRegion = city.join(' / ');
     const availableFacilities = facility.join(' / ');
     const donor = {
@@ -32,8 +31,8 @@ const DonorForm = (props) => {
       "availableFacilities": availableFacilities,
       "comments": comment
     }
-    console.log(donor);
     dispatch(postDonor(donor));
+    toggleModal();
   }
   const appendCity = (ci) => {
     setCity(ci);
@@ -118,8 +117,10 @@ const DonorForm = (props) => {
 
       </Row>
       <FormGroup>
-        <Label for="workingRegion">Working Area</Label>
+        <Label for="workingRegion">Working Cities</Label>
+
         <Chips
+          placeholder="Select your working cities"
           alwaysRenderSuggestions
           value={city}
           onChange={appendCity}
@@ -127,8 +128,9 @@ const DonorForm = (props) => {
         />
       </FormGroup>
       <FormGroup>
-        <Label for="availableFacilities">Facilities you could Provide( You can select multiples )</Label>
+        <Label for="availableFacilities">Facilities you can Provide</Label>
         <Chips
+          placeholder="Select facilities you provide"
           alwaysRenderSuggestions
           value={facility}
           onChange={appendFacility}

@@ -1,19 +1,23 @@
 import React from 'react';
-import { Card, Button, CardTitle, CardText } from 'reactstrap';
+import { Card, Button, CardText, CardBody } from 'reactstrap';
 
 function DonorCard ({donor}){
 
     return(
         <div>
-            <Card body inverse color="warning">
-                <CardTitle tag="h5">Facilities you could Provide {donor.availableFacilities}</CardTitle>
-                <CardTitle tag="h4">{donor.workingRegion}</CardTitle>
-                <CardText>{donor.name}</CardText>
-                <CardText>Mobile:= {donor.mobileNumber}</CardText>
-                <CardText>{donor.email}</CardText>
-                <CardText>{donor.comments}</CardText>
-                <Button color="secondary">Active/Non-Active</Button>
-            </Card>
+           
+                    <Card className="donor-card" color="warning">
+                        <CardBody className="my-card" >
+                            <CardText tag="h5">Facilities You Can Provide {donor.availableFacilities}</CardText>
+                            <CardText tag="h6">{donor.workingRegion}</CardText>
+                            <CardText>Name:{donor.name}</CardText>
+                            <CardText>Mobile Number: {donor.mobileNumber}</CardText>
+                            <CardText>Email:{donor.email}</CardText>
+                            <CardText>Comment: {donor.comments}</CardText>
+                            <Button className="mt-auto" color="primary">Active/Non-Active</Button>
+                        </CardBody>
+                    </Card>
+                   
         </div>
     );
 
