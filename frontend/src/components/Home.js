@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Button, Card, CardBody, CardHeader, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader,CardImg, CardImgOverlay, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import DonorForm from "./DonorForm";
 import SeekerForm from "./SeekerForm";
-import donor from './images/donor.gif';
-import seeker from './images/seeker.gif';
 import network from './images/network.jpg';
-//import Carousal from "./Carousal";
-
+import pmCaresImage from './images/pmCaresImage.jpg';
+import cmCaresImage from './images/cmCaresImage.jpg';
+import robinHOOdImage from './images/robinHood.jpg';
 const Home = () => {
 
     const [modal1, setmodal1] = useState(false);
@@ -21,8 +20,8 @@ const Home = () => {
     return (
         <div className="container ">
             <div className="row align-items-center">
-                <div className="col-12 col-md-5 text-wrap align-middle">
-                    <div className="line2 fs-6">An IIT Indore Initiative to connect covid affected people to verified relief sources</div>
+                <div  id="homeText"className=" col-12 col-md-5 text-wrap align-middle">
+                    <div className="line2 h1">An IIT Indore Initiative to connect covid affected people to verified relief resources. Let's defeat COVID-19 together.</div>
                 </div>
                 <div className="col-12 col-md-7 ">
                     <img src={network} width="100%" height="auto" alt="" />
@@ -53,23 +52,36 @@ const Home = () => {
             <div className="row mt-2 justify-content-center">
 
                 <div className="col-12 col-md-3 ">
-                    <Card className="m-card">
+                    <Card className="m-card ">                    
+                    <CardImg width="100%"  src={pmCaresImage} alt="Card image cap" /> 
+                        <CardImgOverlay>
                         <CardBody>PM fund</CardBody>
+                        </CardImgOverlay>
                     </Card>
                 </div>
                 <div className="col-12 col-md-3 ">
                     <Card className="m-card">
-                        <CardBody>CM fund</CardBody>
+                    <CardImg width="100%"  src={cmCaresImage} alt="Card image cap" /> 
+                        <CardImgOverlay>
+                        <CardBody>List of CM RELIEF PORTALS</CardBody>
+                        </CardImgOverlay>
+                    
+                    </Card>
+                </div>
+                <div className="col-12 col-md-3 ">
+                <Card className="m-card">
+                        <CardImg width="100%"  src={robinHOOdImage} alt="Card image cap" /> 
+                        <CardImgOverlay>
+                        <CardBody>Robin Hood</CardBody>
+                        </CardImgOverlay>
                     </Card>
                 </div>
                 <div className="col-12 col-md-3 ">
                     <Card className="m-card">
-                        <CardBody>RobinHood</CardBody>
-                    </Card>
-                </div>
-                <div className="col-12 col-md-3 ">
-                    <Card className="m-card">
-                        <CardBody>PM fund</CardBody>
+                        <CardImg width="100%"  src={robinHOOdImage} alt="Card image cap" /> 
+                        <CardImgOverlay>
+                        <CardBody>other relief funds</CardBody>
+                        </CardImgOverlay>
                     </Card>
                 </div>
             </div>
