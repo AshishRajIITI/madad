@@ -49,21 +49,7 @@ function Header() {
                                     Awareness
                                     </NavLink>
                             </NavItem>
-<<<<<<< HEAD
                             
-                            <NavItem>
-                                <NavLink className="nav-link" to="/donate">
-                                    Donate
-                                </NavLink>
-                            </NavItem>
-=======
-                            <NavItem>
-                                <NavLink className="nav-link" to="/search">
-                                    Search
-                                </NavLink>
-                            </NavItem>
-                            
->>>>>>> ca5e6cee1cdc97a1f7ed6a132808b94ee1ab705a
                             <NavItem>
                                 <NavLink className="nav-link" to="/contactus">
                                     Contact Us

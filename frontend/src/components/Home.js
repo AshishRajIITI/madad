@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
-import { Card, CardBody, CardHeader, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import {  Card, CardBody,CardTitle, CardHeader, CardImg, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import DonorForm from "./DonorForm";
 import SeekerForm from "./SeekerForm";
-// import donor from './images/donor.gif';
-// import seeker from './images/seeker.gif';
-=======
-import { Button, Card, CardBody,CardTitle, CardHeader, CardImg, CardImgOverlay, Modal, ModalBody, ModalHeader } from 'reactstrap';
-import DonorForm from "./DonorForm";
-import SeekerForm from "./SeekerForm";
->>>>>>> ca5e6cee1cdc97a1f7ed6a132808b94ee1ab705a
 import network from './images/network.jpg';
 import pmCaresImage from './images/pmCaresDonateImg.jpg';
 import cmCaresImage from './images/cmCaresDonateImg.jpg';
