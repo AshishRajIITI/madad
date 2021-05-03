@@ -23,6 +23,22 @@
     color: transparent;
    
 }
+#help{
+    background: linear-gradient(to right,blue, red);
+    background-clip: text;
+    color: transparent;
+}
+.donationCard{
+    
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow : 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.donationCard:hover{
+    
+    box-shadow : 4px 8px 12px 4px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
 .footer{
     margin-top: 100px;
     padding-top: 20px;
@@ -35,12 +51,16 @@
     
 }
 .m-card{
-border-radius: 20px;
+    border-radius: 20px;
     cursor: pointer;
     box-shadow : 0 4px 8px 0 rgba(0,0,0,0.2);
-
-    min-height: 50vh;
+    
 }
+.m-card-img{
+    width: 100%;
+    height: 100px;
+}
+
 .m-card:hover{
     
     box-shadow : 4px 8px 12px 4px rgba(0,0,0,0.2);

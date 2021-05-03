@@ -54,11 +54,7 @@ function Header() {
                                     Search
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink className="nav-link" to="/donate">
-                                    Donate
-                                </NavLink>
-                            </NavItem>
+                            
                             <NavItem>
                                 <NavLink className="nav-link" to="/contactus">
                                     Contact Us
