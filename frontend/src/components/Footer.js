@@ -10,53 +10,53 @@ function Footer(props) {
     <div className="footer">
       <div className="container-fluid">
         <div className="row justify-content-center">
-          <div className="col-4 offset-1 col-sm-2">
+          <div className="col-5 col-sm-2 ">
             <h5>Links</h5>
             <ul className="list-unstyled">
-              <li><Link to="/">Home</Link></li>
+              <li><Link to="/home">Home</Link></li>
               <li><Link to="/donors">Donors</Link></li>
               <li><Link to="/seekers">Seekers</Link></li>
               <li><Link to="/contactus">Contact Us</Link></li>
             </ul>
           </div>
-          <div className="col-7 col-sm-5">
-          <p>Quick Links</p>
-          <ul>
+          <div className="col-5 col-sm-5 ">
+          <h5>Quick Links</h5>
+          <ul  className="list-unstyled">
             <li className="list-unstyled">
-              <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019?gclid=Cj0KCQjwsqmEBhDiARIsANV8H3Z9S2QOOEpwE5kNxleFkJ0lr57jaTgfQk7WJOBPfwKZ-XJP8ZJib-4aAqSgEALw_wcB" >WHO</a>
+              <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019?gclid=Cj0KCQjwsqmEBhDiARIsANV8H3Z9S2QOOEpwE5kNxleFkJ0lr57jaTgfQk7WJOBPfwKZ-XJP8ZJib-4aAqSgEALw_wcB"  rel="noreferrer" target="_blank">WHO</a>
             </li>
             <li className="list-unstyled">
-              <a href="https://www.aarogyasetu.gov.in/">Arogya Setu</a>
+              <a href="https://www.aarogyasetu.gov.in/"  rel="noreferrer" target="_blank">Arogya Setu</a>
             </li>
             <li className="list-unstyled">
-              <a href="https://www.mohfw.gov.in/">Ministry of Health</a>
+              <a href="https://www.mohfw.gov.in/"  rel="noreferrer" target="_blank">Ministry of Health</a>
             </li>
             <li className="list-unstyled">
-              <a href="https://www.nhp.gov.in/">National Health Portal</a>
+              <a href="https://www.nhp.gov.in/" rel="noreferrer" target="_blank">National Health Portal</a>
             </li>
           </ul>
           </div>
-          <div className="col-12 col-sm-4 align-self-center">
-            <div className="text-center">
-              <ul className="nav">
-                <li className="list-unstyled p-5">
-                  <a href="https://www.iiti.ac.in/">
-                    <GrFacebook />
+          <div className="col-6 col-sm-4 align-self-center">
+            <div className="text-center  m-auto">
+              <ul className="list-group list-group-horizontal ">
+                <li className="list-unstyled p-3">
+                  <a href="https://www.iiti.ac.in/" rel="noreferrer" target="_blank">
+                    <GrFacebook className="fs-lg" />
                   </a>
                 </li>
-                <li className="list-unstyled p-5">
-                  <a href="https://twitter.com/MADAD34598902">
-                    <GrTwitter />
+                <li className="list-unstyled p-3">
+                  <a href="https://twitter.com/MADAD34598902" rel="noreferrer" target="_blank">
+                    <GrTwitter className="fs-lg" />
                   </a>
                 </li>
-                <li className="list-unstyled p-5">
-                  <a href="https://www.iiti.ac.in/">
-                    <GrInstagram />
+                <li className="list-unstyled p-3">
+                  <a href="https://www.iiti.ac.in/" rel="noreferrer" target="_blank">
+                    <GrInstagram className="fs-lg" />
                   </a>
                 </li>
-                <li className="list-unstyled p-5">
-                  <a href="https://www.iiti.ac.in/">
-                    <GrLinkedin />
+                <li className="list-unstyled p-3">
+                  <a href="https://www.iiti.ac.in/" rel="noreferrer" target="_blank">
+                    <GrLinkedin className="fs-lg" />
                   </a>
                 </li>
               </ul>

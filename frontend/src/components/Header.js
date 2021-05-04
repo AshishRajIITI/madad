@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { NavItem, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav } from 'reactstrap';
+import { NavItem, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, Col, Row } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import logo from './images/madadLogo2.png'
+import gym from './images/GYM.png'
 
 
 function Header() {
@@ -14,8 +15,18 @@ function Header() {
             <Navbar dark className="header-clr"  expand="md">
                 <div className="container">
                     <NavbarBrand className="mr-auto" href="/home">
+                    <div className="row line align-items-center ml-4"><span>A Students' Gymkhana IIT Indore initiative<img src={gym} className="m-1" alt="" height="20" width="26" /></span></div>
+
+                        <Row className=" align-items-center">
+                        <Col>
                         <img src={logo} alt='' height="90px" width="90px" />
-                        <span className="title">MADAD</span>
+                        </Col>
+                        <Col className="ml-2">
+                        <div className=" row title pr-5">MADAD</div>
+
+                        </Col>
+                        </Row>
+                        
                         </NavbarBrand>
                     <NavbarToggler className='ml-auto' onClick={toggleNav} />
                     <Collapse isOpen={isNavOpen} navbar>
@@ -40,11 +51,7 @@ function Header() {
                                     Awareness
                                     </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink className="nav-link" to="/search">
-                                    Search
-                                    </NavLink>
-                            </NavItem>
+                            
                             <NavItem>
                                 <NavLink className="nav-link" to="/contactus">
                                     Contact Us
