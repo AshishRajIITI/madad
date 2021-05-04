@@ -54,14 +54,16 @@ UserSchema.methods.validatePassword = function(password) {
 
 
 UserSchema.methods.generateJWT = function() {
-     var today = new Date();
-     var exp = new Date(today);
-     exp.setDate(today.getDate() + 30);
+    //  var today = new Date();
+    //  var exp = new Date(today);
+    //  exp.setDate(today.getDate() + 30);
        return jwt.sign({
        id: this._id,
        mobileNumber: this.mobileNumber,
-       exp: parseInt(exp.getTime() / 1000),
-       }, secret);
+    //    exp: parseInt(exp.getTime() / 1000),
+       }, secret , {
+           expiresIn: 2592000, //seconds (30 days)
+       });
     };
 
 UserSchema.methods.toAuthJSON = function(){
