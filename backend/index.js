@@ -4,11 +4,11 @@ const cors = require("cors");
 
 const mongoose = require("mongoose");
 
-const donorRouter = require("./routes/donor");
-
-const seekerRouter = require("./routes/seeker");
-
 require("dotenv").config();
+
+const donorRouter = require("./routes/donor");
+const seekerRouter = require("./routes/seeker");
+const userRouter = require("./routes/user");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -32,6 +32,7 @@ connection.once("open", () => {
 
 app.use("/donors", donorRouter);
 app.use("/seekers", seekerRouter);
+app.use("/user", userRouter);
 
 app.listen(port, () => {
 	console.log(`Server is running at port no. : ${port}`);
