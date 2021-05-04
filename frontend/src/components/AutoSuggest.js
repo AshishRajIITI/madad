@@ -1,96 +1,49 @@
-import React from 'react';
-import Autosuggest from 'react-autosuggest';
+import React, { useState } from 'react';
+import { Input, Label } from 'reactstrap';
 
-// Imagine you have a list of languages that you'd like to autosuggest.
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'Elm',
-    year: 2012
-  }
-];
 
-// Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
 
-  return inputLength === 0 ? [] : languages.filter(lang =>
-    lang.name.toLowerCase().slice(0, inputLength) === inputValue
-  );
-};
+function AutoSuggest({ text, setText, sug, placeHolder }) {
 
-// When suggestion is clicked, Autosuggest needs to populate the input
-// based on the clicked suggestion. Teach Autosuggest how to calculate the
-// input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.name;
+  const [suggest, setSuggest] = useState([]);
 
-// Use your imagination to render suggestions.
-const renderSuggestion = suggestion => (
-  <div>
-    {suggestion.name}
-  </div>
-);
 
-class Example extends React.Component {
-  constructor() {
-    super();
-
-    // Autosuggest is a controlled component.
-    // This means that you need to provide an input value
-    // and an onChange handler that updates this value (see below).
-    // Suggestions also need to be provided to the Autosuggest,
-    // and they are initially empty because the Autosuggest is closed.
-    this.state = {
-      value: '',
-      suggestions: []
-    };
+  const onTextChange = (e) => {
+    const value = e.target.value;
+    let temp = [];
+    if (value.length > 0) {
+      temp = sug.filter(v => v.toLowerCase().startsWith(value.toLowerCase()));
+    }
+    setSuggest(temp);
+    setText(value);
   }
 
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
-  };
+  function suggestionSelected(value) {
+    setText(value);
+    setSuggest([]);
 
-  // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value)
-    });
-  };
-
-  // Autosuggest will call this function every time you need to clear suggestions.
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
-  };
-
-  render() {
-    const { value, suggestions } = this.state;
-
-    // Autosuggest will pass through all these props to the input.
-    const inputProps = {
-      placeholder: 'Type a programming language',
-      value,
-      onChange: this.onChange
-    };
-
-    // Finally, render it!
+  }
+  const list = suggest.slice(0, 5).map((s) => {
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
-    );
-  }
+      <li className="search-li" onClick={() => suggestionSelected(s)}>{s}</li>
+    )
+  })
+  return (
+
+    <div>
+      <Input value={text} onChange={onTextChange} placeholder={placeHolder} />
+      <Label>
+          {suggest.length>0 
+          ?
+          <ul className="search">
+           {list} 
+         </ul>
+         :  null
+         }
+      </Label>
+
+    </div>
+  );
 }
+
+export default AutoSuggest;

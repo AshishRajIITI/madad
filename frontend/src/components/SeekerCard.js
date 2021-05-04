@@ -1,19 +1,20 @@
 import React from 'react';
-import { Card, Button, CardTitle, CardText } from 'reactstrap';
+import { Card, Button, CardText, CardBody, Badge, CardFooter } from 'reactstrap';
 
-function SeekerCard ({seeker}){
+function SeekerCard({ seeker }) {
 
-    return(
+    return (
         <div>
-            <Card body inverse color="primary">
-                <CardTitle tag="h5">Requirements</CardTitle>
-                <CardTitle tag="h4">city</CardTitle>
-                <CardText>Address: kdnvf,sdbkv</CardText>
-                <CardText>Mobile:= {seeker.mobileNumber}</CardText>
-                <CardText>Name:=  {seeker.name}</CardText>                
-                <CardText>{seeker.email}</CardText>
-                <CardText>Any comments</CardText>
-                <Button color="secondary"> Request Completed/Non-Completed</Button>
+            <Card className="my-card">
+                <CardBody className="">
+                    <CardText tag="h5">Requirements: <Badge pill color="warning">{seeker.requirements}</Badge></CardText>
+                    <CardText tag="h6"><Badge pill color="success">{seeker.city}</Badge></CardText>
+                    <CardText> {seeker.name ? seeker.name : null}</CardText>
+                    <CardText>{seeker.mobileNumber ? seeker.mobileNumber : null }</CardText>
+                    <CardText>{seeker.email ? seeker.email : null}</CardText>
+                    <CardText>{seeker.address ? seeker.address : null}</CardText>
+                </CardBody>
+                <CardFooter className="text-center"><Button className="justify-center" block color="success"> Status</Button></CardFooter>
             </Card>
         </div>
     );
