@@ -1,0 +1,95 @@
+.OfferCar .off:hover img {
+	animation-name: zoomin;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	box-shadow: 2rem;
+}
+
+.OfferCar {
+	margin-top: 200px;
+}
+
+
+@keyframes zoomin {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.1);
+	}
+}
+
+.OfferCar .off .card-img-top {
+	height: 250px;
+	overflow: hidden;
+}
+
+.OfferCar .off {
+	height: 350px;
+	font-family: "Roboto";
+}
+
+.OfferCar .owl-stage {
+	margin: 2% 0px;
+}
+
+.OfferCar .off h4 {
+	color: crimson;
+	font-size: large;
+}
+
+.off .image-holder {
+	overflow: hidden;
+}
+
+@media only screen and (max-width: 1000px) {
+	.OfferCar .off h4 {
+		color: crimson;
+		font-size: large;
+	}
+}
+
+.OfferCar .owl-prev,
+.OfferCar .owl-next {
+	position: absolute;
+	top: 40%;
+	background-color: #444 !important;
+	color: white !important;
+}
+
+.OfferCar .owl-prev {
+	left: 0px;
+	border-radius: 0 10px 10px 0 !important;
+}
+
+.OfferCar .owl-next {
+	right: 0px;
+	border-radius: 10px 0 0 10px !important;
+}
+
+.OfferCar .owl-prev span,
+.OfferCar .owl-next span {
+	font-size: 50px !important;
+	margin: 0 10px !important;
+	position: relative;
+	top: -5px;
+}
+
+.OfferCar .card-body {
+	text-align: center !important;
+}
+
+.OfferCar .owl-theme {
+	padding: 0 40px;
+}
+
+@media only screen and (max-width: 800px) {
+	.owl-nav {
+		display: none;
+	}
+	.owl-theme {
+		padding: 0px !important;
+	}
+}

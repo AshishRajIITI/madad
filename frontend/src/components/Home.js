@@ -1,14 +1,24 @@
 import React, { useState } from "react";
-import {  Card, CardBody,CardTitle, CardHeader, CardImg, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Card, CardHeader, CardImg, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import DonorForm from "./DonorForm";
 import SeekerForm from "./SeekerForm";
 import network from './images/network.jpg';
-import pmCaresImage from './images/pmCaresDonateImg.jpg';
-import cmCaresImage from './images/cmCaresDonateImg.jpg';
-import soodFoundation from './images/soodFoundation.png';
-import akshayPatra from './images/akshyPatraFoundation.jpg';
+
 import { useHistory } from "react-router";
 import Example from "./providerForm";
+import pmCaresImage from './images/donate1.jpg';
+import cmCaresImage from './images/donate2.jpg';
+import soodFoundation from './images/donate3.jpg';
+import akshayPatra from './images/donate4.jpg';
+import step1 from "./images/step1.jpg";
+import step2 from "./images/step2.jpg";
+import step3 from "./images/step3.jpg";
+import step5 from "./images/step5.jpg";
+import step6 from "./images/step6.jpg";
+
+import MyCarousel from "./MyCarousel";
+
+
 const Home = () => {
     const history = useHistory();
     const [modal1, setmodal1] = useState(false);
@@ -19,7 +29,7 @@ const Home = () => {
     const toggleModal2 = () => {
         setmodal2(!modal2);
     }
-    const hc=()=>{
+    const hc = () => {
         history.push('/seekers');
     }
 
@@ -48,63 +58,46 @@ const Home = () => {
                     <Card className='m-card' onClick={toggleModal2}>
                         <CardHeader>Need Help</CardHeader>
                     </Card>
+                </div>
+                <div className="row">
+                    <MyCarousel />
+                </div>
+                <div>
+                    <h1 id="help" className="text-center mt-5" >Help Them to Help You</h1>
+                    <br />
+                </div>
+            </div>
+                <div className="row mt-2 justify-content-center">
 
+                    <div className=" col-12 col-md-3 my-2 ">
+                        <a href="https://www.pmcares.gov.in/en/web/contribution/donate_india" rel="noreferrer" target="_blank">
+                            <Card className=" donationCard">
+                                <CardImg top width="100%" src={pmCaresImage} alt="Card image cap" />
+                            </Card>
+                        </a>
+                    </div>
+                    <div className="col-12 col-md-3 my-2">
+                        <a href="https://www.bhimupi.org.in/donation-digitized-with-bhim-upi" rel="noreferrer" target="_blank">
+                            <Card className=" donationCard">
+                                <CardImg top width="100%" src={cmCaresImage} alt="Card image cap" />
+                            </Card>
+                        </a>
+                    </div>
+                    <div className=" col-12 col-md-3 my-2">
+                        <a href="https://www.instamojo.com/@soodcharityfoundation/lcbf43d4ae0824ea4a4118175cd8e9d28/" rel="noreferrer" target="_blank">
+                            <Card className=" donationCard">
+                                <CardImg top width="100%" src={soodFoundation} alt="Card image cap" />
+                            </Card>
+                        </a>
+                    </div>
+                    <div className=" col-12 col-md-3 my-2">
+                        <a href="https://www.akshayapatra.org/covid-relief-services" rel="noreferrer" target="_blank">
+                            <Card className=" donationCard">
+                                <CardImg top width="100%" src={akshayPatra} alt="Card image cap" />
+                            </Card>
+                        </a>
+                    </div>
                 </div>
-                <Modal isOpen={modal2} toggle={toggleModal2} >
-                    <ModalHeader>Seeker Registration</ModalHeader>
-                    <ModalBody><SeekerForm toggleModal={toggleModal2} /></ModalBody>
-                </Modal>
-            </div>
-            <div>
-              <h1  id="help" className="text-center mt-5" >Help Them to Help You</h1>
-              <br />
-            </div>
-            <div className="row mt-2 justify-content-center">
-
-                <div className=" col-12 col-md-3 my-2 ">
-                <a href="https://www.pmcares.gov.in/en/web/contribution/donate_india" rel="noreferrer" target="_blank">
-                    <Card className=" donationCard">
-                        <CardImg top width="100%" src={pmCaresImage} alt="Card image cap" />
-                        <CardBody>
-                            <CardTitle className="text-center" tag="h5">PM-Cares</CardTitle>                           
-                        </CardBody>
-                    </Card>
-                    </a>
-                </div>
-                <div className="col-12 col-md-3 my-2">
-                <a href="https://www.bhimupi.org.in/donation-digitized-with-bhim-upi" rel="noreferrer" target="_blank">
-                    <Card className=" donationCard">
-                        <CardImg top width="100%" src={cmCaresImage} alt="Card image cap" />
-                        <CardBody>
-                            <CardTitle  className="text-center" tag="h5">State List</CardTitle>                           
-                        </CardBody>
-                    </Card>
-                    </a>
-                </div>
-                <div className=" col-12 col-md-3 my-2">
-                    <a href="https://www.instamojo.com/@soodcharityfoundation/lcbf43d4ae0824ea4a4118175cd8e9d28/" rel="noreferrer" target="_blank">
-                    <Card className=" donationCard">
-                        <CardImg top width="100%" src={soodFoundation} alt="Card image cap" />
-                        <CardBody>
-                            <CardTitle  className="text-center" tag="h5">Sood-Foundation</CardTitle>                           
-                        </CardBody>
-                    </Card>
-                    </a>
-                </div>
-                <div className=" col-12 col-md-3 my-2">
-                    <a href="https://www.akshayapatra.org/covid-relief-services" rel="noreferrer" target="_blank">
-                    <Card className=" donationCard">
-                        <CardImg top width="100%" src={akshayPatra} alt="Card image cap" />
-                        <CardBody>
-                            <CardTitle  className="text-center" tag="h5">Akshay Patra</CardTitle>                           
-                        </CardBody>
-                    </Card>
-                    </a>
-                </div>
-            </div>
-            {/* <div>
-                <Carousal />
-            </div> */}
         </div>
     );
 }

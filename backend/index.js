@@ -8,6 +8,8 @@ const donorRouter = require("./routes/donor");
 
 const seekerRouter = require("./routes/seeker");
 
+const authorisation = require("./routes/authorisation");
+
 require("dotenv").config();
 
 const app = express();
@@ -32,6 +34,7 @@ connection.once("open", () => {
 
 app.use("/donors", donorRouter);
 app.use("/seekers", seekerRouter);
+app.use("/authorisation", authorisation);
 
 app.listen(port, () => {
 	console.log(`Server is running at port no. : ${port}`);

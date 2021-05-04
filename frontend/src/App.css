@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
+
 .loading{
     height: 80vh;
     text-align: center;
@@ -10,7 +11,10 @@ a{
     text-decoration: none;
 }
 .App{
-    background-color: #fff;
+    background-image: url(../src/components/images/landingPage.png) ;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-size: cover;
     font-family: 'Baloo 2', cursive;
 }
 .home-div{
@@ -19,13 +23,15 @@ a{
 .h-700{
     height: 100%;
 }
+
 #homeText{
+    margin-top: 50px;
     background: linear-gradient(to right,blue, red);
     background-clip: text;
     color: transparent;
    
 }
-#help{
+.help{
     background: linear-gradient(to right,blue, red);
     background-clip: text;
     color: transparent;
@@ -53,7 +59,8 @@ a{
     
 }
 .m-card{
-    border-radius: 20px;
+    background-color: #2F52B1;
+    border-radius: 20px;   
     cursor: pointer;
     box-shadow : 0 4px 8px 0 rgba(0,0,0,0.2);
     
