@@ -7,6 +7,9 @@
     text-align: center;
     margin-top: 40vh;
 }
+a{
+    text-decoration: none;
+}
 .App{
     background-image: url(../src/components/images/landingPage.png) ;
     background-repeat: no-repeat;
@@ -77,8 +80,12 @@
     font-size: xx-small;
 }
 .line2{
-font-size: xx-large;
+
+font-size: calc(20px + 10vw);
     text-shadow: 4px 8px 12px 4px rgba(0,0,0,0.2);; 
+}
+.fs-lg{
+    font-size: x-large;
 }
 .donor-card{
   min-height: 50vh; 
