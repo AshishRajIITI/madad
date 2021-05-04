@@ -7,6 +7,9 @@ import Donors from './Donors'
 import Seekers from "./Seekers";
 import Contactus from "./Contactus";
 import Awareness from "./Awareness";
+import Profile from "./Profile";
+import Provider from "./Provider";
+import Example from "./providerForm";
 
 
 function Main() {
@@ -19,6 +22,8 @@ function Main() {
                 <Route exact path="/seekers" component={Seekers} />
                 <Route exact path="/contactus" component={Contactus} />
                 <Route exact path="/awareness" component={Awareness} />
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/provider" component={Example} />
                 <Redirect to="/home" />
             </Switch>
             <Footer />

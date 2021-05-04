@@ -7,8 +7,10 @@ import pmCaresImage from './images/pmCaresDonateImg.jpg';
 import cmCaresImage from './images/cmCaresDonateImg.jpg';
 import soodFoundation from './images/soodFoundation.png';
 import akshayPatra from './images/akshyPatraFoundation.jpg';
+import { useHistory } from "react-router";
+import Example from "./providerForm";
 const Home = () => {
-
+    const history = useHistory();
     const [modal1, setmodal1] = useState(false);
     const [modal2, setmodal2] = useState(false);
     const toggleModal1 = () => {
@@ -16,6 +18,9 @@ const Home = () => {
     }
     const toggleModal2 = () => {
         setmodal2(!modal2);
+    }
+    const hc=()=>{
+        history.push('/seekers');
     }
 
     return (
@@ -35,8 +40,9 @@ const Home = () => {
                     </Card>
                 </div>
                 <Modal isOpen={modal1} toggle={toggleModal1} >
-                    <ModalHeader>Provider Registration</ModalHeader>
-                    <ModalBody><DonorForm toggleModal={toggleModal1} /></ModalBody>
+                    <Example />
+                    {/* <ModalHeader>Provider Registration</ModalHeader>
+                    <ModalBody><DonorForm toggleModal={toggleModal1} /></ModalBody> */}
                 </Modal>
                 <div className="col-12 col-md-6 h-700 home-seeker">
                     <Card className='m-card' onClick={toggleModal2}>
