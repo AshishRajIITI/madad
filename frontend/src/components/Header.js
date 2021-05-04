@@ -12,7 +12,7 @@ function Header() {
     }
     return (
         <div>
-            <Navbar dark className="header-clr"  expand="md">
+            <Navbar dark className="header-clr" expand="md">
                 <div className="container">
                     <NavbarBrand className="mr-auto" href="/home">
                     <div className="row line align-items-center ml-4"><span>A Students' Gymkhana IIT Indore initiative<img src={gym} className="m-1" alt="" height="20" width="26" /></span></div>
@@ -44,6 +44,11 @@ function Header() {
                             <NavItem>
                                 <NavLink className="nav-link" to="/seekers">
                                     Help-Seekers
+                                    </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/pmfund">
+                                    PM Fund
                                     </NavLink>
                             </NavItem>
                             <NavItem>
