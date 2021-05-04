@@ -11,12 +11,12 @@ function Header() {
     }
     return (
         <div>
-            <Navbar dark className="header-clr"  expand="md">
+            <Navbar dark className="header-clr" expand="md">
                 <div className="container">
                     <NavbarBrand className="mr-auto" href="/home">
                         <img src={logo} alt='' height="90px" width="90px" />
                         <span className="title">MADAD</span>
-                        </NavbarBrand>
+                    </NavbarBrand>
                     <NavbarToggler className='ml-auto' onClick={toggleNav} />
                     <Collapse isOpen={isNavOpen} navbar>
                         <Nav className='ml-auto' navbar>
@@ -33,6 +33,11 @@ function Header() {
                             <NavItem>
                                 <NavLink className="nav-link" to="/seekers">
                                     Help-Seekers
+                                    </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/pmfund">
+                                    PM Fund
                                     </NavLink>
                             </NavItem>
                             <NavItem>
