@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import citySuggestion from "../resources/city";
 import facilitySuggestion from '../resources/facilty';
 import Chips from 'react-chips';
@@ -8,7 +8,7 @@ import { postDonor } from '../redux/ActionCreators';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
 const DonorForm = ({ toggleModal }) => {
-  const dispatch = useDispatch();
+  
 
   const dispatch = useDispatch();
   const [isFormInValid, makeValid] = useState(true);
@@ -41,7 +41,7 @@ const DonorForm = ({ toggleModal }) => {
     setFacility(fac);
   }
 
-  const isName = (val) => /^[a-zA-Z]+ [a-zA-Z]+$/.test(val);
+  const isName = (val) => /^[a-zA-Z]/.test(val);
   const isNumber = (val) => /^\d{10}$/.test(val);
   const validEmail = val => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val);
   
@@ -62,7 +62,8 @@ const DonorForm = ({ toggleModal }) => {
             validators={{
               isName
             }}
-            placeholder="Enter your name" />
+            placeholder="Enter your name"
+            onChange={(e)=>setName(e.target.value)} />
           <Errors
             className="text-danger"
             model=".name"
@@ -83,6 +84,7 @@ const DonorForm = ({ toggleModal }) => {
             }}
             placeholder="Enter your Mobile Number"
             className="form-control"
+            onChange={(e)=>setMob(e.target.value)}
           />
           <Errors
             className="text-danger"
@@ -104,6 +106,7 @@ const DonorForm = ({ toggleModal }) => {
             validators={{
               validEmail
             }}
+            onChange={(e)=>setEmail(e.target.value)}
           />
           <Errors
             className="text-danger"
@@ -143,7 +146,7 @@ const DonorForm = ({ toggleModal }) => {
         <Input type="textarea" name="comments" onChange={e => setComment(e.target.value)} id="comments" />
       </FormGroup>
 
-      <Button type="submit" disabled={isFormInValid}>Submit</Button>
+      <Button type="submit" color="primary" disabled={isFormInValid}>Submit</Button>
     </LocalForm>
   );
 }

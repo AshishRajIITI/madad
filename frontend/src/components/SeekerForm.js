@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, Row  } from 'reactstrap';
 import citySuggestion from "../resources/city";
 import facilitySuggestion from '../resources/facilty';
-import Chips from 'react-chips';
-import {useDispatch} from 'react-redux';
+
+
 import { Control, LocalForm, Errors } from 'react-redux-form';
 //import { postSeeker } from '../redux/ActionCreators';
 
@@ -47,7 +47,7 @@ const SeekerForm = ({ toggleModal }) => {
     setRequirement(fac);
   }
 
-  const isName = (val) => /^[a-zA-Z]+ [a-zA-Z]+$/.test(val);
+  const isName = (val) => /^[a-zA-Z]/.test(val);
   const isNumber = (val) => /^\d{10}$/.test(val);
   const validEmail = val => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val);
   
@@ -56,16 +56,17 @@ const SeekerForm = ({ toggleModal }) => {
   }
 
   return (
-    <LocalForm onUpdate={(form) => handleUpdate(form)}>
+    <LocalForm onSubmit={handleSubmit} onUpdate={(form) => handleUpdate(form)}>
       <Row className="form-group">
         <Label htmlFor="name">Name</Label>
-        <Col>
+        <Col sm={12}>
           <Control.text model=".name" name="name"
             id="name"
             className="form-control"
             validators={{
               isName
             }}
+            onChange={(e)=>setName(e.target.value)}
             placeholder="Enter your name" />
           <Errors
             className="text-danger"
@@ -79,12 +80,13 @@ const SeekerForm = ({ toggleModal }) => {
       </Row>
       <Row className="form-group">
         <Label htmlFor="mobileNumber">Mobile No.</Label>
-        <Col>
+        <Col sm={12}>
           <Control.text model=".mobileNumber" name="mobileNumber"
             id="mobileNumber"
             validators={{
               isNumber
             }}
+            onChange={(e)=>setMob(e.target.value)}
             placeholder="Enter your Mobile Number"
             className="form-control"
           />
@@ -100,7 +102,7 @@ const SeekerForm = ({ toggleModal }) => {
       </Row>
       <Row className="form-group">
         <Label htmlFor="email">Email-ID</Label>
-        <Col>
+        <Col sm={12}>
           <Control.text model=".email" name="email"
             id="email"
             placeholder="Enter your Email-ID"
@@ -108,6 +110,7 @@ const SeekerForm = ({ toggleModal }) => {
             validators={{
               validEmail
             }}
+            onChange={(e)=>setEmail(e.target.value)}
           />
           <Errors
             className="text-danger"
@@ -121,20 +124,21 @@ const SeekerForm = ({ toggleModal }) => {
 
       </Row>
       <FormGroup>
-        <Label for="requirements">Requirements </Label>
+        <Label for="city">City </Label>
+        <AutoSuggest text={city} setText={appendCity} sug={citySuggestion} placeHolder="Select your City" />
+      </FormGroup>
+      <FormGroup>
+        <Label for="requirements">Requirement </Label>
         <AutoSuggest text={requirement} setText={appendFacility} sug={facilitySuggestion} placeHolder="Select your facility" />
       </FormGroup>
+      
       <FormGroup>
-        <Label for="mobileNumber">Mobile No.</Label>
-        <Input type="text" name="mobileNumber" id="mobileNumber" onChange={(e) => { setMob(e.target.value) }} placeholder="Enter your Mobile Number" />
-      </FormGroup>
-      <FormGroup>
-        <Label for="email">Email</Label>
-        <Input type="text" name="email" id="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter your Email-ID" />
+        <Label for="address">Address</Label>
+        <Input type="text" name="address" id="address" onChange={(e) => { setAddress(e.target.value) }} placeholder="Enter your Address" />
       </FormGroup>
       <FormGroup>
         <Label for="comments">Any comment</Label>
-        <Input type="textarea" name="comments" id="comments" />
+        <Input type="textarea" name="comments" id="comments" onChange={(e) => { setComment(e.target.value) }} />
       </FormGroup>      
       {/* <FormGroup>
         <Label for="exampleFile">Upload Prescription File</Label>
