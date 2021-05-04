@@ -67,19 +67,33 @@ router.route('/otp').post((req, res) => {
     const mobileNumber = req.body.mobileNumber;
     const otp = rn(options);
 
-    var reques = unirest("GET", `http://2factor.in/API/V1/${process.env.SMS_API_KEY}/SMS/${mobileNumber}/${otp}/MADAD`);
+    User.findOne({ mobileNumber: mobileNumber }, function (err, result) {
+        if (err) {
+            res.status(400).send(err);
+        } else {
+            if (result === null) {
+                console.log("mobile no", mobileNumber, "otp", otp)
+                var reques = unirest("GET", `http://2factor.in/API/V1/${process.env.SMS_API_KEY}/SMS/${mobileNumber}/${otp}/MADAD`);
 
-    reques.headers({
-        "content-type": "application/x-www-form-urlencoded"
+                reques.headers({
+                    "content-type": "application/x-www-form-urlencoded"
+                });
+
+                reques.form({});
+
+                reques.end(function (result) {
+                    if (result.error) throw new Error(result.error);
+                    result.body["otp"] = otp;
+                    res.send(result.body);
+                });
+            }
+            else {
+                res.status(204).send({ message: 'User exist' })
+            }
+        }
     });
 
-    reques.form({});
 
-    reques.end(function (result) {
-        if (result.error) throw new Error(result.error);
-        result.body["otp"] = otp;
-        res.send(result.body);
-    });
 });
 
 
@@ -87,20 +101,24 @@ router.route('/otp').post((req, res) => {
 router.route('/login').post((req, res) => {
     const mobileNumber = req.body.mobileNumber;
     const password = req.body.password;
+    console.log("entered login");
 
     User.findOne({ mobileNumber: mobileNumber }, function (err, result) {
         if (err) {
             res.status(400).send(err);
         } else {
-            if (result === null) {
+            if (result == null) {
                 res.status(400).send({ message: 'User not found' });
             }
-
-            user = result;
-            if (!user.validatePassword(password)) {
-                res.status(400).send({ message: 'Invalid password' })
-            } else {
-                res.status(200).send(user.toAuthJSON());
+            else {
+                console.log("done login");
+                user = result;
+                console.log(user)
+                if (!user.validatePassword(password)) {
+                    res.status(400).send({ message: 'Invalid password' })
+                } else {
+                    res.status(200).send(user.toAuthJSON());
+                }
             }
         }
     });
