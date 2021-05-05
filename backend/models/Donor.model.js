@@ -29,16 +29,16 @@ const donorNonAuthSchema = new Schema({
             value: String
         }
     ],
-    statusVer: {        //verification status
-        type: String,
-        enum: ['Non-verified', 'Pending', 'Verified'],
-        default: 'Verified'
+    status: {
+        type: Boolean,
+        required: true,
+        default: false
     },
-    status: {           //working status
-        type: String,
-        enum: ['Active', 'Non-active'],
-        default: 'Active'
-    }
+    isActive: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
 }, {
     timestamps: true,
 });
@@ -74,16 +74,16 @@ const donorAuthSchema = new Schema({
             value: String
         }
     ],
-    statusVer: {
-        type: String,
-        enum: ['Non-verified', 'Pending', 'Verified'],
-        default: 'Non-verified'
+    status: {
+        type: Boolean,
+        required: true,
+        default: false
     },
-    status: {           //working status
-        type: String,
-        enum: ['Active', 'Non-active'],
-        default: 'Active'
-    }
+    isActive: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
 }, {
     timestamps: true,
 });
