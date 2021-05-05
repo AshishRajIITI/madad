@@ -4,10 +4,10 @@ import { Card, CardBody, CardTitle, CardImg, Modal, ModalBody, ModalHeader, Card
 import DonorForm from "./DonorForm";
 import SeekerForm from "./SeekerForm";
 import vaccineImage from './images/vaccine-image.jpg'
-import pmCaresImage from './images/pmCaresDonateImg.jpg';
-import cmCaresImage from './images/cmCaresDonateImg.jpg';
-import soodFoundation from './images/soodFoundation.png';
-import akshayPatra from './images/akshyPatraFoundation.jpg';
+import pmCaresImage from './images/donate1.jpg';
+import cmCaresImage from './images/donate2.jpg';
+import soodFoundation from './images/donate3.jpg';
+import akshayPatra from './images/donate4.jpg';
 import registerImg from './images/register.jpg';
 import searchImg from './images/search.jpg';
 import connectImg from './images/connect.jpg';
@@ -149,7 +149,7 @@ const Home = () => {
                 </div>
 
             </div>
-        </div>
+       
     );
 }
 export default Home;

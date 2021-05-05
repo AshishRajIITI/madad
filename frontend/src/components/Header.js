@@ -48,7 +48,7 @@ function Header() {
                             </NavItem>
                             <NavItem>
                                 <NavLink className="nav-link" to="/pmfund">
-                                    PM Fund
+                                    Donation
                                     </NavLink>
                             </NavItem>
                             <NavItem>

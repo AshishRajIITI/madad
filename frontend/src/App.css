@@ -25,7 +25,7 @@ a {
 }
 .card-height:hover {
   cursor: pointer;
-  transform: scale(0.9);
+  transform: scale(0.95);
 }
 #help {
   background: linear-gradient(to right, blue, red);
