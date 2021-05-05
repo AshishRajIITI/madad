@@ -36,9 +36,10 @@ router.route('/').post((req, res) => {
             } else {
                 if (result === null) return res.status(400).send({ auth: false, message: 'User not found' });
 
-                const workingRegion = req.body.workingRegion;
-                const availableFacilities = req.body.availableFacilities;
+                const city = req.body.city;
+                const services = req.body.services;
                 const comments = req.body.comments;
+                const extra = req.body.extra; // {key : value}
                 const status = req.body.status; // Choices - "Non-verified" , "Pending" , "Verified"
                 const twitter = req.body.twitter; // Boolean - post on twitter or not?
                 const facebook = req.body.facebook; // Boolean - post on facebook or not?
@@ -51,18 +52,20 @@ router.route('/').post((req, res) => {
                 if (donorType === 'donorAuth') {
                     newDonor = new DonorAuth({
                         user: result.id,
-                        workingRegion: workingRegion,
-                        availableFacilities: availableFacilities,
+                        city: city,
+                        services: services,
                         comments: comments,
+                        extra: extra,
                         status: status,
                         organizationName: organizationName
                     });
                 } else {
                     newDonor = new DonorNonAuth({
                         user: result.id,
-                        workingRegion: workingRegion,
-                        availableFacilities: availableFacilities,
+                        city: city,
+                        services: services,
                         comments: comments,
+                        extra: extra,
                         status: status,
                     });
                 }
