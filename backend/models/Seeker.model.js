@@ -21,7 +21,7 @@ const seekerSchema = new Schema({
         trim: true,
     },
     services: {
-        type: Array,
+        type: String,
         required: true,
         unique: false,
         trim: true,

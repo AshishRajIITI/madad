@@ -56,7 +56,7 @@ const DonorForm = ({ toggleModal }) => {
       <FormGroup>
         <Label for="email">Email-ID</Label>
         <Input type="email" name="email" id="email" onChange={e => setEmail(e.target.value)} placeholder="Enter your Email-ID" />
-      </FormGroup>
+      </FormGroup> 
       <FormGroup>
         <Label for="workingRegion">Working Cities</Label>
 
