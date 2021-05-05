@@ -9,7 +9,7 @@ import { fetchDonor } from '../redux/ActionCreators';
 import { FaSearch } from 'react-icons/fa';
 import Loading from './Loading';
 
-function SearchEngine() {
+function Donors() {
 
     const donor = useSelector((state) => state.donorReducer.donors);
     const isLoading = useSelector((state) => state.donorReducer.isLoading);
@@ -20,7 +20,7 @@ function SearchEngine() {
     }, [dispatch]);
     const [searched, setSearch] = useState([]);
     const [cityS, setCityS] = useState('');
-    const [facilityS, setFacilityS] = useState('');
+    const [facilityS, setFacilityS] = useState();
     const [touch, setTouch] = useState(0);
 
 
@@ -29,9 +29,9 @@ function SearchEngine() {
 
     function handleSearch() {
         var temp = [];
-        temp = donor.filter(v => v.workingRegion.toString().search(cityS) !== -1);
+        temp = donor.filter(v => v.city.toString().search(cityS) !== -1);
         var temp2 = [];
-        temp2 = temp.filter(v => v.availableFacilities.toString().search(facilityS) !== -1);
+        temp2 = temp.filter(v => v.service.search(facilityS) !== -1);
         setSearch(temp2);
         setTouch(touch + 1);
     }
@@ -77,4 +77,4 @@ function SearchEngine() {
     );
 }
 
-export default SearchEngine;
+export default Donors;

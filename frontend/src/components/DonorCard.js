@@ -8,9 +8,10 @@ function DonorCard ({donor}){
            
                     <Card className=" my-card" >
                         <CardBody className="" >
-                            <CardText>Facilities You Can Provide {donor.availableFacilities.toString().split(" / ").map((v)=><Badge pill color="warning">{v}</Badge>)}</CardText>
-                            <CardText>{donor.workingRegion.toString().split(" / ").map((v)=><Badge pill color="success">{v}</Badge>)}</CardText>
+                            <CardText>Facility Provided<Badge pill color="warning">{donor.services}</Badge></CardText>
+                            <CardText>{donor.city.toString().split(" / ").map((v)=><Badge pill color="success">{v}</Badge>)}</CardText>
                             <CardText>{donor.name ? donor.name : null }</CardText>
+                            <CardText>{donor.organizationName ? donor.organizationName : null }</CardText>
                             <CardText>{donor.mobileNumber ? donor.mobileNumber : null}</CardText>
                             <CardText>{donor.email ? donor.email : null}</CardText>
                         </CardBody>

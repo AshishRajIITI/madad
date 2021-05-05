@@ -3,8 +3,9 @@ import { Donors } from './donor';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { Seekers } from './seeker';
+import {Users} from './users'
 
 export const ConfigureStore = () => {
-    const store = createStore(combineReducers({ donorReducer: Donors, seekerReducer: Seekers }), compose(applyMiddleware(thunk, logger)));
+    const store = createStore(combineReducers({ donorReducer: Donors, seekerReducer: Seekers, users: Users }), compose(applyMiddleware(thunk, logger)));
     return store;
 }

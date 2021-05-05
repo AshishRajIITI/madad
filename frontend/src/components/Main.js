@@ -7,7 +7,11 @@ import Donors from './Donors'
 import Seekers from "./Seekers";
 import Contactus from "./Contactus";
 import Awareness from "./Awareness";
-import SearchEngine from "./searchEngine";
+import Profile from "./Profile";
+
+import Example from "./providerForm";
+
+
 import PMFund from "./PMFund";
 
 function Main() {
@@ -21,6 +25,9 @@ function Main() {
                 <Route exact path="/contactus" component={Contactus} />
                 <Route exact path="/pmfund" component={PMFund} />
                 <Route exact path="/awareness" component={Awareness} />
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/donorReg" component={()=><Example type="0" />} />
+                <Route exact path="/seekerReg" component={()=><Example type="1" />} />
                 <Redirect to="/home" />
             </Switch>
             <Footer />
