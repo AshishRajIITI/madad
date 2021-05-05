@@ -12,22 +12,22 @@ function Header() {
     }
     return (
         <div>
-            <Navbar dark className="header-clr"  expand="md">
+            <Navbar dark className="header-clr" expand="md">
                 <div className="container">
                     <NavbarBrand className="mr-auto" href="/home">
-                    <div className="row line align-items-center ml-4"><span>A Students' Gymkhana IIT Indore initiative<img src={gym} className="m-1" alt="" height="20" width="26" /></span></div>
+                        <div className="row line align-items-center ml-4"><span>An IIT Indore initiative by Students' Gymkhana<img src={gym} className="m-1" alt="" height="20" width="26" /></span></div>
 
                         <Row className=" align-items-center">
-                        <Col>
-                        <img src={logo} alt='' height="90px" width="90px" />
-                        </Col>
-                        <Col className="ml-2">
-                        <div className=" row title pr-5">MADAD</div>
+                            <Col>
+                                <img src={logo} alt='' height="90px" width="90px" />
+                            </Col>
+                            <Col className="ml-2">
+                                <div className=" row title pr-5">MADAD</div>
 
-                        </Col>
+                            </Col>
                         </Row>
-                        
-                        </NavbarBrand>
+
+                    </NavbarBrand>
                     <NavbarToggler className='ml-auto' onClick={toggleNav} />
                     <Collapse isOpen={isNavOpen} navbar>
                         <Nav className='ml-auto' navbar>
@@ -47,11 +47,16 @@ function Header() {
                                     </NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink className="nav-link" to="/pmfund">
+                                    PM Fund
+                                    </NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink className="nav-link" to="/awareness">
                                     Awareness
                                     </NavLink>
                             </NavItem>
-                            
+
                             <NavItem>
                                 <NavLink className="nav-link" to="/contactus">
                                     Contact Us
