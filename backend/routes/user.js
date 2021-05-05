@@ -72,7 +72,7 @@ router.route('/otp').post((req, res) => {
             res.status(400).send(err);
         } else {
             if (result === null) {
-                console.log("mobile no", mobileNumber, "otp", otp)
+                // console.log("mobile no", mobileNumber, "otp", otp)
                 var reques = unirest("GET", `http://2factor.in/API/V1/${process.env.SMS_API_KEY}/SMS/${mobileNumber}/${otp}/MADAD`);
 
                 reques.headers({

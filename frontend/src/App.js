@@ -13,7 +13,7 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            <Main />
+            <Main className="main-home" />
           </div>
         </BrowserRouter>
       </Provider>
