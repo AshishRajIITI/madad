@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Route, Switch} from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
@@ -8,9 +8,11 @@ import Seekers from "./Seekers";
 import Contactus from "./Contactus";
 import Awareness from "./Awareness";
 import Profile from "./Profile";
-import Provider from "./Provider";
+
 import Example from "./providerForm";
 
+
+import PMFund from "./PMFund";
 
 function Main() {
     return (
@@ -21,6 +23,7 @@ function Main() {
                 <Route exact path="/donors" component={() => <Donors />} />
                 <Route exact path="/seekers" component={Seekers} />
                 <Route exact path="/contactus" component={Contactus} />
+                <Route exact path="/pmfund" component={PMFund} />
                 <Route exact path="/awareness" component={Awareness} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/donorReg" component={()=><Example type="0" />} />

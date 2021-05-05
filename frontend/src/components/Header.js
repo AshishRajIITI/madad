@@ -81,7 +81,12 @@ function Header() {
                                     </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/awareness" onClick={handleCollapse}>
+                                <NavLink className="nav-link" to="/pmfund"  onClick={handleCollapse}>
+                                    PM Fund
+                                    </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="/awareness"  onClick={handleCollapse}>
                                     Awareness
                                     </NavLink>
                             </NavItem>
@@ -97,7 +102,7 @@ function Header() {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to="/profile" >{isAuth ? user.name : null}</NavLink>
+                                <NavLink className="nav-link" to="/profile"  onClick={handleCollapse} >{isAuth ? user.name : null}</NavLink>
 
                             </NavItem>
                             <NavItem>
