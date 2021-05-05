@@ -23,7 +23,8 @@ function Main() {
                 <Route exact path="/contactus" component={Contactus} />
                 <Route exact path="/awareness" component={Awareness} />
                 <Route exact path="/profile" component={Profile} />
-                <Route exact path="/provider" component={Example} />
+                <Route exact path="/donorReg" component={()=><Example type="0" />} />
+                <Route exact path="/seekerReg" component={()=><Example type="1" />} />
                 <Redirect to="/home" />
             </Switch>
             <Footer />

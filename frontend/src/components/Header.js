@@ -4,10 +4,11 @@ import { NavLink } from 'react-router-dom';
 import logo from './images/madadLogo2.png';
 import gym from './images/GYM.png';
 import GoogleLogin from 'react-google-login';
-import { loginUser } from '../redux/ActionCreators';
+import { loginUser, logOutUser } from '../redux/ActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
-import SignUp from './SignUp';
-import SignIn from './SignIn';
+import SignUpBtn from './SignUp';
+
+import SignInBtn from './SignIn';
 
 
 function Header() {
@@ -30,6 +31,10 @@ function Header() {
         if (isNavOpen) {
             toggleNav();
         }
+    }
+    const handleLogout=()=>{
+        
+        dispatch(logOutUser());
     }
     const responseGoogle = (res) => {
         if (res.tokenId) {
@@ -96,19 +101,19 @@ function Header() {
 
                             </NavItem>
                             <NavItem>
-                                {isAuth ? <Button>Logout</Button> : <ButtonGroup><Button onClick={toggleSignIn}>SignIn</Button><Button onClick={toggleSignUp}>SignUp</Button></ButtonGroup>}
+                                {isAuth ? <Button onClick={handleLogout}>Logout</Button> : <ButtonGroup><Button><SignInBtn /></Button><Button><SignUpBtn /></Button></ButtonGroup>}
                             </NavItem>
                         
                         </Nav>
                     </Collapse>
                 </div>
             </Navbar>
-            <Modal isOpen={modal1} toggle={toggleSignIn}>
+            {/* <Modal isOpen={modal1} toggle={toggleSignIn}>
 <ModalBody><SignIn /></ModalBody>
             </Modal>
             <Modal isOpen={modal2} toggle={toggleSignUp}>
 <ModalBody><SignUp /></ModalBody>
-            </Modal>
+            </Modal> */}
         </div>
     );
 }

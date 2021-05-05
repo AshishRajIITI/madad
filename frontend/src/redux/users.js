@@ -7,20 +7,20 @@ const userSchema ={
 }
 
 export const Users = (state = {
-    user: localStorage.getItem('creds') ? JSON.parse(localStorage.getItem('creds')) : null,
+    user: localStorage.getItem('creds') ? JSON.parse(localStorage.getItem('creds')) : userSchema,
     otp: 0,
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('token') ,
     isAuth: localStorage.getItem('token') ? true : false,
     err: null
 }, action) => {
     switch (action.type) {
         case ActionTypes.ADD_USER:
-            return { ...state, err: null, user: action.payload, otp:0 , isAuth: true };
+            return { ...state, err: null, user: action.user, otp:0 , isAuth: true, token: action.token };
        
         case ActionTypes.USER_FAILED:
-            return { ...state, err: action.payload, seekers: userSchema, otp: 0, isAuth:false};
+            return { ...state, err: action.payload, user: null, otp: 0, isAuth:false, token: null};
         case ActionTypes.ADD_OTP:
-                return { ...state, err: null, seekers: userSchema, otp: action.payload, isAuth:false };
+                return { ...state, err: null, user: null , otp: action.payload, isAuth:false };
         default:
             return state;
     }

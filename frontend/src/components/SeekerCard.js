@@ -7,7 +7,7 @@ function SeekerCard({ seeker }) {
         <div>
             <Card className="my-card">
                 <CardBody className="">
-                    <CardText tag="h5">Requirements: <Badge pill color="warning">{seeker.requirements}</Badge></CardText>
+                    <CardText tag="h5">Requirements: <Badge pill color="warning">{seeker.services}</Badge></CardText>
                     <CardText tag="h6"><Badge pill color="success">{seeker.city}</Badge></CardText>
                     <CardText> {seeker.name ? seeker.name : null}</CardText>
                     <CardText>{seeker.mobileNumber ? seeker.mobileNumber : null }</CardText>

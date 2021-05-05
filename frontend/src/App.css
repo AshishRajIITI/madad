@@ -21,7 +21,7 @@ a{
     text-align: center;   
 }
 .h-700{
-    height: 100%;
+    height: 100vh;
 }
 
 #homeText{
@@ -52,6 +52,10 @@ a{
     padding-top: 20px;
     background-color: #0a1b2c;
     color: rgb(255, 255, 255);
+    
+}
+.m-link{
+    text-decoration: none;
     
 }
 .header-clr{
