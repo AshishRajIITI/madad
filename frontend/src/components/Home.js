@@ -11,11 +11,6 @@ import pmCaresImage from './images/donate1.jpg';
 import cmCaresImage from './images/donate2.jpg';
 import soodFoundation from './images/donate3.jpg';
 import akshayPatra from './images/donate4.jpg';
-import step1 from "./images/step1.jpg";
-import step2 from "./images/step2.jpg";
-import step3 from "./images/step3.jpg";
-import step5 from "./images/step5.jpg";
-import step6 from "./images/step6.jpg";
 
 import MyCarousel from "./MyCarousel";
 
@@ -123,12 +118,8 @@ const Home = () => {
                         </Card>
                     </div>
                 </div>
-                <div>
-                    <h1 id="help" className="text-center mt-5" >Help Them to Help You</h1>
-                    <br />
-                </div>
-
-                <div className="row mt-2 justify-content-center">
+                
+                <div className="carousel col-12 col-md-12 justify-content-center">
                     <MyCarousel />
                 </div>
                 <div className="row">
