@@ -29,26 +29,29 @@ router.route("/").post((req, res) => {
                 res.status(400).send(err);
             } else {
                 if (result === null) return res.status(400).send({ auth: false, message: 'User not found' });
-
+                
                 const address = req.body.address;
                 const city = req.body.city;
-                const requirements = req.body.requirements;
+                const services = req.body.services;
                 const isCompleted = req.body.isCompleted;
                 const comments = req.body.comments;
+                const extra = req.body.extra; // {key : value}
 
                 const twitter = req.body.twitter; // Boolean - post on twitter or not?
                 const facebook = req.body.facebook; // Boolean - post on facebook or not?
 
                 const newSeeker = new Seeker({
                     user: result.id,
-                    address,
-                    city,
-                    requirements,
-                    isCompleted,
-                    comments,
+                    address: address,
+                    city: city,
+                    services: services,
+                    isCompleted: isCompleted,
+                    comments: comments,
+                    extra: extra
                 });
 
-                const format_requirements = requirements
+
+                const format_requirements = services
                     .toString()
                     .replace('"', "") //remove the quotes
                     .replace(",", " , ") //replace comma with space
@@ -84,12 +87,12 @@ router.route("/").post((req, res) => {
                     .then((new_seeker) => {
                         result.seeker.push(new_seeker._id);
                         result.save();
-                        client
-                            .post("statuses/update", { status: `${tweet}` })
-                            .then((result) => {
-                                // console.log('You successfully tweeted this : "' + result.text + '"');
-                            })
-                            .catch((err) => console.error);
+                        // client
+                        //     .post("statuses/update", { status: `${tweet}` })
+                        //     .then((result) => {
+                        //         // console.log('You successfully tweeted this : "' + result.text + '"');
+                        //     })
+                        //     .catch((err) => console.error);
                         res.json(newSeeker);
                     })
                     .catch((err) => res.status(400).json("Error" + err));

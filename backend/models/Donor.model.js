@@ -25,8 +25,8 @@ const donorNonAuthSchema = new Schema({
     },
     extra: [
         {
-            key: { type: String },
-            value: { type: String }
+            key: String,
+            value: String
         }
     ],
     status: {
@@ -65,8 +65,8 @@ const donorAuthSchema = new Schema({
     },
     extra: [
         {
-            key: { type: String },
-            value: { type: String }
+            key: String,
+            value: String
         }
     ],
     status: {

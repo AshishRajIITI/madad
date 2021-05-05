@@ -37,8 +37,8 @@ const seekerSchema = new Schema({
     },
     extra: [
         {
-            key: { type: String },
-            value: { type: String }
+            key: String,
+            value: String
         }
     ],
 
