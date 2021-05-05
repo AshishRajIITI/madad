@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import citySuggestion from "../resources/city";
 import facilitySuggestion from '../resources/facilty';
@@ -72,8 +72,8 @@ donorType= "donorNonAuth";
         else {
           setDAuth(false);
         }
-
       }
+      return(null);
     })
   }
 
@@ -82,8 +82,9 @@ donorType= "donorNonAuth";
 
   return (
     <Form onSubmit={handleSubmit} >
+      <h5 className="text-center mt-3">Registration for Providing Help</h5>
        <FormGroup>
-        <Label for="name">Name</Label>
+        <Label for="name">Organization Name*</Label>
         <Input type="text" name="name" id="name" onChange={e => setName(e.target.value)} placeholder="Enter your Organization Name" />
       </FormGroup>
      {/* <FormGroup>
@@ -94,9 +95,9 @@ donorType= "donorNonAuth";
         <Label for="email">Email-ID</Label>
         <Input type="email" name="email" id="email" onChange={e => setEmail(e.target.value)} placeholder="Enter your Email-ID" />
       </FormGroup> */}
-      <h4>Registration for Providing Help</h4>
+      
       <FormGroup>
-        <Label for="city">Working Cities (multiple selections allowed)</Label>
+        <Label for="city">Working Cities (multiple selections allowed)*</Label>
 
         <Chips
           placeholder="Select your working cities"
@@ -107,7 +108,7 @@ donorType= "donorNonAuth";
         />
       </FormGroup>
       <FormGroup>
-        <Label for="service">Service you can Provide</Label>
+        <Label for="service">Service you can Provide*</Label>
         {/* <Chips
           placeholder="Select facilities you provide"
           alwaysRenderSuggestions
@@ -123,11 +124,11 @@ donorType= "donorNonAuth";
             return (
               <div>
                 <FormGroup>
-                  <Label for="key1">{s.key1}</Label>
+                  <Label for="key1">{s.key1}*</Label>
                   <Input type="text" required name="key1" id="key1" onChange={e => { setV1(e.target.value); setK1(s.key1); }} placeholder="Enter value" />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="key2">{s.key2}</Label>
+                  <Label for="key2">{s.key2}*</Label>
                   <Input type="text" required name="key2" id="key2" onChange={e => { setV2(e.target.value); setK2(s.key2); }} placeholder="Enter value" />
                 </FormGroup>
               </div>
@@ -147,7 +148,7 @@ donorType= "donorNonAuth";
           I allow posting my data to twitter  <GrTwitter color="blue" />
         </Label>
       </FormGroup>
-      {donorAuth ? <span>Please help us verify your data by filling the Google form </span> : null}
+     <Label> {donorAuth ? <span>Please help us verify your data by filling the Google form </span> : null}</Label>
       <Button type="submit" color="primary" block>{donorAuth ? <span>Continue</span> : <span>Submit</span>}</Button>
     </Form>
   );

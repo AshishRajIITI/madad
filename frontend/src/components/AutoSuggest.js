@@ -31,7 +31,7 @@ function AutoSuggest({ text, setText, sug, placeHolder }) {
   return (
 
     <div>
-      <Input value={text} onChange={onTextChange} placeholder={placeHolder} />
+      <Input required value={text} onChange={onTextChange} placeholder={placeHolder} />
       <Label>
           {suggest.length>0 
           ?

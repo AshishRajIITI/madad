@@ -12,7 +12,9 @@ import Profile from "./Profile";
 import Example from "./providerForm";
 
 
-import PMFund from "./PMFund";
+import CMFund from "./CMFund";
+import Donate from "./donate";
+import tnc from "./tnc";
 
 function Main() {
     return (
@@ -23,7 +25,9 @@ function Main() {
                 <Route exact path="/donors" component={() => <Donors />} />
                 <Route exact path="/seekers" component={Seekers} />
                 <Route exact path="/contactus" component={Contactus} />
-                <Route exact path="/pmfund" component={PMFund} />
+                <Route exact path="/donate" component={Donate} />
+                <Route exact path="/tnc" component={tnc} />
+                <Route exact path="/cmfund" component={CMFund} />
                 <Route exact path="/awareness" component={Awareness} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/donorReg" component={()=><Example type="0" />} />

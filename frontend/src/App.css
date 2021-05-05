@@ -6,22 +6,23 @@
   text-align: center;
   margin-top: 40vh;
 }
+.container-fluid{
+  padding: 0px 0px !important;
+}
 a {
   text-decoration: none;
 }
 .App {
   font-family: "Baloo 2", cursive;
-  background-image: linear-gradient(
-    to right,
-    rgba(136, 89, 199, 0),
-    rgb(218, 214, 235)
-  );
+  background-image: url('./components/images/long.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .card-height {
-  height: 430px;
+  height: 480px;
   margin-top: 20px;
-  background-color: rgba(52, 35, 206, 0.6) !important;
-  box-shadow: 4px 8px 12px 4px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(75, 73, 73, 0.2);
 }
 .card-height:hover {
   cursor: pointer;
@@ -43,12 +44,13 @@ a {
 }
 .cardText {
   color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
+  
   font-size: 1.2rem;
 }
 .footer {
+  
   margin-top: 30px;
-  padding-top: 20px;
+  padding: 20px;
   background-color: #0a1b2c;
   color: rgb(255, 255, 255);
 }
@@ -103,15 +105,15 @@ a {
 }
 .my-card {
   justify-content: space-between;
-  min-height: 45vh;
+  min-height: 25vh;
   border-radius: 20px;
   background-color: rgb(255, 247, 238);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(239, 72, 245, 0.24);
   transition: 0.3s;
 }
 
 .my-card:hover {
-  box-shadow: 4px 8px 12px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 8px 12px 4px rgba(207, 2, 248, 0.281);
 }
 
 .seeker-card {
@@ -155,4 +157,39 @@ a {
 .donor-card:hover {
   transition: (0.3s);
   margin: -2px;
+}
+
+.card-feature{
+  height: 70% !important;
+}
+
+.donateCard{
+  background-image:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('./components/images/poorPeople.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  width: 100vw;
+}
+.btn-donate{
+  margin: 5px;
+}
+.donateCard:hover{
+  background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('./components/images/poorPeople.jpeg');
+  transition: 0.3s;
+}
+.m-card{
+  width: 100%;
+  border-radius: 10px;
+}
+.m-title{
+  height: 90px;
+  width: 296px;
+  margin-left: 50px;
+}
+@media (max-width: 600px) {
+  .m-title{
+    height: 70px;
+    width: 189px;
+    margin-left: unset;
+  }
 }

@@ -1,7 +1,7 @@
 import * as ActionTypes from "./ActionTypes";
 import axios from "axios";
-//const baseURL = "https://madad-iiti.herokuapp.com";
-const baseURL = "http://localhost:5000";
+const baseURL = "https://madad-iiti.herokuapp.com";
+//const baseURL = "http://localhost:5000";
 
 const fetchDonorRequest = () => ({
 	type: ActionTypes.DONOR_LOADING,
@@ -88,7 +88,7 @@ export const postSeeker = (body) => {
 			.then((response) => {
 				if (response) {
 					console.log("posted");
-					alert("Successfully Registered! Our team will validate it soon");
+					alert("Successfully Request Placed!");
 				} else {
 					var error = new Error(
 						"Error " + response.status + ": " + response.statusText
@@ -175,6 +175,7 @@ export const signupUser = (user) => {
 };
 
 export const sendOTPrequest = (user) => {
+	alert("Otp is sent to your registered mobile no.")
 	return function (dispatch) {
 		axios.post(baseURL + '/user/otp', user)
 			.then((response) => {

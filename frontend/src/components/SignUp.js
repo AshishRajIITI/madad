@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { FaRegIdBadge } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, FormGroup, Input, Label, Row, Col, ModalBody, Modal } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { Button, Form, FormGroup, Input, Label, ModalBody, Modal } from 'reactstrap';
 import { sendOTPrequest, signupUser } from '../redux/ActionCreators';
 
 
@@ -29,7 +31,7 @@ function SignUpBtn(props) {
         }
         function handleSignUp(e) {
             e.preventDefault();
-            if (otp == otpR) {
+            if (otp === otpR) {
                 console.log(otp);
                 const user = {
                     "name": name,
@@ -39,7 +41,7 @@ function SignUpBtn(props) {
                 }
                 dispatch(signupUser(user));
                 setOtpValid(!isValidOtp);
-                
+
                 toggleModal();
                 if (props.toggleSignIn) {
                     props.toggleSignIn();
@@ -55,37 +57,37 @@ function SignUpBtn(props) {
             <div>
                 <Form onSubmit={generateOtp}>
                     <FormGroup>
-                        <Label for="name">Name</Label>
+                        <Label for="name">Name*</Label>
                         <Input disabled={isOtpS} type="text" name="name" required id="name" onChange={e => setName(e.target.value)} placeholder="Enter your name" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="mob">Mobile No.</Label>
+                        <Label for="mob">Mobile No.*</Label>
                         <Input type="text" name="mob" required id="mob" disabled={isOtpS} onChange={e => setMob(e.target.value)} placeholder="Enter your Mobile Number" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="password">4-digit Pin</Label>
-                        <Input type="password" name="password" required id="password" disabled={isOtpS} onChange={e => setPass(e.target.value)} placeholder="Enter your Email" />
+                        <Label for="password">4-digit Pin*</Label>
+                        <Input type="password" name="password" required id="password" disabled={isOtpS} onChange={e => setPass(e.target.value)} placeholder="Create a 4-digit Pin" />
                     </FormGroup>
                     <FormGroup>
                         <Label for="email">Email</Label>
                         <Input type="email" name="email" id="email" disabled={isOtpS} onChange={e => setEmail(e.target.value)} placeholder="Enter your Email" />
                     </FormGroup>
-                    <FormGroup>
-                        <Row>
-                            <Col className="offset-2" sm="1"><Input type="checkbox" name="tc" id="tc" disabled={isOtpS} onChange={e => setTC(!tc)} /></Col>
-                            <Col><Label for="tc">I accept the Terms and Conditions</Label></Col>
-                        </Row>
+                    <FormGroup check className="mb-4 ml-3">
+                        <Label check>
+                            <Input type="checkbox" name="tc" id="tc" disabled={isOtpS} onChange={e => setTC(!tc)} />{' '}
+                             I accept the <Link className="" to="/tnc" rel="noreferrer" target="_blank">Terms and Conditions</Link>
+                         </Label>
                     </FormGroup>
                     <Button color="primary" className="m-auto" type="submit" disabled={!tc} >Generate OTP</Button>
                     {isOtpS
                         ?
                         <div>
                             <Form onSubmit={handleSignUp}>
-                            <FormGroup>
-                                <Label for="otp">4-digit OTP</Label>
-                                <Input type="number" name="otp" required id="otp" onChange={e => setOtp(e.target.value)} placeholder="Enter OTP" />
-                            </FormGroup>
-                            <Button type="submit">SignUp</Button>
+                                <FormGroup>
+                                    <Label for="otp">4-digit OTP</Label>
+                                    <Input type="number" name="otp" required id="otp" onChange={e => setOtp(e.target.value)} placeholder="Enter OTP" />
+                                </FormGroup>
+                                <Button type="submit">SignUp</Button>
                             </Form>
                             {isValidOtp ? <span>Successfully signedUp</span> : <span>Opps! OTP didn't match</span>}
                         </div>
@@ -101,8 +103,8 @@ function SignUpBtn(props) {
 
 
     return (
-        <div className="col-3">
-            <div onClick={toggleModal}>Sign Up</div>
+        <div>
+            <div onClick={toggleModal}><FaRegIdBadge /> Sign Up</div>
             <Modal isOpen={modal} toggle={toggleModal}>
                 <ModalBody><SignUp /></ModalBody>
             </Modal>

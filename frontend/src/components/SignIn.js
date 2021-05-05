@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { BiLogInCircle } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, FormGroup, Input, Label, Modal, ModalBody } from 'reactstrap';
 import { loginUser } from '../redux/ActionCreators';
@@ -38,8 +39,8 @@ setModal(!modal);}
                     <Label for="pin">Pin</Label>
                     <Input type="text" name="pin" required id="pin" onChange={e => setPin(e.target.value)} placeholder="Enter Pin" />
             </FormGroup>
-            <div className="row"><div className="col-7">Are you new here. Click here to </div><div className="col-4"><SignUpBtn toggleSignIn={toggleModal} /></div></div>
-            <Button type="submit" color="primary" className="m-auto">Sign In</Button>
+            <Label className="row ml-2">Are you new here. Click here to {' '} <SignUpBtn toggleSignIn={toggleModal} /></Label>
+            <Button type="submit" block color="primary"  className="mt-3"> Sign In</Button>
             </Form>
         </div>
     );
@@ -47,7 +48,7 @@ setModal(!modal);}
 
     return (
         <div>
-            <div onClick={toggleModal}>Sign In</div>
+            <div onClick={toggleModal}><BiLogInCircle /> Sign In</div>
             <Modal isOpen={modal} toggle={toggleModal}>
 <ModalBody><SignIn /></ModalBody>
             </Modal>

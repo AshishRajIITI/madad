@@ -8,7 +8,7 @@
 }
 
 .OfferCar {
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 .OfferCar .card-text {
@@ -24,28 +24,21 @@
 	}
 }
 
-.OfferCar .off .card-img-top {
-	height: 250px;
-	overflow: hidden;
-}
+
 
 .OfferCar .off {
-	height: 350px;
+	
 	font-family: "Roboto";
 }
 
-.OfferCar .owl-stage {
-	margin: 2% 0px;
-}
+
 
 .OfferCar .off h4 {
 	color: crimson;
 	font-size: large;
 }
 
-.off .image-holder {
-	overflow: hidden;
-}
+
 
 @media only screen and (max-width: 1000px) {
 	.OfferCar .off h4 {
@@ -58,8 +51,8 @@
 .OfferCar .owl-next {
 	position: absolute;
 	top: 40%;
-	background-color: #444 !important;
-	color: white !important;
+	background-color: transparent !important;
+	color: rgb(189, 186, 186) !important;
 }
 
 .OfferCar .owl-prev {
@@ -84,9 +77,7 @@
 	text-align: center !important;
 }
 
-.OfferCar .owl-theme {
-	padding: 0 40px;
-}
+
 
 @media only screen and (max-width: 800px) {
 	.owl-nav {

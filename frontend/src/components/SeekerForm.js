@@ -57,11 +57,11 @@ const history = useHistory();
         <Input type="text" name="address" id="address" onChange={(e) => { setAddress(e.target.value) }} placeholder="Enter your Address" />
       </FormGroup>
       <FormGroup>
-        <Label for="city">City</Label>
+        <Label for="city">City*</Label>
         <AutoSuggest text={city} setText={appendCity} sug={citySuggestion} placeHolder="Select your city" />
       </FormGroup>
       <FormGroup>
-        <Label for="requirements">Requirements </Label>
+        <Label for="requirements">Requirements*</Label>
         <AutoSuggest text={requirement} setText={appendFacility} sug={facilitySuggestion} placeHolder="Select your facility" />
       </FormGroup>
       {/* <FormGroup>

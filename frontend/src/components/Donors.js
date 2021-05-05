@@ -31,7 +31,7 @@ function Donors() {
         var temp = [];
         temp = donor.filter(v => v.city.toString().search(cityS) !== -1);
         var temp2 = [];
-        temp2 = temp.filter(v => v.service.search(facilityS) !== -1);
+        temp2 = temp.filter(v => v.services.search(facilityS) !== -1);
         setSearch(temp2);
         setTouch(touch + 1);
     }
