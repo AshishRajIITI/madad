@@ -21,21 +21,28 @@ router.route('/').get((req, res) => {
     jwt.verify(token, process.env.secret, function (err, decoded) {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
-        User.findById(decoded.id, function (err, result) {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                if (result === null) return res.status(400).send({ auth: false, message: 'User not found' });
-                const response = {
-                    auth: true,
-                    name: result.name,
-                    mobileNumber: result.mobileNumber,
-                    email: result.email,
-                    updatedAt: result.updatedAt
-                };
-                res.status(200).send(response);
-            }
-        });
+        User.findById(decoded.id).populate('donorAuth donorNonAuth seeker').exec(
+            function (err, result) {
+                
+                if (err) {
+                    res.status(400).send(err);
+                } else {
+                    if (result === null) return res.status(400).send({ auth: false, message: 'User not found' });
+        
+                    const response = {
+                        auth: true,
+                        name: result.name,
+                        mobileNumber: result.mobileNumber,
+                        email: result.email,
+                        updatedAt: result.updatedAt,
+                        createdAt: result.createdAt,
+                        donorAuth: result.donorAuth,
+                        donorNonAuth: result.donorNonAuth,
+                        seeker: result.seeker,
+                    };
+                    res.status(200).send(response);
+                }
+            });
     });
 });
 

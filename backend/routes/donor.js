@@ -15,10 +15,15 @@ const client = new twitter(config);
 
 router.route('/').get(async (req, res) => {
 
-    const donorAuthList = await DonorAuth.find();
-    const donorNonAuthList = await DonorNonAuth.find();
+    var donorList = [];
 
-    res.status(200).send(donorAuthList.concat(donorNonAuthList));
+    const donorAuthList = await DonorAuth.find({ status: true, isActive: true }).populate('user', ['name', 'mobileNumber', 'email']);
+    const donorNonAuthList = await DonorNonAuth.find({ status: true, isActive: true }).populate('user', ['name', 'mobileNumber', 'email']);
+
+    donorList = donorList.concat(donorAuthList);
+    donorList = donorList.concat(donorNonAuthList);
+
+    res.status(200).send(donorList);
 });
 
 
@@ -40,7 +45,7 @@ router.route('/').post((req, res) => {
                 const services = req.body.services;
                 const comments = req.body.comments;
                 const extra = req.body.extra; // {key : value}
-                const status = req.body.status; // Choices - "Non-verified" , "Pending" , "Verified"
+                const status = req.body.status; // Boolean
                 const twitter = req.body.twitter; // Boolean - post on twitter or not?
                 const facebook = req.body.facebook; // Boolean - post on facebook or not?
                 const donorType = req.body.donorType; // "donorAuth" or "donorNonAuth"
@@ -94,7 +99,11 @@ router.route('/').post((req, res) => {
 
                 newDonor.save()
                     .then((new_donor) => {
-                        result.donor.push(new_donor._id);
+                        if (donorType === 'donorAuth') {
+                            result.donorAuth.push(new_donor._id);
+                        } else {
+                            result.donorNonAuth.push(new_donor._id);
+                        }
                         result.save();
                         if (twitter) {
                             client.post('statuses/update', { status: `${tweet}` }).then((result) => {
@@ -109,5 +118,70 @@ router.route('/').post((req, res) => {
         });
     });
 });
+
+router.route('/:id').put((req, res) => {
+
+    const id = req.params.id;
+
+    var token = req.headers['x-access-token'];
+    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+
+    jwt.verify(token, process.env.secret, function (err, decoded) {
+        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+        User.findById(decoded.id, function (err, user) {
+            if (err) {
+                res.status(400).send(err);
+            } else {
+                if (user === null) return res.status(400).send({ auth: false, message: 'User not found' });
+
+                const donorAuthList = user.donorAuth;
+                const donorAuthcheck = donorAuthList.includes(id);
+
+                const donorNonAuthList = user.donorNonAuth;
+                const donorNonAuthcheck = donorNonAuthList.includes(id);
+
+                if (donorAuthcheck) {
+                    DonorAuth.findById(id, function (err, donor_object) {
+                        if (err) {
+                            res.status(400).send(err);
+                        }
+                        else {
+                            donor_object.city = req.body.city ? req.body.city : donor_object.city;
+                            donor_object.organizationName = req.body.organizationName ? req.body.organizationName : donor_object.organizationName;
+                            donor_object.services = req.body.services ? req.body.services : donor_object.services;
+                            donor_object.comments = req.body.comments ? req.body.comments : donor_object.comments;
+                            donor_object.extra = req.body.extra ? req.body.extra : donor_object.extra;
+                            donor_object.isActive = req.body.isActive ? req.body.isActive : donor_object.isActive;
+                            donor_object.save(() => {
+                                res.status(200).send({ message: 'Updated Successfully' });
+                            });
+                        }
+                    });
+
+                } else if (donorNonAuthcheck) {
+                    DonorNonAuth.findById(id, function (err, donor_object) {
+                        if (err) {
+                            res.status(400).send(err);
+                        }
+                        else {
+                            donor_object.city = req.body.city ? req.body.city : donor_object.city;
+                            donor_object.services = req.body.services ? req.body.services : donor_object.services;
+                            donor_object.comments = req.body.comments ? req.body.comments : donor_object.comments;
+                            donor_object.extra = req.body.extra ? req.body.extra : donor_object.extra;
+                            donor_object.isActive = req.body.isActive ? req.body.isActive : donor_object.isActive;
+                            donor_object.save(() => {
+                                res.status(200).send({ message: 'Updated Successfully' });
+                            });
+                        }
+                    });
+                } else {
+                    res.status(400).send({ message: 'Update Denied' });
+                }
+            }
+        });
+    });
+});
+
 
 module.exports = router;
