@@ -26,14 +26,14 @@ router.route('/').get((req, res) => {
                 res.status(400).send(err);
             } else {
                 if (result === null) return res.status(400).send({ auth: false, message: 'User not found' });
-                const response = {
-                    auth: true,
-                    name: result.name,
-                    mobileNumber: result.mobileNumber,
-                    email: result.email,
-                    updatedAt: result.updatedAt
-                };
-                res.status(200).send(response);
+                // const response = {
+                //     auth: true,
+                //     name: result.name,
+                //     mobileNumber: result.mobileNumber,
+                //     email: result.email,
+                //     updatedAt: result.updatedAt
+                // };
+                res.status(200).send(result);
             }
         });
     });
@@ -109,6 +109,7 @@ router.route('/login').post((req, res) => {
         } else {
             if (result == null) {
                 res.status(400).send({ message: 'User not found' });
+                console.log("not exist");
             }
             else {
                 console.log("done login");

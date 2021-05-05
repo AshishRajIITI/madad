@@ -87,6 +87,7 @@ router.route("/").post((req, res) => {
                     .then((new_seeker) => {
                         result.seeker.push(new_seeker._id);
                         result.save();
+                        console.log(newSeeker);
                         // client
                         //     .post("statuses/update", { status: `${tweet}` })
                         //     .then((result) => {
