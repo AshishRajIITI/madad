@@ -31,7 +31,7 @@ function SearchEngine() {
         var temp = [];
         temp = seeker.filter(v => v.city.search(cityS)!==-1);
         var temp2 = [];
-        temp2 = temp.filter(v => v.requirements.toString().search(facilityS) !== -1);
+        temp2 = temp.filter(v => v.services.search(facilityS) !==-1);
         setSearch(temp2);
         setTouch(touch + 1);
     }

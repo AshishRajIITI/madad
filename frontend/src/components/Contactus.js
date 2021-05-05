@@ -47,7 +47,7 @@ export default function ContactUs() {
       </FormGroup>
       <FormGroup check row style = {{marginBottom:25,marginTop:10}}>
         <Col sm={{ size: 10, offset: 2 }}>
-          <Button color="warning" type="submit" value="Send">Send</Button>
+          <Button color="warning" block type="submit" value="Send">Send</Button>
         </Col>
       </FormGroup>
     </Form>

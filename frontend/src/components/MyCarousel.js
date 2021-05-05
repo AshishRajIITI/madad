@@ -5,42 +5,60 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import "./OwlCarousel.css";
 import "owl.carousel/dist/assets/owl.carousel.css";
 
-import step1  from "./images/step1.jpg";
-import step2  from "./images/step2.jpg";
-import step3  from "./images/step3.jpg";
-import step5  from "./images/step5.jpg";
-import step6  from "./images/step6.jpg";
+import {Card, CardImg, CardBody, CardTitle, CardText} from 'reactstrap';
+
+import registerImg from './images/register.jpg';
+import searchImg from './images/search.jpg';
+import connectImg from './images/connect.jpg';
+import donateImg from './images/donate.jpg';
+import authorizedImg from './images/authorized.jpg';
+import servicesImg from './images/services.jpg';
 
 const MyCarousel = () => {
 
     const[images] = useState([
     {
-        img: step1,
+        img: registerImg,
+        head: "Register",
+        text: "Register on the portal to get required help in no time"
     },
     {
-        img: step2,
+        img: searchImg,
+        head: "Search",
+        text: "Quick Search the required help by connecting with 100+ people"
     },
     {
-        img: step3,
+        img: servicesImg,
+        head:"Services",
+        text:"Plasma, Blood, Oxygen, Food, Medicine and more"
     },
     {
-        img: step5,
+        img: authorizedImg,
+        head:"Authorize",
+        text:"Our team will keep track of verified resources"
     },
     {
-        img: step6,
+        img: connectImg,
+        head:"Connect",
+        text:"Our team will help you in connecting with the helper"
+    },
+    {
+        img: donateImg,
+        head:"Donate",
+        text:"Help our nation by donating into the funds"
     },
 
 ]);
 
 const responsive = {
     3000: {
-        items: 5,
-    },
-    1400: {
         items: 4,
     },
-    1024: {
+    1400: {
         items: 3,
+    },
+    1024: {
+        items: 2,
     },
     800: {
         items: 2,
@@ -67,18 +85,14 @@ return (
                 responsive={responsive}
             >
                 {images.map((img) => {
-                    return (
-                       
-                            <div className="off card mx-3 mb-0">
-                                <div className="image-holder">
-                                    <img
-                                        className="card-img-top"
-                                        src={img.img}
-                                        alt="Card image cap"
-                                    />
-                                </div>
-                            </div>
-                       
+                    return ( 
+                        <Card className="card-height mr-1 ml-1">
+                            <CardImg top className="card-feature" width="100%" src={img.img} alt="Card image cap" />
+                            <CardBody>
+                                <CardTitle tag="h2">{img.head}</CardTitle>
+                                <CardText className="cardText">{img.text}</CardText>
+                            </CardBody>
+                        </Card>
                     );
                 })}
             </OwlCarousel>
