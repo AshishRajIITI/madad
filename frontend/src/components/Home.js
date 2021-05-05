@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { Card, CardBody, CardTitle, CardImg, Modal, ModalBody, ModalHeader, CardText } from 'reactstrap';
 import DonorForm from "./DonorForm";
 import SeekerForm from "./SeekerForm";
@@ -13,6 +14,7 @@ import connectImg from './images/connect.jpg';
 import donateImg from './images/donate.jpg';
 import authorizedImg from './images/authorized.jpg';
 import servicesImg from './images/services.jpg';
+
 const Home = () => {
 
     const [modal1, setmodal1] = useState(false);
@@ -46,6 +48,7 @@ const Home = () => {
                         </Modal>
                     </div>
                 </div>
+
                 <div className="col-12 col-lg-6">
                     <img src={vaccineImage} width="100%" height="auto" alt="" />
                 </div>
@@ -112,52 +115,40 @@ const Home = () => {
                 <h1 id="help" className="text-center mt-5" >Help Them to Help You</h1>
                 <br />
             </div>
-            <div className="row mt-2 justify-content-center">
+             
+                <div className="row mt-2 justify-content-center">
 
-                <div className=" col-12 col-md-3 my-2 ">
-                    <a href="https://www.pmcares.gov.in/en/web/contribution/donate_india" rel="noreferrer" target="_blank">
-                        <Card className=" donationCard">
-                            <CardImg top width="100%" src={pmCaresImage} alt="Card image cap" />
-                            <CardBody>
-                                <CardTitle className="text-center" tag="h5">PM-Cares</CardTitle>
-                            </CardBody>
-                        </Card>
-                    </a>
+                    <div className=" col-12 col-md-3 my-2 ">
+                        <a href="https://www.pmcares.gov.in/en/web/contribution/donate_india" rel="noreferrer" target="_blank">
+                            <Card className=" donationCard">
+                                <CardImg top width="100%" src={pmCaresImage} alt="Card image cap" />
+                            </Card>
+                        </a>
+                    </div>
+                    <div className="col-12 col-md-3 my-2">
+                        <a href="https://www.bhimupi.org.in/donation-digitized-with-bhim-upi" rel="noreferrer" target="_blank">
+                            <Card className=" donationCard">
+                                <CardImg top width="100%" src={cmCaresImage} alt="Card image cap" />
+                            </Card>
+                        </a>
+                    </div>
+                    <div className=" col-12 col-md-3 my-2">
+                        <a href="https://www.instamojo.com/@soodcharityfoundation/lcbf43d4ae0824ea4a4118175cd8e9d28/" rel="noreferrer" target="_blank">
+                            <Card className=" donationCard">
+                                <CardImg top width="100%" src={soodFoundation} alt="Card image cap" />
+                            </Card>
+                        </a>
+                    </div>
+                    <div className=" col-12 col-md-3 my-2">
+                        <a href="https://www.akshayapatra.org/covid-relief-services" rel="noreferrer" target="_blank">
+                            <Card className=" donationCard">
+                                <CardImg top width="100%" src={akshayPatra} alt="Card image cap" />
+                            </Card>
+                        </a>
+                    </div>
                 </div>
-                <div className="col-12 col-md-3 my-2">
-                    <a href="https://www.bhimupi.org.in/donation-digitized-with-bhim-upi" rel="noreferrer" target="_blank">
-                        <Card className=" donationCard">
-                            <CardImg top width="100%" src={cmCaresImage} alt="Card image cap" />
-                            <CardBody>
-                                <CardTitle className="text-center" tag="h5">State List</CardTitle>
-                            </CardBody>
-                        </Card>
-                    </a>
-                </div>
-                <div className=" col-12 col-md-3 my-2">
-                    <a href="https://www.instamojo.com/@soodcharityfoundation/lcbf43d4ae0824ea4a4118175cd8e9d28/" rel="noreferrer" target="_blank">
-                        <Card className=" donationCard">
-                            <CardImg top width="100%" src={soodFoundation} alt="Card image cap" />
-                            <CardBody>
-                                <CardTitle className="text-center" tag="h5">Sood-Foundation</CardTitle>
-                            </CardBody>
-                        </Card>
-                    </a>
-                </div>
-                <div className=" col-12 col-md-3 my-2">
-                    <a href="https://www.akshayapatra.org/covid-relief-services" rel="noreferrer" target="_blank">
-                        <Card className=" donationCard">
-                            <CardImg top width="100%" src={akshayPatra} alt="Card image cap" />
-                            <CardBody>
-                                <CardTitle className="text-center" tag="h5">Akshay Patra</CardTitle>
-                            </CardBody>
-                        </Card>
-                    </a>
-                </div>
+
             </div>
-            {/* <div>
-                <Carousal />
-            </div> */}
         </div>
     );
 }
