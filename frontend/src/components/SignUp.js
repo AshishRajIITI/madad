@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaRegIdBadge } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -9,13 +9,15 @@ import { sendOTPrequest, signupUser } from '../redux/ActionCreators';
 
 function SignUpBtn(props) {
     const [modal, setModal] = useState(false);
+    const otpR = useSelector(state => state.users.otp);
     const toggleModal = () => {
         setModal(!modal);
-
+console.log("modal called");
+console.log(otpR);
     }
     function SignUp() {
         const dispatch = useDispatch();
-        const otpR = useSelector(state => state.users.otp);
+        
         const [password, setPass] = useState('');
         const [isOtpS, setOtpS] = useState(false);
         const [isValidOtp, setOtpValid] = useState(false);
@@ -24,13 +26,21 @@ function SignUpBtn(props) {
         const [name, setName] = useState('');
         const [mob, setMob] = useState('');
         const [email, setEmail] = useState('');
+        
+        const generateOtp = (e) => {
+            e.preventDefault();
+            setOtpS(true);
+             dispatch(sendOTPrequest({ "mobileNumber": mob }, toggleModal));
+            if(otpR===0){
+                console.log(otpR);
+                setModal(!modal);
+            }
 
-        const generateOtp = () => {
-            setOtpS(!isOtpS);
-            dispatch(sendOTPrequest({ "mobileNumber": mob }));
         }
+
         function handleSignUp(e) {
             e.preventDefault();
+            console.log(otpR);
             if (otp === otpR) {
                 console.log(otp);
                 const user = {
@@ -48,9 +58,7 @@ function SignUpBtn(props) {
                 };
 
             }
-            else {
-                alert("Wrong Otp entered! Try again");
-            }
+
         }
 
         return (
@@ -76,26 +84,24 @@ function SignUpBtn(props) {
                         <Label check>
                             <Input type="checkbox" name="tc" id="tc" disabled={isOtpS} onChange={e => setTC(!tc)} />{' '}
                              I accept the <Link className="" to="/tnc" rel="noreferrer" target="_blank">Terms and Conditions</Link>
-                         </Label>
+                        </Label>
                     </FormGroup>
                     <Button color="primary" className="m-auto" type="submit" disabled={!tc} >Generate OTP</Button>
-                    {isOtpS
-                        ?
-                        <div>
-                            <Form onSubmit={handleSignUp}>
-                                <FormGroup>
-                                    <Label for="otp">4-digit OTP</Label>
-                                    <Input type="number" name="otp" required id="otp" onChange={e => setOtp(e.target.value)} placeholder="Enter OTP" />
-                                </FormGroup>
-                                <Button type="submit">SignUp</Button>
-                            </Form>
-                            {isValidOtp ? <span>Successfully signedUp</span> : <span>Opps! OTP didn't match</span>}
-                        </div>
-                        :
-                        null
-                    }
-
                 </Form>
+                {isOtpS
+                    ?
+                    <div>
+                        <Form onSubmit={handleSignUp}>
+                            <FormGroup>
+                                <Label for="otp">4-digit OTP</Label>
+                                <Input type="number" name="otp" required id="otp" onChange={e => setOtp(e.target.value)} placeholder="Enter OTP" />
+                            </FormGroup>
+                            <Button type="submit">SignUp</Button>
+                        </Form>
+                    </div>
+                    :
+                    null
+                }
             </div>
         );
     }

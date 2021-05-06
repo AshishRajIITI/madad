@@ -174,13 +174,25 @@ export const signupUser = (user) => {
 	}
 };
 
-export const sendOTPrequest = (user) => {
-	alert("Otp is sent to your registered mobile no.")
+export const sendOTPrequest = (mob, toggleModal) => {
+	
 	return function (dispatch) {
-		axios.post(baseURL + '/user/otp', user)
+		axios.post(baseURL + '/user/otp', mob)
 			.then((response) => {
 				if (response) {
-					dispatch({ type: ActionTypes.ADD_USER, user: user, token: user.token })
+					const rest = response.data;
+console.log(rest);
+					if(!rest.isRepeat)
+					{
+						alert("Otp is sent to your registered mobile no: ",mob)
+						dispatch({ type: ActionTypes.ADD_OTP, payload: rest.otp })
+					}
+					else
+					{
+						alert("User already exists! Please login to continue");
+						toggleModal();
+						dispatch({ type: ActionTypes.USER_FAILED, err: "User Exist" });
+					}
 				} else {
 					var error = new Error(
 						"Error " + response.status + ": " + response.statusText

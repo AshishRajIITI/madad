@@ -8,7 +8,7 @@ const userSchema ={
 
 export const Users = (state = {
     user: localStorage.getItem('creds') ? JSON.parse(localStorage.getItem('creds')) : userSchema,
-    otp: 0,
+    otp: 5,
     token: localStorage.getItem('token') ,
     isAuth: localStorage.getItem('token') ? true : false,
     err: null
