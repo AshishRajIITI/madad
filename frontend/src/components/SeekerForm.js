@@ -33,6 +33,7 @@ const history = useHistory();
       "email": user.email,
       "address": address,
       "city": city,
+      "twitter": twitter,
       "services": requirement,
       "comments": comment
     }

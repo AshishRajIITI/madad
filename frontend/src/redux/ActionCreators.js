@@ -177,7 +177,7 @@ export const signupUser = (user, toggleModal) => {
 	}
 };
 
-export const sendOTPrequest = (mob, toggleModal, setOtpS) => {
+export const sendOTPrequest = (mob, toggleModal) => {
 	
 	return function (dispatch) {
 		axios.post(baseURL + '/user/otp', mob)
@@ -187,7 +187,7 @@ export const sendOTPrequest = (mob, toggleModal, setOtpS) => {
 // console.log(rest);
 					if(!rest.isRepeat)
 					{
-						alert("Otp is sent to your registered mobile no: ",mob);
+						alert("Otp is sent to your registered mobile no: ", mob.mobileNumber);
 						dispatch({ type: ActionTypes.ADD_OTP, payload: rest.otp });
 					}
 					else
