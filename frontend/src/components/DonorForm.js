@@ -3,62 +3,101 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import citySuggestion from "../resources/city";
 import facilitySuggestion from '../resources/facilty';
 import Chips from 'react-chips';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postDonor } from '../redux/ActionCreators';
+import AutoSuggest from './AutoSuggest';
+
+import services from '../resources/services'
+import { useHistory } from 'react-router';
+import { GrTwitter } from 'react-icons/gr';
 
 
 const DonorForm = ({ toggleModal }) => {
   const dispatch = useDispatch();
-  
-
+  const history = useHistory();
+  const user = useSelector(state=>state.users.user);
   const [city, setCity] = useState([]);
   const [name, setName] = useState('');
-  const [mob, setMob] = useState('');
-  const [email, setEmail] = useState('');
-  const [facility, setFacility] = useState([]);
+  const [twitter, setTwit] = useState(true);
+  const [facility, setFacility] = useState('');
   const [comment, setComment] = useState('');
+  const [value1, setV1] = useState('');
+  const [key1, setK1] = useState('');
+  const [value2, setV2] = useState('');
+  const [key2, setK2] = useState('');
+  const [donorAuth, setDAuth] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
     const workingRegion = city.join(' / ');
-    const availableFacilities = facility.join(' / ');
-    const donor = {
-      "name": name,
-      "mobileNumber": mob,
-      "email": email,
-      "workingRegion": workingRegion,
-      "availableFacilities": availableFacilities,
-      "comments": comment
+    var donorType;
+    if(donorAuth)
+    {
+ donorType= "donorAuth";
     }
+    else{
+donorType= "donorNonAuth";
+    }
+    const donor = {
+      "organizationName": name,
+      "mobileNumber": user.mobileNumber,
+      "email": user.email,
+      "city": workingRegion,
+      "services": facility,
+      "comments": comment,
+      "twitter": twitter,
+      "donorType": donorType,
+      "extra": [{ "key": key1, "value": value1 }, { "key": key2, "value": value2 }]
+    }
+    console.log(donor);
+    
     dispatch(postDonor(donor));
-    toggleModal();
+    
+    if(donorAuth){
+      window.location.href="https://forms.gle/mmVuai6NHkuQP2m7A";
+    }
+    history.push('/seekers');
   }
   const appendCity = (ci) => {
     setCity(ci);
   }
+
   const appendFacility = (fac) => {
     setFacility(fac);
+    services.map((s) => {
+      if (s.service === fac) {
+        if (s.donorAUTH) {
+          setDAuth(true);
+        }
+        else {
+          setDAuth(false);
+        }
+      }
+      return(null);
+    })
   }
 
 
 
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormGroup>
-        <Label for="name">Name</Label>
-        <Input type="text" name="name" id="name" onChange={e => setName(e.target.value)} placeholder="Enter your name" />
+    <Form onSubmit={handleSubmit} >
+      <h5 className="text-center mt-3">Registration for Providing Help</h5>
+       <FormGroup>
+        <Label for="name">Organization Name*</Label>
+        <Input type="text" name="name" id="name" onChange={e => setName(e.target.value)} placeholder="Enter your Organization Name" />
       </FormGroup>
-      <FormGroup>
+     {/* <FormGroup>
         <Label for="mobileNo">Mobile No.</Label>
         <Input type="tel" required name="mobileNo" id="mobileNo" onChange={e => setMob(e.target.value)} placeholder="Enter your Mobile Number" />
       </FormGroup>
       <FormGroup>
         <Label for="email">Email-ID</Label>
         <Input type="email" name="email" id="email" onChange={e => setEmail(e.target.value)} placeholder="Enter your Email-ID" />
-      </FormGroup>
+      </FormGroup> */}
+      
       <FormGroup>
-        <Label for="workingRegion">Working Cities</Label>
+        <Label for="city">Working Cities (multiple selections allowed)*</Label>
 
         <Chips
           placeholder="Select your working cities"
@@ -69,24 +108,52 @@ const DonorForm = ({ toggleModal }) => {
         />
       </FormGroup>
       <FormGroup>
-        <Label for="availableFacilities">Facilities you can Provide</Label>
-        <Chips
+        <Label for="service">Service you can Provide*</Label>
+        {/* <Chips
           placeholder="Select facilities you provide"
           alwaysRenderSuggestions
           value={facility}
           onChange={appendFacility}
           suggestions={facilitySuggestion}
-        />
+        /> */}
+        <AutoSuggest text={facility} setText={appendFacility} sug={facilitySuggestion} placeHolder="Select your facility" />
       </FormGroup>
-
+      {
+        services.map((s) => {
+          if (s.service === facility) {
+            return (
+              <div>
+                <FormGroup>
+                  <Label for="key1">{s.key1}*</Label>
+                  <Input type="text" required name="key1" id="key1" onChange={e => { setV1(e.target.value); setK1(s.key1); }} placeholder="Enter value" />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="key2">{s.key2}*</Label>
+                  <Input type="text" required name="key2" id="key2" onChange={e => { setV2(e.target.value); setK2(s.key2); }} placeholder="Enter value" />
+                </FormGroup>
+              </div>
+            )
+          }
+          else
+            return (null);
+        })
+      }
       <FormGroup>
-        <Label for="comments">Any comment</Label>
+        <Label for="comments">Description</Label>
         <Input type="textarea" name="comments" onChange={e => setComment(e.target.value)} id="comments" />
       </FormGroup>
-
-      <Button type="submit">Submit</Button>
+      <FormGroup check className="mb-4 ml-3">
+        <Label check>
+          <Input checked onChange={(e) => setTwit(!twitter)} type="checkbox" />{' '}
+          I allow posting my data to twitter  <GrTwitter color="blue" />
+        </Label>
+      </FormGroup>
+     <Label> {donorAuth ? <span>Please help us verify your data by filling the Google form </span> : null}</Label>
+      <Button type="submit" color="primary" block>{donorAuth ? <span>Continue</span> : <span>Submit</span>}</Button>
     </Form>
   );
 }
 
 export default DonorForm;
+
+

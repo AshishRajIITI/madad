@@ -94,7 +94,7 @@ router.route('/').post((req, res) => {
                     // current minutes
                     let minutes = date_ob.getMinutes();
 
-                    const tweet = `\nName - ${decoded.name} \nMobile Number - ${decoded.mobileNumber} \nCities - ${workingRegion}  \nFacilities- ${availableFacilities} \nDate posted- ${year + "-" + month + "-" + date_ + " " + hours + ":" + minutes} \n\n#COVID19India #IndiaCovidCrisis #CovidIndia`;
+                    const tweet = `\nName - ${decoded.name} \nMobile Number - ${decoded.mobileNumber} \nCities - ${city}  \nFacilities- ${services} \nDate posted- ${year + "-" + month + "-" + date_ + " " + hours + ":" + minutes} \n\n#COVID19India #IndiaCovidCrisis #CovidIndia`;
                 }
 
                 newDonor.save()
@@ -110,6 +110,7 @@ router.route('/').post((req, res) => {
                                 // console.log('You successfully tweeted this : "' + result.text + '"');
                             }).catch(err => console.error);
                         }
+                        console.log(newDonor);
                         res.json(newDonor)
                     }
                     )
