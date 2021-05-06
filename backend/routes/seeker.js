@@ -50,14 +50,7 @@ router.route("/").post((req, res) => {
                     extra: extra
                 });
 
-
-                const format_requirements = services
-                    .toString()
-                    .replace('"', "") //remove the quotes
-                    .replace(",", " , ") //replace comma with space
-                    .replace("[", "") //remove the left bracket
-                    .replace("]", ""); //remove the right bracket
-
+                var tweet;
 
                 if (twitter) {
                     let date_ob = new Date();
@@ -78,7 +71,7 @@ router.route("/").post((req, res) => {
                     // current minutes
                     let minutes = date_ob.getMinutes();
 
-                    const tweet = `\nName - ${result.name} \nMobile Number - ${result.mobileNumber} \nCity - ${city} \nAddress - ${address} \nRequirements- ${format_requirements} \nDate posted- ${year + "-" + month + "-" + date_ + " " + hours + ":" + minutes
+                    tweet = `\nName - ${result.name} \nMobile Number - ${result.mobileNumber} \nCity - ${city} \nAddress - ${address} \nRequirements- ${services} \nDate posted- ${year + "-" + month + "-" + date_ + " " + hours + ":" + minutes
                         } \n\n#COVID19India #IndiaCovidCrisis #CovidIndia`;
                 }
 
@@ -142,6 +135,44 @@ router.route('/:id').put((req, res) => {
                 }
                 else {
                     res.status(400).send({ message: 'Update Denied' });
+                }
+            }
+        });
+    });
+});
+
+router.route('/:id').delete((req, res) => {
+
+    const id = req.params.id;
+
+    var token = req.headers['x-access-token'];
+    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+
+    jwt.verify(token, process.env.secret, function (err, decoded) {
+        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+        User.findById(decoded.id, function (err, user) {
+            if (err) {
+                res.status(400).send(err);
+            } else {
+                if (user === null) return res.status(400).send({ auth: false, message: 'User not found' });
+
+                const seekerList = user.seeker;
+                const seekercheck = seekerList.includes(id);
+
+                if (seekercheck) {
+                    Seeker.deleteOne({ _id: id }, function (err) {
+                        user.seeker = seekerList.filter(function (value, index, arr) {
+                            return value.toString() !== id;
+                        })
+                        user.save(() => {
+                            res.status(200).send({ message: 'Deleted Successfully' });
+                        });
+                    })
+
+                }
+                else {
+                    res.status(400).send({ message: 'Delete Denied' });
                 }
             }
         });

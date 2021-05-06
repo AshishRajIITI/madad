@@ -184,4 +184,56 @@ router.route('/:id').put((req, res) => {
 });
 
 
+router.route('/:id').delete((req, res) => {
+
+    const id = req.params.id;
+
+    var token = req.headers['x-access-token'];
+    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+
+    jwt.verify(token, process.env.secret, function (err, decoded) {
+        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+        User.findById(decoded.id, function (err, user) {
+            if (err) {
+                res.status(400).send(err);
+            } else {
+                if (user === null) return res.status(400).send({ auth: false, message: 'User not found' });
+
+                const donorAuthList = user.donorAuth;
+                const donorAuthcheck = donorAuthList.includes(id);
+
+                const donorNonAuthList = user.donorNonAuth;
+                const donorNonAuthcheck = donorNonAuthList.includes(id);
+
+                if (donorAuthcheck) {
+
+                    DonorAuth.deleteOne({ _id: id }, function (err) {
+                        user.donorAuth = donorAuthList.filter(function (value, index, arr) {
+                            return value.toString() !== id;
+                        })
+                        user.save(() => {
+                            res.status(200).send({ message: 'Deleted Successfully' });
+                        });
+                    })
+
+                } else if (donorNonAuthcheck) {
+                    DonorNonAuth.deleteOne({ _id: id }, function (err) {
+                        user.donorNonAuth = donorNonAuthList.filter(function (value, index, arr) {
+                            return value !== id;
+                        })
+                        user.save(() => {
+                            res.status(200).send({ message: 'Deleted Successfully' });
+                        });
+                    })
+
+                } else {
+                    res.status(400).send({ message: 'Delete Denied' });
+                }
+            }
+        });
+    });
+});
+
+
 module.exports = router;
