@@ -27,9 +27,13 @@ const UserSchema = new Schema({
         unique:false,
         trim:true,
     },
-    donor: [{
+    donorAuth: [{
         type:Schema.Types.ObjectId,
-        ref: "donor"
+        ref: "donorAuth"
+    }],
+    donorNonAuth: [{
+        type:Schema.Types.ObjectId,
+        ref: "donorNonAuth"
     }],
     seeker: [{
         type:Schema.Types.ObjectId,
