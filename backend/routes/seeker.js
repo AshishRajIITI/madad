@@ -87,12 +87,14 @@ router.route("/").post((req, res) => {
                     .then((new_seeker) => {
                         result.seeker.push(new_seeker._id);
                         result.save();
+
                         client
                             .post("statuses/update", { status: `${tweet}` })
                             .then((result) => {
                                 // console.log('You successfully tweeted this : "' + result.text + '"');
                             })
                             .catch((err) => console.error);
+
                         res.json(newSeeker);
                     })
                     .catch((err) => res.status(400).json("Error" + err));

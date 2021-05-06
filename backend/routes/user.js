@@ -116,6 +116,7 @@ router.route('/login').post((req, res) => {
         } else {
             if (result == null) {
                 res.status(400).send({ message: 'User not found' });
+                console.log("not exist");
             }
             else {
                 console.log("done login");
