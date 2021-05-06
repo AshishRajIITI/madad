@@ -3,6 +3,8 @@ import { BiCopyright } from 'react-icons/bi';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import iiti from './images/iiti.png'
+import gym from './images/GYM.png'
 
 function Footer(props) {
   return (
@@ -19,7 +21,7 @@ function Footer(props) {
               <li><Link to="/contactus">Contact Us</Link></li>
             </ul>
           </div>
-          <div className="col-5 col-sm-5 ">
+          <div className="col-5 col-sm-3 ">
           <h5>Quick Links</h5>
           <ul  className="list-unstyled">
             <li className="list-unstyled">
@@ -36,7 +38,7 @@ function Footer(props) {
             </li>
           </ul>
           </div>
-          <div className="col-6 col-sm-4 align-self-center">
+          <div className="col-10 col-sm-4 align-self-center">
             <div className="text-center  m-auto">
               <ul className="list-group list-group-horizontal ">
                 <li className="list-unstyled p-3">
@@ -61,6 +63,10 @@ function Footer(props) {
                 </li>
               </ul>
             </div>
+          </div>
+          <div className="col-12 col-sm-3 align-self-center text-center">
+<img height="75" width="75" className="m-2" src={iiti} alt="" />
+<img height="70" width="85" className="ml-2" src={gym} alt="" />
           </div>
         </div>
         <div className="row justify-content-center">
