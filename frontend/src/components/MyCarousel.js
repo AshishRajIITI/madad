@@ -52,16 +52,16 @@ const MyCarousel = () => {
 
 const responsive = {
     3000: {
-        items: 4,
+        items: 5,
     },
     1400: {
-        items: 3,
+        items: 4,
     },
     1024: {
-        items: 2,
+        items: 3,
     },
     800: {
-        items: 2,
+        items: 3,
     },
     0: {
         items: 1,

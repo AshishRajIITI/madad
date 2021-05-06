@@ -10,21 +10,19 @@ function SeekerCard({ seeker }) {
                 <CardBody className="">
                     <CardText tag="h5">Requirements: <Badge pill color="warning">{seeker.services}</Badge></CardText>
                     <CardText tag="h6"><Badge pill color="success">{seeker.city}</Badge></CardText>
-                    <CardText>
+                    <h6>
                         {seeker.comment ? "Description" : null}
                         {seeker.comment ? seeker.comment : null}
-                    </CardText>
-                    <CardText> {user.name ? user.name : null}</CardText>
-                    <CardText>
-                        <dl className="row">
-                            <dt className="col-1"><BiPhoneCall /></dt>
-                            <dd className="col-4">{user.mobileNumber ? user.mobileNumber : <span>Akash</span>}</dd>
-                            <dt className="col-1">{user.email ? <BiVoicemail /> : null}</dt>
-                            <dd className="col-5">{user.email ? user.email: null}</dd>
-                        </dl>
-                    </CardText>
+                    </h6>
+                    <h6> {user.name ? user.name : null}</h6>
+            <h6><BiPhoneCall />{' '}{user.mobileNumber ? user.mobileNumber : null}</h6>
+            <h6>{user.email ? <BiVoicemail /> : null}{'  '}{user.email ? user.email: null}</h6>
+            <h6>Updated On: <span>{new Intl.DateTimeFormat('default', {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: 'numeric', minute: 'numeric', second: 'numeric'
+          }).format(new Date(Date.parse(seeker.updatedAt)))}</span></h6>
                 </CardBody>
-                <CardFooter className="text-center"><Button className="justify-center" block color="warning"> Need Help </Button></CardFooter>
+                <CardFooter className="text-center"><Button className="justify-center" block color="warning"> Active </Button></CardFooter>
             </Card>
         </div>
     );

@@ -21,6 +21,7 @@ function Header() {
    
     
     const isAuth = useSelector(state => state.users.isAuth);
+    const user = useSelector(state => state.users.user);
     const dispatch = useDispatch();
     const handleCollapse = () => {
         if (isNavOpen) {
@@ -85,9 +86,9 @@ function Header() {
                                     Provider
                                 </NavLink>
                             </NavItem> */}
-                            {/* <NavItem>
+                             <NavItem>
                                 <NavLink className="nav-link" to="/profile"  onClick={handleCollapse} >{isAuth ? user.name : null}</NavLink>
-                            </NavItem> */}
+                            </NavItem> 
                             <NavItem className="ml-5 mr-5">
                                 {isAuth ? <Button color="danger" onClick={handleLogout}><BiLogOutCircle /> Logout</Button> : <ButtonGroup className="row"><Button className="col-6" color="primary"><SignInBtn /></Button><Button className="col-6" color="warning"><SignUpBtn /></Button></ButtonGroup>}
                             </NavItem>

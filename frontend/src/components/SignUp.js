@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FaRegIdBadge } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -9,18 +9,18 @@ import { sendOTPrequest, signupUser } from '../redux/ActionCreators';
 
 function SignUpBtn(props) {
     const [modal, setModal] = useState(false);
+    const [isOtpS, setOtpS] = useState(false);
     const otpR = useSelector(state => state.users.otp);
+    const [user, setUser]=useState({});
     const toggleModal = () => {
         setModal(!modal);
-console.log("modal called");
-console.log(otpR);
     }
     function SignUp() {
         const dispatch = useDispatch();
         
         const [password, setPass] = useState('');
-        const [isOtpS, setOtpS] = useState(false);
-        const [isValidOtp, setOtpValid] = useState(false);
+        
+        // const [isValidOtp, setOtpValid] = useState(false);
         const [tc, setTC] = useState(false);
         const [otp, setOtp] = useState(0);
         const [name, setName] = useState('');
@@ -30,40 +30,43 @@ console.log(otpR);
         const generateOtp = (e) => {
             e.preventDefault();
             setOtpS(true);
-             dispatch(sendOTPrequest({ "mobileNumber": mob }, toggleModal));
-            if(otpR===0){
-                console.log(otpR);
-                setModal(!modal);
-            }
+setUser({
+    "name": name,
+    "mobileNumber": mob,
+    "email": email ? email : null,
+    "password": password
+});
+             dispatch(sendOTPrequest({ "mobileNumber": mob }, toggleModal, setOtpS));
 
         }
 
         function handleSignUp(e) {
             e.preventDefault();
-            console.log(otpR);
+            // console.log(otpR);
+            // console.log(otp)
             if (otp === otpR) {
-                console.log(otp);
-                const user = {
-                    "name": name,
-                    "mobileNumber": mob,
-                    "email": email ? email : null,
-                    "password": password
-                }
+                // console.log(otp);
+                // const user = {
+                //     "name": name,
+                //     "mobileNumber": mob,
+                //     "email": email ? email : null,
+                //     "password": password
+                // }
+                // console.log(user);
                 dispatch(signupUser(user));
-                setOtpValid(!isValidOtp);
-
                 toggleModal();
                 if (props.toggleSignIn) {
                     props.toggleSignIn();
                 };
-
             }
-
+            else{
+                alert("Entered wrong OTP! Try again");
+            }
         }
 
         return (
             <div>
-                <Form onSubmit={generateOtp}>
+                <Form>
                     <FormGroup>
                         <Label for="name">Name*</Label>
                         <Input disabled={isOtpS} type="text" name="name" required id="name" onChange={e => setName(e.target.value)} placeholder="Enter your name" />
@@ -86,7 +89,7 @@ console.log(otpR);
                              I accept the <Link className="" to="/tnc" rel="noreferrer" target="_blank">Terms and Conditions</Link>
                         </Label>
                     </FormGroup>
-                    <Button color="primary" className="m-auto" type="submit" disabled={!tc} >Generate OTP</Button>
+                    <Button color="primary" className="m-auto" onClick={generateOtp} disabled={!tc} >Generate OTP</Button>
                 </Form>
                 {isOtpS
                     ?
@@ -101,7 +104,7 @@ console.log(otpR);
                     </div>
                     :
                     null
-                }
+                    }
             </div>
         );
     }

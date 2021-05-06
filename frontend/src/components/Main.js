@@ -15,8 +15,20 @@ import Example from "./providerForm";
 import CMFund from "./CMFund";
 import Donate from "./donate";
 import tnc from "./tnc";
+import { useSelector } from "react-redux";
 
 function Main() {
+    const users = useSelector(state=>state.users);
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+        <Route {...rest} render={(props) => (
+          props.isAuth
+            ? <Component {...props} />
+            : <Redirect to={{
+                pathname: '/home',
+                state: { from: props.location }
+              }} />
+        )} />
+      );
     return (
         <div className="App">
             <Header />

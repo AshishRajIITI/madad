@@ -29,7 +29,7 @@ const history = useHistory();
     event.preventDefault();
     const seeker = {
       "name": user.name,
-      "mobileNumber": user.mob,
+      "mobileNumber": user.mobileNumber,
       "email": user.email,
       "address": address,
       "city": city,
@@ -62,6 +62,7 @@ const history = useHistory();
       </FormGroup>
       <FormGroup>
         <Label for="requirements">Requirements*</Label>
+        <Label>OxygenCylinder/Medicines/Ambulance/Remdesivir/Bed/Tiffin/Blood/Covid-Plasma</Label>
         <AutoSuggest text={requirement} setText={appendFacility} sug={facilitySuggestion} placeHolder="Select your facility" />
       </FormGroup>
       {/* <FormGroup>

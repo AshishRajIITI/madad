@@ -1,4 +1,4 @@
  const facilty = [
-"OxygenCylinder", "Tiffin", "Ambulance", "Medicine", "Remdesivir", "Plasma", "Blood", "ICU Bed"
+"OxygenCylinder", "Tiffin", "Ambulance", "Medicine", "Remdesivir", "Covid-Plasma", "Blood", "Bed"
     ]
 export default facilty;

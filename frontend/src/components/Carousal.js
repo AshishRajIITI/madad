@@ -31,11 +31,11 @@ const Example = (props) => {
   const [animating, setAnimating] = useState(false);
 
   const next = () => {
-    console.log("next")
+    
     if (animating) return;
     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
     setActiveIndex(nextIndex);
-    console.log("hello")
+    
   }
 
   const previous = () => {

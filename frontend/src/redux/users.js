@@ -20,7 +20,7 @@ export const Users = (state = {
         case ActionTypes.USER_FAILED:
             return { ...state, err: action.payload, user: null, otp: 0, isAuth:false, token: null};
         case ActionTypes.ADD_OTP:
-                return { ...state, err: null, user: null , otp: action.payload, isAuth:false };
+                return { ...state, err: null, user: null , otp:action.payload , isAuth:false };
         default:
             return state;
     }

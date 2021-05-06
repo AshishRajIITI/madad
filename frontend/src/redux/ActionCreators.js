@@ -82,6 +82,7 @@ export const postDonor = (body) => {
 
 export const postSeeker = (body) => {
 	const token = localStorage.getItem('token');
+	console.log(body, token);
 	return function (dispatch) {
 		axios
 			.post(baseURL + "/seekers", body, { headers: { "x-access-token": token }})
@@ -149,16 +150,18 @@ export const loginUser = (user) => {
 	}
 };
 
-export const signupUser = (user) => {
+export const signupUser = (user, toggleModal) => {
+	// console.log("sign up call");
 	return function (dispatch) {
 		axios.post(baseURL + '/user', user)
 			.then((response) => {
 				if (response) {
-					console.log("signeup");
+					// console.log("signeup");
 					var user = response.data
 					localStorage.setItem('token', user.token);
 					dispatch(fetchUser(user.token));
 					alert("Successfully SignedUp");
+					toggleModal();
 				} else {
 					var error = new Error(
 						"Error " + response.status + ": " + response.statusText
@@ -169,27 +172,27 @@ export const signupUser = (user) => {
 			})
 			.catch((error) => {
 				console.log(error.message);
-				dispatch({ type: ActionTypes.USER_FAILED, payload: 'invalid id' })
+				dispatch({ type: ActionTypes.USER_FAILED, payload: error.message })
 			});
 	}
 };
 
-export const sendOTPrequest = (mob, toggleModal) => {
+export const sendOTPrequest = (mob, toggleModal, setOtpS) => {
 	
 	return function (dispatch) {
 		axios.post(baseURL + '/user/otp', mob)
 			.then((response) => {
 				if (response) {
 					const rest = response.data;
-console.log(rest);
+// console.log(rest);
 					if(!rest.isRepeat)
 					{
-						alert("Otp is sent to your registered mobile no: ",mob)
-						dispatch({ type: ActionTypes.ADD_OTP, payload: rest.otp })
+						alert("Otp is sent to your registered mobile no: ",mob);
+						dispatch({ type: ActionTypes.ADD_OTP, payload: rest.otp });
 					}
 					else
 					{
-						alert("User already exists! Please login to continue");
+						// alert("User already exists! Please login to continue");
 						toggleModal();
 						dispatch({ type: ActionTypes.USER_FAILED, err: "User Exist" });
 					}
