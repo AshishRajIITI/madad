@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavItem, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, Button, ButtonGroup } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import title from './images/mainLogo2.png'
 
@@ -15,6 +15,7 @@ import { BiLogOutCircle, BiUserCircle } from 'react-icons/bi';
 function Header() {
     
     const [isNavOpen, setNav] = useState(false);
+    const history=useHistory();
     const toggleNav = () => {
         setNav(!isNavOpen);
     }
@@ -29,8 +30,8 @@ function Header() {
         }
     }
     const handleLogout=()=>{
-        
         dispatch(logOutUser());
+        history.push("/home");
     }
     return (
         <div>
@@ -60,11 +61,19 @@ function Header() {
                                     Help-Providers
                                     </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink className="nav-link" to="/seekers" onClick={handleCollapse}>
+                            <div className="dropdown">
+                            <NavItem className="">
+                                <NavLink className="nav-link dropbtn" to="/seekers" onClick={handleCollapse}>
                                     Help-Seekers
-                                    </NavLink>
+                                </NavLink>
                             </NavItem>
+                            <div className="dropdown-content">
+                                <NavItem>
+                                    <NavLink to="#" className="nav-link">h1</NavLink>
+                                </NavItem>
+                            </div>
+                            </div>
+
                             {/* <NavItem>
                                 <NavLink className="nav-link" to="/donate"  onClick={handleCollapse}>
                                     Donation
@@ -75,7 +84,11 @@ function Header() {
                                     Covid-Info
                                     </NavLink>
                             </NavItem>
-
+                            <NavItem>
+                                <NavLink className="nav-link" to="/doctors"  onClick={handleCollapse}>
+                                    Doctors
+                                    </NavLink>
+                            </NavItem>
                             <NavItem>
                                 <NavLink className="nav-link" to="/contactus" onClick={handleCollapse}>
                                     Contact Us

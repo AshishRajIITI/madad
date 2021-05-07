@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { BiLogInCircle } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { Button, Form, FormGroup, Input, Label, Modal, ModalBody } from 'reactstrap';
 import { loginUser } from '../redux/ActionCreators';
 import SignUpBtn from './SignUp';
@@ -12,6 +13,7 @@ import SignUpBtn from './SignUp';
 function SignInBtn(props) {
     const isAuth = useSelector(state=>state.users.isAuth)
     const [modal, setModal]=useState(false);
+    const history=useHistory();
     const toggleModal=()=>{
 setModal(!modal);}
 
@@ -19,14 +21,14 @@ setModal(!modal);}
     const dispatch = useDispatch();
     const [mob, setMob] = useState('');
     const [pin, setPin] = useState('');
-     function handleSignIn(e){
+     
+    function handleSignIn(e){
     e.preventDefault();
     dispatch(loginUser({"mobileNumber": mob, "password": pin}))
-
     if(isAuth){
-        toggleModal();
+        toggleModal(); 
+        history.push('/profile');  
     }
-    
     }
     return (
         <div>
@@ -37,7 +39,7 @@ setModal(!modal);}
             </FormGroup>
             <FormGroup>
                     <Label for="pin">Pin</Label>
-                    <Input type="text" name="pin" required id="pin" onChange={e => setPin(e.target.value)} placeholder="Enter Pin" />
+                    <Input type="password" name="pin" required id="pin" onChange={e => setPin(e.target.value)} placeholder="Enter Pin" />
             </FormGroup>
             <Label className="row ml-2">Are you new here. Click here to {' '} <SignUpBtn toggleSignIn={toggleModal} /></Label>
             <Button type="submit" block color="primary"  className="mt-3"> Sign In</Button>

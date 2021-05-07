@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaRegIdBadge } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, Form, FormGroup, Input, Label, ModalBody, Modal } from 'reactstrap';
 import { sendOTPrequest, signupUser } from '../redux/ActionCreators';
 
@@ -11,6 +11,7 @@ function SignUpBtn(props) {
     const [modal, setModal] = useState(false);
     const [isOtpS, setOtpS] = useState(true);
     const otpR = useSelector(state => state.users.otp);
+    const history=useHistory();
     const [user, setUser] = useState({});
     const toggleModal = () => {
         setModal(!modal);
@@ -57,6 +58,7 @@ function SignUpBtn(props) {
                 if (props.toggleSignIn) {
                     props.toggleSignIn();
                 };
+                history.push("/profile");
             }
             else {
                 alert("Entered wrong OTP! Try again");

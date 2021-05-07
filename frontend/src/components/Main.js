@@ -16,6 +16,7 @@ import CMFund from "./CMFund";
 import Donate from "./donate";
 import tnc from "./tnc";
 import ExtraRes from "./ExtraRes";
+import Doctors from "./doctors";
 // import { useSelector } from "react-redux";
 
 function Main() {
@@ -46,6 +47,7 @@ function Main() {
                 <Route exact path="/donorReg" component={()=><Example type="0" />} />
                 <Route exact path="/seekerReg" component={()=><Example type="1" />} />
                 <Route exact path="/extraRes" component={ExtraRes} />
+                <Route exact path="/doctors" component={Doctors} />
                 <Redirect to="/home" />
             </Switch>
             <Footer />

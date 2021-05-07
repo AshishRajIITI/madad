@@ -62,16 +62,19 @@ function Donors() {
     return (
         <div className="container container-70">
             <div className="m-sticky">
-                <div className="row mt-1 b-bottom">
-                    <div className="col-6 col-sm-5">
+                <div className="row mt-1 b-bottom ">
+                    <div className="col-12 col-sm-5">
                         <AutoSuggest text={cityS} setText={setCityS} sug={city} placeHolder="Search City" />
                     </div>
-                    <div className="col-6 col-sm-5">
+                    <div className="col-12 col-sm-5">
                         <AutoSuggest text={facilityS} setText={setFacilityS} sug={facility} placeHolder="Search Facility" />
                     </div>
                     <div className="col-12 col-sm-2">
                         <Button className="" onClick={handleSearch} color="primary" block ><FaSearch /> Search</Button>
                     </div>
+                </div>
+                <div className="row">
+                    <div className="col-4"></div>
                 </div>
             </div>
             <div className="row mt-3 justify-content-center">

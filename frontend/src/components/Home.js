@@ -8,6 +8,7 @@ import { useHistory } from "react-router";
 import MyCarousel from "./MyCarousel";
 
 import Example from "./Carousal";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     const history = useHistory();
@@ -51,18 +52,20 @@ const Home = () => {
             </div>
             <div className="row mt-1 align-item-center justify-content-center">
                 <Card className="col-3 navCard">
-                    <CardText>Looking for Authorised Covid relief Leads?</CardText>
-                    <CardTitle>Help-Providers</CardTitle>
+                    <CardText className="navCardtext">Looking for Authorised Covid relief Leads?</CardText>
+                    <h3>Help-Providers</h3>
                 </Card>
-                <Card className="col-3">
+                <Card className="col-3 navCard">
                     <CardText>Wishing to help someone?</CardText>
                     <CardTitle>Help-Seekers</CardTitle>
                 </Card>
-                <Card className="col-3">
+            
+                <Card className="col-3 navCard">
                     <CardText>Verified Doctors Cansultance</CardText>
                     <CardTitle>Doctor</CardTitle>
                 </Card>
-                <Card className="col-3">
+            
+                <Card className="col-3 navCard">
                     <CardText>Loosing your hope? Get </CardText>
                     <CardTitle>volunteers</CardTitle>
                 </Card>
