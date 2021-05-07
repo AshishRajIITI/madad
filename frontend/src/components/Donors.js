@@ -8,6 +8,7 @@ import DonorCard from './DonorCard';
 import { fetchDonor } from '../redux/ActionCreators';
 import { FaSearch } from 'react-icons/fa';
 import Loading from './Loading';
+import Noresult from './Noresult';
 
 function Donors() {
 
@@ -18,6 +19,9 @@ function Donors() {
     useEffect(() => {
         dispatch(fetchDonor());
     }, [dispatch]);
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     const [searched, setSearch] = useState([]);
     const [cityS, setCityS] = useState('');
     const [facilityS, setFacilityS] = useState();
@@ -56,7 +60,7 @@ function Donors() {
 
 
     return (
-        <div className="container">
+        <div className="container container-70">
             <div className="m-sticky">
                 <div className="row mt-1 b-bottom">
                     <div className="col-6 col-sm-5">
@@ -71,7 +75,7 @@ function Donors() {
                 </div>
             </div>
             <div className="row mt-3 justify-content-center">
-                {touch === 0 ? (isLoading ? <Loading /> : initialDonor) : (searched.length > 0 ? item : <h1>No Result</h1>)}
+                {touch === 0 ? (isLoading ? <Loading /> : initialDonor) : (searched.length > 0 ? item : <Noresult type="1" />)}
             </div>
         </div>
     );

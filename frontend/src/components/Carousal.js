@@ -1,5 +1,7 @@
-import lp from "./images/1.png";
-import lp2 from "./images/2.png";
+import lp4 from "./images/madad4.png";
+import lp3 from "./images/madad5.png";
+import lp1 from './images/madad1.png';
+import lp2 from './images/madad2.png';
 import React, { useState } from 'react';
 import {
   Carousel,
@@ -10,7 +12,7 @@ import {
 
 const items = [
   {
-    src: lp,
+    src: lp1,
     altText: 'Slide 1',
     caption: 'Slide 1'
   },
@@ -19,11 +21,16 @@ const items = [
     altText: 'Slide 2',
     caption: 'Slide 2'
   },
-  // {
-  //   src: lp2,
-  //   altText: 'Slide 2',
-  //   caption: 'Slide 2'
-  // }
+   {
+     src: lp3,
+   altText: 'Slide 2',
+     caption: 'Slide 2'
+ },
+ {
+  src: lp4,
+altText: 'Slide 2',
+  caption: 'Slide 2'
+}
 ];
 
 const Example = (props) => {
@@ -56,7 +63,7 @@ const Example = (props) => {
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <img className=""  width="100%" src={item.src} alt={item.altText} />
+        <img className="carousel-img" src={item.src} alt={item.altText} />
         
       </CarouselItem>
     );

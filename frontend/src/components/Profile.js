@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { BiEditAlt } from 'react-icons/bi';
 import { useSelector, useDispatch } from 'react-redux';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardBody, CardText, CustomInput, Input, Button, Row, Col, FormGroup, Form } from 'reactstrap';
-import {fetchDonor} from '../redux/ActionCreators';
+import { useHistory } from 'react-router';
+import { TabContent, TabPane, Card, CardBody, CardText, CustomInput, Input, Button, Row, Col, FormGroup, Form, ButtonGroup, Badge } from 'reactstrap';
+import { donorUpdate, seekerUpdate, fetchUser } from '../redux/ActionCreators';
 function Profile(props) {
+    const history = useHistory();
     const user = useSelector((state) => state.users.user);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchDonor());
+        dispatch(fetchUser(localStorage.getItem('token')));
     }, [dispatch]);
+    console.log(user);
     const donorAuth = user.donorAuth;
-    const donorNonAuth = useSelector(state=>state.donorReducer.donors);
+    const donorNonAuth = user.donorNonAuth;
     const seeker = user.seeker;
-    
+    const donorReg = () => {
+        history.push('/donorReg');
+    }
+    const seekerReg = () => {
+        history.push('/seekerReg');
+    }
+
 
     const [name, setName] = useState('');
     const [mobileNumber, setMob] = useState('');
@@ -20,44 +29,65 @@ function Profile(props) {
     const [edit, setEdit] = useState(false);
     console.log(name, mobileNumber, email);
 
+    function RenderNoresult({type}){
+        return(
+            <Card className="text-center pl-5 pr-5 pt-2">
+                <h5>Not yet registered</h5>
+                <Button  color="warning" onClick={()=>{(type==="1"||type==="2") ? donorReg() : seekerReg() }} className="btn btn-lg mt-2 pt-2 pb-2" >{type==="3" ? "Need Help" : "Want to Help"}</Button>
+            </Card>
+        )
+    }
+
     function RenderProfile() {
         return (
             <Card>
-                <CardBody className="row">
-                    <CardText className="col-4"><Input disabled={!edit} placeholder={user.name} onChange={(e) => setName(e.target.value)} /></CardText>
-                    <CardText className="col-3"><Input disabled placeholder={user.mobileNumber} onChange={(e) => setMob(e.target.value)} /></CardText>
-                    <CardText className="col-4"><Input disabled={!edit} placeholder={user.email} onChange={(e) => setEmail(e.target.value)} /></CardText>
-                    <CardText className="col-1"><Button color="warning" onClick={() => setEdit(!edit)}><BiEditAlt /></Button></CardText>
+                <CardBody className="row align-items-center justify-content-center">
+                    <CardText className="col-10 col-md-4"><Input disabled={!edit} placeholder={user.name} onChange={(e) => setName(e.target.value)} /></CardText>
+                    <CardText className="col-10 col-md-3"><Input disabled placeholder={user.mobileNumber} onChange={(e) => setMob(e.target.value)} /></CardText>
+                    <CardText className="col-10 col-md-4"><Input disabled={!edit} placeholder={user.email ? user.email : "Add Email"} onChange={(e) => setEmail(e.target.value)} /></CardText>
+                    <CardText className="col-3 col-md-1"><Button color="warning" onClick={() => setEdit(!edit)}><BiEditAlt /></Button></CardText>
                 </CardBody>
             </Card>
         )
     }
-    function RenderCard({d}) {
-        const [act, setAct]=useState(d.isActive);
+    function RenderCard({ d, type }) {
+        const isActive = (type==="1" || type==="2") ? d.isActive : !d.isCompleted;
+        const [act, setAct] = useState(isActive);
+        const handleUpdate =(v)=>{
+            console.log("update request ", v, d._id, type);
+            if(type==="1" || type==="2"){
+                dispatch(donorUpdate(d._id, {"isActive":v}));
+            }
+            else{
+                dispatch(seekerUpdate(d._id, {"isCompleted":!v}));
+            }
 
-        const handleAct=()=>{
-    setAct(!act);
-    //dispatch(updateAct(v));
-    console.log("update request ", act);
         }
+        const handleAct = () => {
+            handleUpdate(!act);
+            setAct(!act);
+        }
+        
         return (
-            <dl className="row">
-                <dt className="col-3">{d.services}</dt>
-                <dt className="col-6">{d.city}</dt>
-                <dt className="col-2"><Form><FormGroup><CustomInput type="switch" name="act" id={d._id}  checked={act} onChange={handleAct} label={act ? "Active" : "Non-Active"} /></FormGroup></Form></dt>
-            </dl>
+            <Card className="pl-3 align-item-center">
+                <dl className="row">
+                    <dt className="col-3">{d.services}{type==="2" ? <span>{d.status ? <Badge pill color="success">Verified</Badge> : <Badge pill color="warning">Verification Pending</Badge>}</span> : null}</dt>
+                    <dt className="col-6">{d.city}</dt>
+                    <dt className="col-2"><Form><FormGroup><CustomInput type="switch" name="act" id={d._id} checked={act} onChange={()=>handleAct()} label={act ? "Active" : "Non-Active"} /></FormGroup></Form></dt>
+                </dl>
+            </Card>
         )
     }
     function RenderDonorNonAuth() {
         if (donorNonAuth !== null) {
-            if(donorNonAuth.length<1){
+            if (donorNonAuth.length < 1) {
                 return (
-                    <h5>No service</h5>
+                    <RenderNoresult type="1" />
                 )
             }
             const d = donorNonAuth.map((d) => {
                 return (
-                    <RenderCard d={d} />
+                    <RenderCard d={d} type="1" />
                 )
             })
             return (
@@ -66,51 +96,51 @@ function Profile(props) {
         }
         else {
             return (
-                <h5>No service</h5>
+                <RenderNoresult type="1" />
             )
         }
     }
     function RenderDonorAuth() {
-        if (donorAuth === null) {
-            if(donorAuth.length<1){
+        if (donorAuth !== null) {
+            if (donorAuth.length < 1) {
                 return (
-                    <h5>No Verified service</h5>
+                    <RenderNoresult type="2" />
                 )
             }
             const d = donorAuth.map((d) => {
                 return (
-                    <RenderCard d={d} />
+                    <RenderCard d={d} type="2" />
                 )
             })
             return (
-                <h5>{d}</h5>
+                <div>{d}</div>
             )
         }
         else {
             return (
-                <h5>No Verified service</h5>
+                <RenderNoresult type="2" />
             )
         }
     }
     function RenderSeeker() {
         if (seeker !== null) {
-            if(seeker.length<1){
+            if (seeker.length < 1) {
                 return (
-                    <h5>No request</h5>
+                    <RenderNoresult type="3" />
                 )
             }
             const d = seeker.map((d) => {
                 return (
-                    <RenderCard d={d} />
+                    <RenderCard d={d} type="3" />
                 )
             })
             return (
-                <h5>{d}</h5>
+                <div>{d}</div>
             )
         }
         else {
             return (
-                <h5>No request</h5>
+                <RenderNoresult type="3" />
             )
         }
     }
@@ -123,32 +153,14 @@ function Profile(props) {
 
         return (
             <div>
-                <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                            className=""
-                            onClick={() => { toggle('1'); }}
-                        >
-                            Your Verified Services
-                </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className=""
-                            onClick={() => { toggle('2'); }}
-                        >
-                            Your Services
-                </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className=""
-                            onClick={() => { toggle('3'); }}
-                        >
-                            Your Requests
-                </NavLink>
-                    </NavItem>
-                </Nav>
+                <Card>
+
+                    <ButtonGroup color="primary" className="row ">
+                        <Button color="primary" onClick={() => { toggle('1'); }}>Non-Auth Services</Button>
+                        <Button color="primary" onClick={() => { toggle('2'); }} >Authorized Services</Button>
+                        <Button color="primary" onClick={() => { toggle('3'); }}>Seek Requests</Button> </ButtonGroup>
+                </Card>
+
                 <TabContent activeTab={activeTab}>
                     <TabPane tabId="1">
                         <Row>
@@ -176,7 +188,7 @@ function Profile(props) {
         );
     }
     return (
-        <div className="container">
+        <div className="container container-70">
             <RenderProfile />
             <RenderTab />
         </div>

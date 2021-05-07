@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import {Card, CardImg,} from 'reactstrap';
 import pmCaresImage from './images/donate1.jpg';
@@ -7,6 +7,9 @@ import soodFoundation from './images/donate3.jpg';
 import akshayPatra from './images/donate4.jpg';
 
 function Donate(props) {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, []);
     return (
         <div className="container">
                  <div className="row d-block m-auto text-center">

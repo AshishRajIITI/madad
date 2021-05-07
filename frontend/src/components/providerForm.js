@@ -31,7 +31,7 @@ const Example = ({ toggleModal, type }) => {
       <TabContent className="" activeTab={activeTab}>
         <TabPane tabId="1">
           <h6 className="text-center">Your one minute can save a life. Please take some time to fill this form and we will help you to help others.
-          </h6><h6 className="text-center">Donors have to verify their details before they can post their contributions.
+          </h6><h6 className="text-center">Provider/Seeker have to verify their details before they can post their contributions.
           </h6>
           <Row className=" align-items-center justify-content-center mt-5">
             <Col sm="12">

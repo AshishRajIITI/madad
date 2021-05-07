@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SignUpBtn from './SignUp';
 
 import SignInBtn from './SignIn';
-import { BiLogOutCircle } from 'react-icons/bi';
+import { BiLogOutCircle, BiUserCircle } from 'react-icons/bi';
 
 
 function Header() {
@@ -21,7 +21,7 @@ function Header() {
    
     
     const isAuth = useSelector(state => state.users.isAuth);
-    const user = useSelector(state => state.users.user);
+    
     const dispatch = useDispatch();
     const handleCollapse = () => {
         if (isNavOpen) {
@@ -87,7 +87,7 @@ function Header() {
                                 </NavLink>
                             </NavItem> */}
                              <NavItem>
-                                <NavLink className="nav-link" to="/profile"  onClick={handleCollapse} >{isAuth ? user.name : null}</NavLink>
+                                <NavLink className="nav-link" to="/profile"  onClick={handleCollapse} >{isAuth ? <h3> <BiUserCircle /></h3> : null}</NavLink>
                             </NavItem> 
                             <NavItem className="ml-5 mr-5">
                                 {isAuth ? <Button color="danger" onClick={handleLogout}><BiLogOutCircle /> Logout</Button> : <ButtonGroup className="row"><Button className="col-6" color="primary"><SignInBtn /></Button><Button className="col-6" color="warning"><SignUpBtn /></Button></ButtonGroup>}

@@ -6,7 +6,7 @@ function SeekerCard({ seeker }) {
     const user = seeker.user;
     return (
         <div>
-            <Card className="my-card">
+            <Card className="my-card seekerHeight">
                 <CardBody className="">
                     <CardText tag="h5">Requirements: <Badge pill color="warning">{seeker.services}</Badge></CardText>
                     <CardText tag="h6"><Badge pill color="success">{seeker.city}</Badge></CardText>

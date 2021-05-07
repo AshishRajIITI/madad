@@ -103,6 +103,58 @@ export const postSeeker = (body) => {
 			});
 	};
 };
+
+export const donorUpdate = (id, body) => {
+	const token = localStorage.getItem('token');
+	return function (dispatch) {
+		axios
+			.put(baseURL + "/donors/"+id , body, { headers: { "x-access-token": token } })
+			.then((response) => {
+				if (response) {
+					console.log("updated");
+				} else {
+					var error = new Error(
+						"Error " + response.status + ": " + response.statusText
+					);
+					error.response = response;
+					throw error;
+				}
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
+	};
+};
+
+export const seekerUpdate = (id, body) => {
+	const token = localStorage.getItem('token');
+	return function (dispatch) {
+		axios
+			.put(baseURL + "/seekers/"+id , body, { headers: { "x-access-token": token } })
+			.then((response) => {
+				if (response) {
+					console.log("updated");
+				} else {
+					var error = new Error(
+						"Error " + response.status + ": " + response.statusText
+					);
+					error.response = response;
+					throw error;
+				}
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
+	};
+};
+
+
+
+
+
+
+
+
 export const fetchUser = (token) => {
 	return function (dispatch) {
 		axios.get(baseURL + '/user', { headers: { "x-access-token": token } })
@@ -206,7 +258,7 @@ export const sendOTPrequest = (mob, toggleModal) => {
 			})
 			.catch((error) => {
 				console.log(error.message);
-				dispatch({ tyep: ActionTypes.USER_FAILED, err: error.message });
+				dispatch({ type: ActionTypes.USER_FAILED, err: error.message });
 			});
 	}
 };

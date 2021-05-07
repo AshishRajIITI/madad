@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import citySuggestion from "../resources/city";
 import facilitySuggestion from '../resources/facilty';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { postSeeker } from '../redux/ActionCreators';
 import AutoSuggest from './AutoSuggest';
 import { GrTwitter } from 'react-icons/gr';
@@ -15,7 +15,7 @@ import { useHistory } from 'react-router';
 
 const SeekerForm = ({ toggleModal }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state=> state.users.user);
+  // const user = useSelector(state=> state.users.user);
 const history = useHistory();
   const [city, setCity] = useState('');
  
@@ -24,15 +24,14 @@ const history = useHistory();
   const [address, setAddress] = useState('');
   const [comment, setComment] = useState('');
   const [requirement, setRequirement] = useState('');
+  const [tags, setTags] =useState('');
 
   function handleSubmit(event) {
     event.preventDefault();
     const seeker = {
-      "name": user.name,
-      "mobileNumber": user.mobileNumber,
-      "email": user.email,
       "address": address,
       "city": city,
+      "tags":tags,
       "twitter": twitter,
       "services": requirement,
       "comments": comment
@@ -63,7 +62,7 @@ const history = useHistory();
       </FormGroup>
       <FormGroup>
         <Label for="requirements">Requirements*</Label>
-        <Label>OxygenCylinder/Medicines/Ambulance/Remdesivir/Bed/Tiffin/Blood/Covid-Plasma</Label>
+        <small>(OxygenCylinder/Medicines/Ambulance/Remdesivir/Bed/Tiffin/Blood/Covid-Plasma)</small>
         <AutoSuggest text={requirement} setText={appendFacility} sug={facilitySuggestion} placeHolder="Select your facility" />
       </FormGroup>
       {/* <FormGroup>
@@ -78,9 +77,18 @@ const history = useHistory();
         <Label for="comments">Description</Label>
         <Input type="textarea" name="comments" id="comments" onChange={(e) => { setComment(e.target.value) }} />
       </FormGroup>
+      {
+        twitter
+          ?
+          <FormGroup>
+            <Label for="tags">Include Twitter Tags</Label>
+            <Input type="text" name="tags" placeholder="#Emergancy #Urgent #CovidHelp ...." onChange={e => setTags(e.target.value)} id="tags" />
+          </FormGroup>
+          : null
+      }
       <FormGroup check className="mb-4 ml-3">
         <Label check>
-          <Input checked onChange={(e) => setTwit(!twitter)} type="checkbox" />{' '}
+          <Input checked={twitter} onChange={() => setTwit(!twitter)} type="checkbox" />{' '}
           I allow posting my data to twitter <GrTwitter color="blue" />
         </Label>
       </FormGroup>

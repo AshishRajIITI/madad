@@ -75,8 +75,9 @@ function SignUpBtn(props) {
                         <Input type="text" name="mob" required id="mob" disabled={isOtpS} onChange={e => setMob(e.target.value)} placeholder="Enter your Mobile Number" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="password">Create your password(min 4-digit)*</Label>
-                        <Input type="password" name="password" required id="password" disabled={isOtpS} onChange={e => setPass(e.target.value)} placeholder="Create a 4-digit Pin" />
+                        <Label for="password">Create your password*</Label>
+                        <small>(min 4-digit)</small>
+                        <Input type="password" name="password" required id="password" disabled={isOtpS} onChange={e => setPass(e.target.value)} placeholder="Create password" />
                     </FormGroup>
                     <FormGroup>
                         <Label for="email">Email</Label>
@@ -98,7 +99,7 @@ function SignUpBtn(props) {
                                 <Label for="otp">4-digit OTP</Label>
                                 <Input type="number" name="otp" required id="otp" onChange={e => setOtp(e.target.value)} placeholder="Enter OTP" />
                             </FormGroup>
-                            <Button type="submit">SignUp</Button>
+                            <Button color="success" className="m-auto" type="submit">SignUp</Button>
                         </Form>
                     </div>
                     :
