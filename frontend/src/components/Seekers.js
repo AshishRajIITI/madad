@@ -8,6 +8,7 @@ import SeekerCard from './SeekerCard';
 import { fetchSeeker } from '../redux/ActionCreators';
 import { FaSearch } from 'react-icons/fa';
 import Loading from './Loading';
+import Noresult from './Noresult';
 
 function SearchEngine() {
 
@@ -18,6 +19,9 @@ function SearchEngine() {
     useEffect(() => {
         dispatch(fetchSeeker());
     }, [dispatch]);
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     const [searched, setSearch] = useState([]);
     const [cityS, setCityS] = useState('');
     const [facilityS, setFacilityS] = useState('');
@@ -56,7 +60,7 @@ function SearchEngine() {
 
 
     return (
-        <div className="container">
+        <div className="container container-70">
             <div className="m-sticky">
                 <div className="row mt-1 b-bottom">
                     <div className="col-6 col-sm-5">
@@ -71,7 +75,7 @@ function SearchEngine() {
                 </div>
             </div>
             <div className="row mt-3 justify-content-center">
-                {touch === 0 ? (isLoading ? <Loading /> : initialSeeker) : (searched.length > 0 ? item : <h1>No Result</h1>)}
+                {touch === 0 ? (isLoading ? <Loading /> : initialSeeker) : (searched.length > 0 ? item : <Noresult type="3" />)}
             </div>
         </div>
     );

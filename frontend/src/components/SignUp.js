@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaRegIdBadge } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, Form, FormGroup, Input, Label, ModalBody, Modal } from 'reactstrap';
 import { sendOTPrequest, signupUser } from '../redux/ActionCreators';
 
@@ -9,34 +9,36 @@ import { sendOTPrequest, signupUser } from '../redux/ActionCreators';
 
 function SignUpBtn(props) {
     const [modal, setModal] = useState(false);
-    const [isOtpS, setOtpS] = useState(false);
+    const [isOtpS, setOtpS] = useState(true);
     const otpR = useSelector(state => state.users.otp);
-    const [user, setUser]=useState({});
+    const history=useHistory();
+    const [user, setUser] = useState({});
     const toggleModal = () => {
         setModal(!modal);
+        setOtpS(!isOtpS);
     }
     function SignUp() {
         const dispatch = useDispatch();
-        
+
         const [password, setPass] = useState('');
-        
+
         // const [isValidOtp, setOtpValid] = useState(false);
         const [tc, setTC] = useState(false);
-        const [otp, setOtp] = useState(0);
+        const [otp, setOtp] = useState('');
         const [name, setName] = useState('');
         const [mob, setMob] = useState('');
         const [email, setEmail] = useState('');
-        
+
         const generateOtp = (e) => {
             e.preventDefault();
-            setOtpS(true);
-setUser({
-    "name": name,
-    "mobileNumber": mob,
-    "email": email ? email : null,
-    "password": password
-});
-             dispatch(sendOTPrequest({ "mobileNumber": mob }, toggleModal, setOtpS));
+            setOtpS(!isOtpS);
+            setUser({
+                "name": name,
+                "mobileNumber": mob,
+                "email": email ? email : null,
+                "password": password
+            });
+            dispatch(sendOTPrequest({ "mobileNumber": mob }, toggleModal));
 
         }
 
@@ -52,14 +54,13 @@ setUser({
                 //     "email": email ? email : null,
                 //     "password": password
                 // }
-                // console.log(user);
-                dispatch(signupUser(user));
-                toggleModal();
+                dispatch(signupUser(user, toggleModal));
                 if (props.toggleSignIn) {
                     props.toggleSignIn();
                 };
+                history.push("/profile");
             }
-            else{
+            else {
                 alert("Entered wrong OTP! Try again");
             }
         }
@@ -76,8 +77,9 @@ setUser({
                         <Input type="text" name="mob" required id="mob" disabled={isOtpS} onChange={e => setMob(e.target.value)} placeholder="Enter your Mobile Number" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="password">4-digit Pin*</Label>
-                        <Input type="password" name="password" required id="password" disabled={isOtpS} onChange={e => setPass(e.target.value)} placeholder="Create a 4-digit Pin" />
+                        <Label for="password">Create your password*</Label>
+                        <small>(min 4-digit)</small>
+                        <Input type="password" name="password" required id="password" disabled={isOtpS} onChange={e => setPass(e.target.value)} placeholder="Create password" />
                     </FormGroup>
                     <FormGroup>
                         <Label for="email">Email</Label>
@@ -89,7 +91,7 @@ setUser({
                              I accept the <Link className="" to="/tnc" rel="noreferrer" target="_blank">Terms and Conditions</Link>
                         </Label>
                     </FormGroup>
-                    <Button color="primary" className="m-auto" onClick={generateOtp} disabled={!tc} >Generate OTP</Button>
+                    <Button color="primary" onClick={generateOtp} className="m-auto" disabled={!tc} >Generate OTP</Button>
                 </Form>
                 {isOtpS
                     ?
@@ -99,12 +101,12 @@ setUser({
                                 <Label for="otp">4-digit OTP</Label>
                                 <Input type="number" name="otp" required id="otp" onChange={e => setOtp(e.target.value)} placeholder="Enter OTP" />
                             </FormGroup>
-                            <Button type="submit">SignUp</Button>
+                            <Button color="success" className="m-auto" type="submit">SignUp</Button>
                         </Form>
                     </div>
                     :
                     null
-                    }
+                }
             </div>
         );
     }

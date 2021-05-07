@@ -103,6 +103,58 @@ export const postSeeker = (body) => {
 			});
 	};
 };
+
+export const donorUpdate = (id, body) => {
+	const token = localStorage.getItem('token');
+	return function (dispatch) {
+		axios
+			.put(baseURL + "/donors/"+id , body, { headers: { "x-access-token": token } })
+			.then((response) => {
+				if (response) {
+					console.log("updated");
+				} else {
+					var error = new Error(
+						"Error " + response.status + ": " + response.statusText
+					);
+					error.response = response;
+					throw error;
+				}
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
+	};
+};
+
+export const seekerUpdate = (id, body) => {
+	const token = localStorage.getItem('token');
+	return function (dispatch) {
+		axios
+			.put(baseURL + "/seekers/"+id , body, { headers: { "x-access-token": token } })
+			.then((response) => {
+				if (response) {
+					console.log("updated");
+				} else {
+					var error = new Error(
+						"Error " + response.status + ": " + response.statusText
+					);
+					error.response = response;
+					throw error;
+				}
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
+	};
+};
+
+
+
+
+
+
+
+
 export const fetchUser = (token) => {
 	return function (dispatch) {
 		axios.get(baseURL + '/user', { headers: { "x-access-token": token } })
@@ -177,7 +229,7 @@ export const signupUser = (user, toggleModal) => {
 	}
 };
 
-export const sendOTPrequest = (mob, toggleModal, setOtpS) => {
+export const sendOTPrequest = (mob, toggleModal) => {
 	
 	return function (dispatch) {
 		axios.post(baseURL + '/user/otp', mob)
@@ -187,7 +239,7 @@ export const sendOTPrequest = (mob, toggleModal, setOtpS) => {
 // console.log(rest);
 					if(!rest.isRepeat)
 					{
-						alert("Otp is sent to your registered mobile no: ",mob);
+						alert("Otp is sent to your registered mobile no: ", mob.mobileNumber);
 						dispatch({ type: ActionTypes.ADD_OTP, payload: rest.otp });
 					}
 					else
@@ -206,7 +258,7 @@ export const sendOTPrequest = (mob, toggleModal, setOtpS) => {
 			})
 			.catch((error) => {
 				console.log(error.message);
-				dispatch({ tyep: ActionTypes.USER_FAILED, err: error.message });
+				dispatch({ type: ActionTypes.USER_FAILED, err: error.message });
 			});
 	}
 };

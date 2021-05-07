@@ -15,20 +15,22 @@ import Example from "./providerForm";
 import CMFund from "./CMFund";
 import Donate from "./donate";
 import tnc from "./tnc";
-import { useSelector } from "react-redux";
+import ExtraRes from "./ExtraRes";
+import Doctors from "./doctors";
+// import { useSelector } from "react-redux";
 
 function Main() {
-    const users = useSelector(state=>state.users);
-    const PrivateRoute = ({ component: Component, ...rest }) => (
-        <Route {...rest} render={(props) => (
-          props.isAuth
-            ? <Component {...props} />
-            : <Redirect to={{
-                pathname: '/home',
-                state: { from: props.location }
-              }} />
-        )} />
-      );
+    // const users = useSelector(state=>state.users);
+    // const PrivateRoute = ({ component: Component, ...rest }) => (
+    //     <Route {...rest} render={(props) => (
+    //       props.isAuth
+    //         ? <Component {...props} />
+    //         : <Redirect to={{
+    //             pathname: '/home',
+    //             state: { from: props.location }
+    //           }} />
+    //     )} />
+    //   );
     return (
         <div className="App">
             <Header />
@@ -44,6 +46,8 @@ function Main() {
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/donorReg" component={()=><Example type="0" />} />
                 <Route exact path="/seekerReg" component={()=><Example type="1" />} />
+                <Route exact path="/extraRes" component={ExtraRes} />
+                <Route exact path="/doctors" component={Doctors} />
                 <Redirect to="/home" />
             </Switch>
             <Footer />

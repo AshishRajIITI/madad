@@ -21,21 +21,29 @@ router.route('/').get((req, res) => {
     jwt.verify(token, process.env.secret, function (err, decoded) {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
 
-        User.findById(decoded.id, function (err, result) {
-            if (err) {
-                res.status(400).send(err);
-            } else {
-                if (result === null) return res.status(400).send({ auth: false, message: 'User not found' });
-                const response = {
-                    auth: true,
-                    name: result.name,
-                    mobileNumber: result.mobileNumber,
-                    email: result.email,
-                    updatedAt: result.updatedAt
-                };
-                res.status(200).send(response);
-            }
-        });
+        User.findById(decoded.id).populate('donorAuth donorNonAuth seeker').exec(
+            function (err, result) {
+
+                if (err) {
+                    res.status(400).send(err);
+                } else {
+                    if (result === null) return res.status(400).send({ auth: false, message: 'User not found' });
+
+                    const response = {
+                        auth: true,
+                        id: result.id,
+                        name: result.name,
+                        mobileNumber: result.mobileNumber,
+                        email: result.email,
+                        updatedAt: result.updatedAt,
+                        createdAt: result.createdAt,
+                        donorAuth: result.donorAuth,
+                        donorNonAuth: result.donorNonAuth,
+                        seeker: result.seeker,
+                    };
+                    res.status(200).send(response);
+                }
+            });
     });
 });
 
@@ -97,11 +105,40 @@ router.route('/otp').post((req, res) => {
 });
 
 
+router.route('/:id').put((req, res) => {
+
+    const id = req.params.id;
+
+    var token = req.headers['x-access-token'];
+    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+
+    jwt.verify(token, process.env.secret, function (err, decoded) {
+        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+        if (id !== decoded.id) return res.status(400).send({ message: "Update not allowed" });
+
+        User.findById(decoded.id, function (err, user) {
+            if (err) {
+                res.status(400).send(err);
+            } else {
+                if (user === null) return res.status(400).send({ auth: false, message: 'User not found' });
+
+                user.name = req.body.name ? req.body.name : user.name;
+                user.email = req.body.email ? req.body.email : user.email;
+                user.save(() => {
+                    res.status(200).send({ message: 'Updated Successfully' });
+                });
+
+            }
+        });
+    });
+});
+
 
 router.route('/login').post((req, res) => {
     const mobileNumber = req.body.mobileNumber;
     const password = req.body.password;
-    console.log("entered login");
+    // console.log("entered login");
 
     User.findOne({ mobileNumber: mobileNumber }, function (err, result) {
         if (err) {
@@ -109,11 +146,12 @@ router.route('/login').post((req, res) => {
         } else {
             if (result == null) {
                 res.status(400).send({ message: 'User not found' });
+                console.log("not exist");
             }
             else {
-                console.log("done login");
+                // console.log("done login");
                 user = result;
-                console.log(user)
+                // console.log(user)
                 if (!user.validatePassword(password)) {
                     res.status(400).send({ message: 'Invalid password' })
                 } else {
