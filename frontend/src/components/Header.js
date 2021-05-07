@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavItem, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, Button, ButtonGroup } from 'reactstrap';
+import { NavItem, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, Button, ButtonGroup, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 import title from './images/mainLogo2.png'
@@ -11,15 +11,23 @@ import SignUpBtn from './SignUp';
 import SignInBtn from './SignIn';
 import { BiLogOutCircle } from 'react-icons/bi';
 
+import { useHistory } from "react-router";
+
 
 function Header() {
-    
+
+    const history = useHistory();
+
     const [isNavOpen, setNav] = useState(false);
     const toggleNav = () => {
         setNav(!isNavOpen);
     }
-   
-    
+
+    const [isDropdownOpen,setDropdown] = useState(false);
+    const toggleDropdown = ()=>{
+        setDropdown(!isDropdownOpen);
+    }
+
     const isAuth = useSelector(state => state.users.isAuth);
     const user = useSelector(state => state.users.user);
     const dispatch = useDispatch();
@@ -28,10 +36,19 @@ function Header() {
             toggleNav();
         }
     }
-    const handleLogout=()=>{
-        
+    const handleLogout = () => {
+
         dispatch(logOutUser());
     }
+
+   const help_seeker = () =>{
+       history.push('/seekers');
+   }
+
+   const hover_dropdown =() =>{
+    toggleDropdown();
+   }
+
     return (
         <div>
             <Navbar dark className="header-clr" expand="md">
@@ -60,18 +77,35 @@ function Header() {
                                     Help-Providers
                                     </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink className="nav-link" to="/seekers" onClick={handleCollapse}>
-                                    Help-Seekers
+                            
+                                <UncontrolledDropdown nav inNavbar >
+                                    <DropdownToggle nav caret onMouseOver={hover_dropdown}>
+                                        Help-Seekers
+                                   </DropdownToggle>
+                                    <DropdownMenu right>
+                                        
+                                        <DropdownItem   onClick={help_seeker}>
+                                            Requirements-List
+                                        </DropdownItem>
+                                        
+                                        <DropdownItem  onClick={help_seeker}>
+                                            Doctors-List
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                          
+                            {/* <NavItem>
+                                    <NavLink className="nav-link" to="/seekers" onClick={handleCollapse}>
+                                      Help-Seekers
                                     </NavLink>
-                            </NavItem>
+                            </NavItem> */}
                             {/* <NavItem>
                                 <NavLink className="nav-link" to="/donate"  onClick={handleCollapse}>
                                     Donation
                                     </NavLink>
                             </NavItem> */}
                             <NavItem>
-                                <NavLink className="nav-link" to="/awareness"  onClick={handleCollapse}>
+                                <NavLink className="nav-link" to="/awareness" onClick={handleCollapse}>
                                     Covid-Info
                                     </NavLink>
                             </NavItem>
@@ -86,9 +120,9 @@ function Header() {
                                     Provider
                                 </NavLink>
                             </NavItem> */}
-                             <NavItem>
-                                <NavLink className="nav-link" to="/profile"  onClick={handleCollapse} >{isAuth ? user.name : null}</NavLink>
-                            </NavItem> 
+                            <NavItem>
+                                <NavLink className="nav-link" to="/profile" onClick={handleCollapse} >{isAuth ? user.name : null}</NavLink>
+                            </NavItem>
                             <NavItem className="ml-5 mr-5">
                                 {isAuth ? <Button color="danger" onClick={handleLogout}><BiLogOutCircle /> Logout</Button> : <ButtonGroup className="row"><Button className="col-6" color="primary"><SignInBtn /></Button><Button className="col-6" color="warning"><SignUpBtn /></Button></ButtonGroup>}
                             </NavItem>
