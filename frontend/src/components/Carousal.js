@@ -2,6 +2,8 @@ import lp4 from "./images/madad4.png";
 import lp3 from "./images/madad5.png";
 import lp1 from './images/madad1.png';
 import lp2 from './images/madad2.png';
+import lp5 from './images/5.png';
+
 import React, { useState } from 'react';
 import {
   Carousel,
@@ -12,9 +14,9 @@ import {
 
 const items = [
   {
-    src: lp1,
-    altText: 'Slide 1',
-    caption: 'Slide 1'
+    src: lp5,
+    altText: 'Slide 5',
+    caption: 'Slide 5'
   },
   {
     src: lp2,
@@ -30,7 +32,12 @@ const items = [
   src: lp4,
 altText: 'Slide 2',
   caption: 'Slide 2'
-}
+},
+{
+  src: lp1,
+  altText: 'Slide 1',
+  caption: 'Slide 1'
+},
 ];
 
 const Example = (props) => {
@@ -75,6 +82,8 @@ const Example = (props) => {
       activeIndex={activeIndex}
       next={next}
       previous={previous}
+      slide={false}
+      interval={3000}
     >
       <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
       {slides}

@@ -19,7 +19,7 @@ const CMFund = () => {
                             <tr className="row" key={item.key}>
                                 <td className="col-4">{item.state}</td>
                                 <td className="col-3">{item.upi}</td>
-                                <td className="col-3"> <a href={item.link}>Click here to donate</a>  </td>
+                                <td className="col-3"> <a rel="noreferrer" target="_blank" href={item.link}>Click here to donate</a>  </td>
                             </tr>
                         );
                     })}

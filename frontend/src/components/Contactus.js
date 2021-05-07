@@ -21,7 +21,7 @@ export default function ContactUs() {
 
     <div className="container container-70" style={{ marginTop: 20, marginBottom: 20 }}>
       <div className="container-div" style={{ color: 'black', textAlign: 'center' }}>
-        How can we help you?
+        YOUR FEEDBACKS/SUGGESTIONS ARE MOST WELCOMED !
         </div>
       <Form onSubmit={sendEmail} style={{ marginTop: 40, marginRight: 50, marginLeft: 75 }}>
 
@@ -52,8 +52,8 @@ export default function ContactUs() {
         </FormGroup>
       </Form>
       <div className="container-link" style={{ textAlign: 'center' }}>
-        <span class="create">
-          <a href="http://gymkhana.iiti.ac.in/#" class="link">Gymkhana IIT Indore</a>
+        <span className="create">
+          <a href="http://gymkhana.iiti.ac.in/#" className="link">Gymkhana IIT Indore</a>
         </span>
       </div>
     </div>

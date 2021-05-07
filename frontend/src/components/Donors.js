@@ -9,8 +9,15 @@ import { fetchDonor } from '../redux/ActionCreators';
 import { FaSearch } from 'react-icons/fa';
 import Loading from './Loading';
 import Noresult from './Noresult';
+import { useHistory } from 'react-router';
 
 function Donors() {
+
+    const history=useHistory();
+
+    const donorReg = () => {
+        history.push('/seekerReg');
+    }
 
     const donor = useSelector((state) => state.donorReducer.donors);
     const isLoading = useSelector((state) => state.donorReducer.isLoading);
@@ -26,9 +33,6 @@ function Donors() {
     const [cityS, setCityS] = useState('');
     const [facilityS, setFacilityS] = useState();
     const [touch, setTouch] = useState(0);
-
-
-
 
 
     function handleSearch() {
@@ -58,21 +62,24 @@ function Donors() {
     }).reverse();
 
 
-
     return (
         <div className="container container-70">
             <div className="m-sticky">
                 <div className="row mt-1 b-bottom ">
-                    <div className="col-12 col-sm-5">
+                    <div className="col-6 col-md-5">
                         <AutoSuggest text={cityS} setText={setCityS} sug={city} placeHolder="Search City" />
                     </div>
-                    <div className="col-12 col-sm-5">
+                    <div className="col-6 col-md-5">
                         <AutoSuggest text={facilityS} setText={setFacilityS} sug={facility} placeHolder="Search Facility" />
                     </div>
-                    <div className="col-12 col-sm-2">
+                    <div className="col-12 col-md-2">
                         <Button className="" onClick={handleSearch} color="primary" block ><FaSearch /> Search</Button>
                     </div>
+                    <div className="text-center col-12 mt-2">
+                        <Button color="warning" onClick={donorReg}>Register Your Request</Button>
+                   </div>
                 </div>
+               
                 <div className="row">
                     <div className="col-4"></div>
                 </div>

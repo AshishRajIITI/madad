@@ -17,7 +17,7 @@ const ExtraRes = () => {
                         return (
                             <tr className="row justify-content-center" key={item.key}>
                                 <td className="col-3">{item.facility}</td>
-                                <td className="col-3"> <a href={item.link}>Click here to visit</a>  </td>
+                                <td className="col-3"> <a rel="noreferrer" target="_blank" href={item.link}>Click here to visit</a>  </td>
                             </tr>
                         );
                     })}

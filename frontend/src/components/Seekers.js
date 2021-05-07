@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,  } from 'react';
 import AutoSuggest from './AutoSuggest';
 import city from '../resources/city';
 import facility from '../resources/facilty';
@@ -9,8 +9,15 @@ import { fetchSeeker } from '../redux/ActionCreators';
 import { FaSearch } from 'react-icons/fa';
 import Loading from './Loading';
 import Noresult from './Noresult';
+import { useHistory } from 'react-router';
+
 
 function SearchEngine() {
+    const history=useHistory();
+
+    const seekerReg = () => {
+        history.push('/donorReg');
+    }
 
     const seeker = useSelector((state) => state.seekerReducer.seekers);
     const isLoading = useSelector((state) => state.seekerReducer.isLoading);
@@ -26,10 +33,6 @@ function SearchEngine() {
     const [cityS, setCityS] = useState('');
     const [facilityS, setFacilityS] = useState('');
     const [touch, setTouch] = useState(0);
-
-
-
-
 
     function handleSearch() {
         var temp = [];
@@ -63,15 +66,18 @@ function SearchEngine() {
         <div className="container container-70">
             <div className="m-sticky">
                 <div className="row mt-1 b-bottom">
-                    <div className="col-6 col-sm-5">
+                    <div className="col-6 col-md-5">
                         <AutoSuggest text={cityS} setText={setCityS} sug={city} placeHolder="Search City" />
                     </div>
-                    <div className="col-6 col-sm-5">
+                    <div className="col-6 col-md-5">
                         <AutoSuggest text={facilityS} setText={setFacilityS} sug={facility} placeHolder="Search Facility" />
                     </div>
-                    <div className="col-12 col-sm-2">
+                    <div className="col-12 col-md-2">
                         <Button className="" onClick={handleSearch} color="primary" block ><FaSearch /> Search</Button>
                     </div>
+                    <div className="text-center col-12 mt-2">
+                        <Button color="warning" onClick={seekerReg}>Register On The Portal </Button>
+                   </div>
                 </div>
             </div>
             <div className="row mt-3 justify-content-center">

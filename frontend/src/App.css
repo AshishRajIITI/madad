@@ -125,8 +125,6 @@ min-height: 330px;
 .seekerHeight{
   min-height: 275px;
   }
-
-
   
 .my-card:hover {
   box-shadow: 4px 8px 12px 4px rgba(207, 2, 248, 0.281);
@@ -202,13 +200,6 @@ min-height: 330px;
   width: 345px;
   margin-left: 50px;
 }
-@media (max-width: 600px) {
-  .m-title{
-    height: 70px;
-    width: 199px;
-    margin-left: unset;
-  }
-}
 
 .navCard{
   height: 300px;
@@ -216,20 +207,15 @@ min-height: 330px;
   justify-content: center;
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: white !important;
+  box-shadow: 0 4px 8px 0 rgba(64, 36, 185, 0.2);
+  
 }
-.navCardtext{
-visibility: hidden;
-}
+
 .navCard:hover{
   z-index: 3;
-  transform: scale(1.2);
+  transform: scale(1.05);
   transition: 0.5s;
-}
-.navCard:hover .navCardtext{
-  visibility: visible;
-  transition: 0.3s;
+  cursor: pointer;
 }
 
 
@@ -269,3 +255,12 @@ visibility: hidden;
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 /* .dropdown:hover .dropbtn {background-color: #3e8e41;} */
+
+
+@media (max-width: 600px) {
+  .m-title{
+    height: 70px;
+    width: 199px;
+    margin-left: unset;
+  }
+}
